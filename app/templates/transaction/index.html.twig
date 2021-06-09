@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_transaction_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title_transaction_list'|trans }}</h1>
+    {% if pagination is defined and pagination.items|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'transaction.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_name'|trans, 'transaction.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_date'|trans, 'transaction.date') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_amount'|trans, 'transaction.amount') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_cteatedAt'|trans, 'transaction.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_updatedAt'|trans, 'transaction.updatedAt') }}</th>
+                <th>{{ 'label_id_category'|trans }}</th>
+                <th>{{ 'label_id_wallet'|trans }}</th>
+                <th>{{ 'label_id_payment'|trans }}</th>
+                <th>{{ 'label_id_operation'|trans }}</th>
+                <th>{{ 'label_actions'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for transaction in pagination.items %}
+                <tr>
+                    <td>{{ transaction.id }}</td>
+                    <td>{{ transaction.name }}</td>
+                    <td>{{ transaction.date|format_date }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.createdAt|format_date('long') }}</td>
+                    <td>{{ transaction.updatedAt|format_date('long') }}</td>
+                    <td>{{ transaction.getIdCategory().name }}</td><!--wywołanie metody publicznej zamiast zmiennej prywatnej czemu wyżej to działa nie wiem-->
+                    <td>{{ transaction.getIdWallet().name }}</td>
+                    <td>{{ transaction.getIdPayment().getPaymentMethod() }}</td>
+                    <td>{{ transaction.getIdOperation().getNameOperation() }}</td>
+                    <td>
+                        <a href="{{ url('transaction_show', {id: transaction.id}) }}" title="{{ 'action_view'|trans }}">
+                            {{ 'action_view'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            {{ 'message_empty_list'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}
