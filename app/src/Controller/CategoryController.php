@@ -168,7 +168,7 @@ class CategoryController extends AbstractController
      */
     public function delete(Request $request, Category $category, CategoryRepository $repository): Response
     {
-        if ($category->getIdTransaction()->count()) {
+        if ($category->getTransaction()->count()) {
             $this->addFlash('warning', 'message_category_contains_transactions');
 
             return $this->redirectToRoute('category_index');

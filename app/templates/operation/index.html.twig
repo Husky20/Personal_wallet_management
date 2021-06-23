@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_operation_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title_operation_list'|trans }}</h1>
+    {% if pagination is defined and pagination.items|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+        <div class="btn btn-light">
+            <a href="{{ url('operation_create') }}" title="{{ 'action_create'|trans }}">
+                    {{ 'action_create'|trans }}</a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'operation.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_created_at'|trans, 'operation.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_updated_at'|trans, 'operation.updatedAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_name'|trans, 'operation.name') }}</th>
+                <th>{{ 'label_actions'|trans }}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for operation in pagination.items %}
+                <tr>
+                    <td>{{ operation.id }}</td>
+                    <td>{{ operation.createdAt|format_date('long') }}</td>
+                    <td>{{ operation.updatedAt|format_date('long') }}</td>
+                    <td>{{ operation.name }}</td>
+                    <td>
+                        <a href="{{ url('operation_show', {id: operation.id}) }}" title="{{ 'action_view'|trans }}">
+                            {{ 'action_view'|trans }}
+                        </a>
+
+                        <a href="{{ url('operation_edit', {id: operation.id}) }}" title="{{ 'action_edit'|trans }}">
+                            {{ 'action_edit'|trans }}
+                        </a>
+                        {% if not operation.transaction|length %}
+                            <a href="{{ url('operation_delete', {id: operation.id}) }}" title="{{ 'action_delete'|trans }}">
+                                {{ 'action_delete'|trans }}
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            {% include 'default/_single_flash_message.html.twig' with {
+                type: 'warning',
+                message: 'message.empty_list'|trans
+            } %}
+        </p>
+    {% endif %}
+{% endblock %}

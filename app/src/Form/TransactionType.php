@@ -10,18 +10,39 @@ use App\Entity\Transaction;
 use App\Entity\Wallet;
 use App\Entity\Payment;
 use App\Entity\Operation;
-use phpDocumentor\Reflection\Types\Integer;
+use App\Entity\Tag;
+use App\Form\DataTransformer\TagsDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 /**
  * Class TransactionType.
  */
 class TransactionType extends AbstractType
 {
+    /**
+     * Tags data transformer.
+     *
+     * @var \App\Form\DataTransformer\TagsDataTransformer
+     */
+    private $tagsDataTransformer;
+
+    /**
+     * TransactionType constructor.
+     *
+     * @param \App\Form\DataTransformer\TagsDataTransformer $tagsDataTransformer Tags data transformer
+     */
+    public function __construct(TagsDataTransformer $tagsDataTransformer)
+    {
+        $this->tagsDataTransformer = $tagsDataTransformer;
+    }
     /**
      * Builds the form.
      *
@@ -44,17 +65,17 @@ class TransactionType extends AbstractType
                 'attr' => ['max_length' => 64],
             ]
         );
-        $builder->add(
+       $builder->add(
             'date',
-            Data::class,
-            [
+           DateType::class,
+           [
                 'label' => 'label_date',
                 'required' => true,
             ]
         );
         $builder->add(
             'amount',
-            Integer::class,
+            IntegerType::class,
             [
                 'label' => 'label_amount',
                 'required' => true,
@@ -68,7 +89,7 @@ class TransactionType extends AbstractType
                 'choice_label' => function ($category) {
                     return $category->getName();
                 },
-                'label' => 'label_id_category',
+                'label' => 'label_category',
                 'placeholder' => 'label_none',
                 'required' => true,
             ]
@@ -81,7 +102,7 @@ class TransactionType extends AbstractType
                 'choice_label' => function ($wallet) {
                     return $wallet->getName();
                 },
-                'label' => 'label_id_wallet',
+                'label' => 'label_wallet',
                 'placeholder' => 'label_none',
                 'required' => true,
             ]
@@ -94,7 +115,7 @@ class TransactionType extends AbstractType
                 'choice_label' => function ($payment) {
                     return $payment->getName();
                 },
-                'label' => 'label_id_payment',
+                'label' => 'label_payment',
                 'placeholder' => 'label_none',
                 'required' => true,
             ]
@@ -107,10 +128,23 @@ class TransactionType extends AbstractType
                 'choice_label' => function ($operation) {
                     return $operation->getName();
                 },
-                'label' => 'label_id_operation',
+                'label' => 'label_operation',
                 'placeholder' => 'label_none',
                 'required' => true,
             ]
+        );
+        $builder->add(
+            'tags',
+            TextType::class,
+            [
+                'label' => 'label_tags',
+                'required' => false,
+                'attr' => ['max_length' => 128],
+            ]
+        );
+
+        $builder->get('tags')->addModelTransformer(
+            $this->tagsDataTransformer
         );
     }
 

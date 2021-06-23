@@ -27,10 +27,20 @@ class TransactionFixtures extends AbstractBaseFixtures implements DependentFixtu
             $transaction->setAmount($this->faker->randomNumber());
             $transaction->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
             $transaction->setUpdatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            $transaction->setIdCategory($this->getRandomReference('categories'));
-            $transaction->setIdOperation($this->getRandomReference('operations'));
-            $transaction->setIdPayment($this->getRandomReference('payments'));
-            $transaction->setIdWallet($this->getRandomReference('wallets'));
+            $transaction->setCategory($this->getRandomReference('categories'));
+            $transaction->setOperation($this->getRandomReference('operations'));
+            $transaction->setPayment($this->getRandomReference('payments'));
+            $transaction->setWallet($this->getRandomReference('wallets'));
+            $tags = $this->getRandomReferences(
+                'tags',
+                $this->faker->numberBetween(0, 5)
+            );
+
+            foreach ($tags as $tag) {
+                $transaction->addTag($tag);
+            }
+
+            $transaction->setAuthor($this->getRandomReference('users'));
 
             return $transaction;
         });
@@ -46,6 +56,6 @@ class TransactionFixtures extends AbstractBaseFixtures implements DependentFixtu
      */
     public function getDependencies(): array
     {
-        return [CategoryFixtures::class,OperationFixtures::class,PaymentFixtures::class,WalletFixtures::class];
+        return [CategoryFixtures::class,OperationFixtures::class,PaymentFixtures::class,WalletFixtures::class,TagFixtures::class, UserFixtures::class];
     }
 }

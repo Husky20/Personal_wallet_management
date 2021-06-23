@@ -11,7 +11,10 @@
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
-
+        <div class="btn btn-light">
+            <a href="{{ url('category_create') }}" title="{{ 'action_create'|trans }}">
+                    {{ 'action_create'|trans }}</a>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -35,12 +38,10 @@
                             {{ 'action_view'|trans }}
                         </a>
 
-
-
                         <a href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action_edit'|trans }}">
                             {{ 'action_edit'|trans }}
                         </a>
-                        {% if not category.getCanDelete() %}
+                        {% if not category.transaction|length %}
                             <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action_delete'|trans }}">
                                 {{ 'action_delete'|trans }}
                             </a>
@@ -53,9 +54,6 @@
 
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
-            <a href="{{ url('category_create') }}" title="{{ 'action_create'|trans }}">
-                {{ 'action_create'|trans }}
-            </a>
         </div>
 
     {% else %}

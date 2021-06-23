@@ -5,14 +5,23 @@
 
 namespace App\Entity;
 
-use App\Repository\PaymentRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use phpDocumentor\Reflection\Types\Boolean;
+use phpDocumentor\Reflection\Types\Nullable;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=PaymentRepository::class)
+ * Class Payment.
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\PaymentRepository")
  * @ORM\Table(name="payments")
+ *
+ * @UniqueEntity(fields={"name"})
  */
 class Payment
 {
@@ -24,24 +33,50 @@ class Payment
     private $id;
 
     /**
-     * Payment method.
+     * Name.
      *
      * @var string
      *
      * @ORM\Column(type="string", length=20)
      */
-    private $payment_method;
+    private $name;
 
     /**
-     * Id_transaction.
+     * Transaction.
      *
-     * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="id_payment")
+     * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="payment")
      */
-    private $id_transaction;
+    private $transaction;
+
+    /**
+     * Create at.
+     *
+     * @var DateTimeInterface
+     *
+     * @ORM\Column(type="datetime")
+     *
+     * @Assert\Type(type="\DateTimeInterface")
+     *
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $createdAt;
+
+    /**
+     * Update at.
+     *
+     * @var DateTimeInterface
+     *
+     * @ORM\Column(type="datetime")
+     *
+     * @Assert\Type(type="\DateTimeInterface")
+     *
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updatedAt;
 
     public function __construct()
     {
-        $this->id_transaction = new ArrayCollection();
+        $this->transaction = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -49,14 +84,14 @@ class Payment
         return $this->id;
     }
 
-    public function getPaymentMethod(): ?string
+    public function getName(): ?string
     {
-        return $this->payment_method;
+        return $this->name;
     }
 
-    public function setPaymentMethod(string $payment_method): self
+    public function setName(string $name): self
     {
-        $this->payment_method = $payment_method;
+        $this->name = $name;
 
         return $this;
     }
@@ -64,29 +99,53 @@ class Payment
     /**
      * @return Collection|Transaction[]
      */
-    public function getIdTransaction(): Collection
+    public function getTransaction(): Collection
     {
-        return $this->id_transaction;
+        return $this->transaction;
     }
 
-    public function addIdTransaction(Transaction $idTransaction): self
+    public function addTransaction(Transaction $Transaction): self
     {
-        if (!$this->id_transaction->contains($idTransaction)) {
-            $this->id_transaction[] = $idTransaction;
-            $idTransaction->setIdPayment($this);
+        if (!$this->transaction->contains($Transaction)) {
+            $this->transaction[] = $Transaction;
+            $Transaction->setPayment($this);
         }
 
         return $this;
     }
 
-    public function removeIdTransaction(Transaction $idTransaction): self
+    public function removeTransaction(Transaction $Transaction): self
     {
-        if ($this->id_transaction->removeElement($idTransaction)) {
+        if ($this->transaction->removeElement($Transaction)) {
             // set the owning side to null (unless already changed)
-            if ($idTransaction->getIdPayment() === $this) {
-                $idTransaction->setIdPayment(null);
+            if ($Transaction->getPayment() === $this) {
+                $Transaction->setPayment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

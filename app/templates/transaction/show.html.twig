@@ -20,6 +20,16 @@
             <dd>{{ transaction.createdAt|format_date('long') }}</dd>
             <dt>{{ 'label_updated_at'|trans }}</dt>
             <dd>{{ transaction.updatedAt|format_date('long') }}</dd>
+            <dt>{{ 'label_category'|trans }}</dt>
+            <dd>{{ transaction.category.name }}</dd>
+            <dt>{{ 'label_wallet'|trans }}</dt>
+            <dd>{{ transaction.wallet.name }}</dd>
+            <dt>{{ 'label_payment'|trans }}</dt>
+            <dd>{{ transaction.payment.name }}</dd>
+            <dt>{{ 'label_operation'|trans }}</dt>
+            <dd>{{ transaction.operation.name }}</dd>
+            <dt>{{ 'label_tags'|trans }}</dt>
+            <dd>{{ transaction.tags.name }}</dd>
         </dl>
         <p>
             <a href="{{ url('transaction_index') }}" title="{{ 'action_back_to_list'|trans }}">

@@ -5,13 +5,16 @@
  */
 namespace App\Entity;
 
-use App\Repository\TransactionRepository;
+use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Transaction.
  *
- * @ORM\Entity(repositoryClass=TransactionRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\TransactionRepository")
  * @ORM\Table(name="transactions")
  */
 class Transaction
@@ -60,6 +63,8 @@ class Transaction
      * @var DateTimeInterface
      *
      * @ORM\Column(type="datetime")
+     *
+     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
@@ -69,51 +74,99 @@ class Transaction
      * @var DateTimeInterface
      *
      * @ORM\Column(type="datetime")
+     *
+     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
     /**
-     * Id category.
+     * Category.
      *
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="id_transaction")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="transactions")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_category;
+    private $category;
 
     /**
-     * Id wallet.
+     * Wallet.
      *
-     * @ORM\ManyToOne(targetEntity=Wallet::class, inversedBy="id_transactions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Wallet", inversedBy="transactions")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_wallet;
+    private $wallet;
 
     /**
-     * Id payment.
+     * Payment.
      *
-     * @ORM\ManyToOne(targetEntity=Payment::class, inversedBy="id_transaction")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Payment", inversedBy="transactions")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_payment;
+    private $payment;
 
     /**
-     * Id operation.
+     * Operation.
      *
-     * @ORM\ManyToOne(targetEntity=Operation::class, inversedBy="id_transaction")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Operation", inversedBy="transactions")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_operation;
+    private $operation;
 
+    /**
+     * Tags.
+     *
+     * @var array
+     *
+     * @ORM\ManyToMany(
+     *     targetEntity="App\Entity\Tag",
+     *     inversedBy="transactions",
+     * )
+     * @ORM\JoinTable(name="transactions_tags")
+     */
+    private $tags;
+
+    /**
+     * Author.
+     *
+     * @var \App\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * Transaction constructor.
+     */
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
+
+    /**
+     * Getter for Id.
+     *
+     * @return int|null Result
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for Name.
+     *
+     * @return string|null Name
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Setter for Name.
+     *
+     * @param string $name Name
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -121,11 +174,21 @@ class Transaction
         return $this;
     }
 
+    /**
+     * Getter for Date.
+     *
+     * @return datetime|null Name
+     */
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
+    /**
+     * Setter for Date.
+     *
+     * @param datetime $date Date
+     */
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
@@ -133,11 +196,21 @@ class Transaction
         return $this;
     }
 
+    /**
+     * Getter for Amount.
+     *
+     * @return int|null Name
+     */
     public function getAmount(): ?int
     {
         return $this->amount;
     }
 
+    /**
+     * Setter for Amount.
+     *
+     * @param int $amount Amount
+     */
     public function setAmount(int $amount): self
     {
         $this->amount = $amount;
@@ -145,11 +218,21 @@ class Transaction
         return $this;
     }
 
+    /**
+     * Getter for Created At.
+     *
+     * @return \DateTimeInterface|null Created at
+     */
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
+    /**
+     * Setter for Created at.
+     *
+     * @param \DateTimeInterface $createdAt Created at
+     */
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
@@ -157,11 +240,22 @@ class Transaction
         return $this;
     }
 
+
+    /**
+     * Getter for Updated at.
+     *
+     * @return \DateTimeInterface|null Updated at
+     */
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
+    /**
+     * Setter for Updated at.
+     *
+     * @param \DateTimeInterface $updatedAt Updated at
+     */
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
@@ -169,50 +263,136 @@ class Transaction
         return $this;
     }
 
-    public function getIdCategory(): ?Category
+    /**
+     * Getter for category.
+     *
+     * @return \App\Entity\Category|null Category
+     */
+    public function getCategory(): ?Category
     {
-        return $this->id_category;
+        return $this->category;
     }
 
-    public function setIdCategory(?Category $id_category): self
+    /**
+     * Setter for category.
+     *
+     * @param \App\Entity\Category|null $category Category
+     */
+    public function setCategory(?Category $category): self
     {
-        $this->id_category = $id_category;
+        $this->category = $category;
 
         return $this;
     }
 
-    public function getIdWallet(): ?Wallet
+    /**
+     * Getter for wallet.
+     *
+     * @return \App\Entity\Wallet|null Wallet
+     */
+    public function getWallet(): ?Wallet
     {
-        return $this->id_wallet;
+        return $this->wallet;
     }
 
-    public function setIdWallet(?Wallet $id_wallet): self
+    /**
+     * Setter for wallet.
+     *
+     * @param \App\Entity\Wallet|null $wallet Wallet
+     */
+    public function setWallet(?Wallet $wallet): self
     {
-        $this->id_wallet = $id_wallet;
+        $this->wallet = $wallet;
 
         return $this;
     }
 
-    public function getIdPayment(): ?Payment
+    /**
+     * Getter for payment.
+     *
+     * @return \App\Entity\Payment|null Payment
+     */
+    public function getPayment(): ?Payment
     {
-        return $this->id_payment;
+        return $this->payment;
     }
 
-    public function setIdPayment(?Payment $id_payment): self
+    /**
+     * Setter for payment.
+     *
+     * @param \App\Entity\Payment|null $payment Payment
+     */
+    public function setPayment(?Payment $payment): self
     {
-        $this->id_payment = $id_payment;
+        $this->payment = $payment;
 
         return $this;
     }
 
-    public function getIdOperation(): ?Operation
+    /**
+     * Getter for operation.
+     *
+     * @return \App\Entity\Operation|null Operation
+     */
+    public function getOperation(): ?Operation
     {
-        return $this->id_operation;
+        return $this->operation;
     }
 
-    public function setIdOperation(?Operation $id_operation): self
+    /**
+     * Setter for opeeration.
+     *
+     * @param \App\Entity\Operation|null $operation Operation
+     */
+    public function setOperation(?Operation $operation): self
     {
-        $this->id_operation = $id_operation;
+        $this->operation = $operation;
+
+        return $this;
+    }
+
+    /**
+     * Getter for tags.
+     *
+     * @return \Doctrine\Common\Collections\Collection|\App\Entity\Tag[] Tags collection
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Add tag to collection.
+     *
+     * @param \App\Entity\Tag $tag Tag entity
+     */
+    public function addTag(Tag $tag): void
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+    }
+
+    /**
+     * Remove tag from collection.
+     *
+     * @param \App\Entity\Tag $tag Tag entity
+     */
+    public function removeTag(Tag $tag): void
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

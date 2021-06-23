@@ -5,16 +5,24 @@
 
 namespace App\Entity;
 
-use App\Repository\WalletRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use phpDocumentor\Reflection\Types\Boolean;
+use phpDocumentor\Reflection\Types\Nullable;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
- * Class wallet.
+ * Class Wallet.
  *
- * @ORM\Entity(repositoryClass=WalletRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\WalletRepository")
  * @ORM\Table(name="wallets")
+ *
+ * @UniqueEntity(fields={"name"})
  */
 class Wallet
 {
@@ -53,6 +61,10 @@ class Wallet
      * @var DateTimeInterface
      *
      * @ORM\Column(type="datetime")
+     *
+     * @Assert\Type(type="\DateTimeInterface")
+     *
+     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
@@ -62,17 +74,21 @@ class Wallet
      * @var DateTimeInterface
      *
      * @ORM\Column(type="datetime")
+     *
+     * @Assert\Type(type="\DateTimeInterface")
+     *
+     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="id_wallet")
+     * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="wallet")
      */
-    private $id_transactions;
+    private $transaction;
 
     public function __construct()
     {
-        $this->id_transactions = new ArrayCollection();
+        $this->transaction = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,27 +147,27 @@ class Wallet
     /**
      * @return Collection|Transaction[]
      */
-    public function getIdTransactions(): Collection
+    public function getTransaction(): Collection
     {
-        return $this->id_transactions;
+        return $this->transaction;
     }
 
-    public function addIdTransaction(Transaction $idTransaction): self
+    public function addTransaction(Transaction $Transaction): self
     {
-        if (!$this->id_transactions->contains($idTransaction)) {
-            $this->id_transactions[] = $idTransaction;
-            $idTransaction->setIdWallet($this);
+        if (!$this->transaction->contains($Transaction)) {
+            $this->transaction[] = $Transaction;
+            $Transaction->setWallet($this);
         }
 
         return $this;
     }
 
-    public function removeIdTransaction(Transaction $idTransaction): self
+    public function removeTransaction(Transaction $Transaction): self
     {
-        if ($this->id_transactions->removeElement($idTransaction)) {
+        if ($this->transaction->removeElement($Transaction)) {
             // set the owning side to null (unless already changed)
-            if ($idTransaction->getIdWallet() === $this) {
-                $idTransaction->setIdWallet(null);
+            if ($Transaction->getWallet() === $this) {
+                $Transaction->setWallet(null);
             }
         }
 

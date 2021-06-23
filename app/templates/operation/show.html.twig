@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_operation_details'|trans({'%id%': operation.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title_operation_details'|trans({'%id%': operation.id|default('')}) }}</h1>
+    {% if operation is defined and operation|length %}
+        <dl class="dl">
+            <dt>{{ 'label_id'|trans }}</dt>
+            <dd>{{ operation.id }}</dd>
+            <dt>{{ 'label_name'|trans }}</dt>
+            <dd>{{  operation.name }}</dd>
+        </dl>
+        <p>
+            <a href="{{ url('operation_index') }}" title="{{ 'action_back_to_list'|trans }}">
+                {{ 'action_back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {% include 'default/_single_flash_message.html.twig' with {
+                type: 'warning',
+                message: 'message.empty_list'|trans
+            } %}
+        </p>
+    {% endif %}
+{% endblock %}

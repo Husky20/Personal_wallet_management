@@ -5,15 +5,24 @@
 
 namespace App\Entity;
 
-use App\Repository\OperationRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use phpDocumentor\Reflection\Types\Boolean;
+use phpDocumentor\Reflection\Types\Nullable;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Operation.
- * @ORM\Entity(repositoryClass=OperationRepository::class)
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\OperationRepository")
+ *
  * @ORM\Table(name="operations")
+ *
+ * @UniqueEntity(fields={"name"})
  */
 class Operation
 {
@@ -29,23 +38,49 @@ class Operation
     private $id;
 
     /**
-     * Name operation.
+     * Name.
      *
      * @var string
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $name_operation;
+    private $name;
 
     /**
-     * Id_transaction.
-     * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="id_operation")
+     * Transaction.
+     * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="operation")
      */
-    private $id_transaction;
+    private $transaction;
+
+    /**
+     * Create at.
+     *
+     * @var DateTimeInterface
+     *
+     * @ORM\Column(type="datetime")
+     *
+     * @Assert\Type(type="\DateTimeInterface")
+     *
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $createdAt;
+
+    /**
+     * Update at.
+     *
+     * @var DateTimeInterface
+     *
+     * @ORM\Column(type="datetime")
+     *
+     * @Assert\Type(type="\DateTimeInterface")
+     *
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updatedAt;
 
     public function __construct()
     {
-        $this->id_transaction = new ArrayCollection();
+        $this->transaction = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,14 +88,14 @@ class Operation
         return $this->id;
     }
 
-    public function getNameOperation(): ?string
+    public function getName(): ?string
     {
-        return $this->name_operation;
+        return $this->name;
     }
 
-    public function setNameOperation(string $name_operation): self
+    public function setName(string $name): self
     {
-        $this->name_operation = $name_operation;
+        $this->name = $name;
 
         return $this;
     }
@@ -68,29 +103,53 @@ class Operation
     /**
      * @return Collection|Transaction[]
      */
-    public function getIdTransaction(): Collection
+    public function getTransaction(): Collection
     {
-        return $this->id_transaction;
+        return $this->transaction;
     }
 
-    public function addIdTransaction(Transaction $idTransaction): self
+    public function addTransaction(Transaction $Transaction): self
     {
-        if (!$this->id_transaction->contains($idTransaction)) {
-            $this->id_transaction[] = $idTransaction;
-            $idTransaction->setIdOperation($this);
+        if (!$this->transaction->contains($Transaction)) {
+            $this->transaction[] = $Transaction;
+            $Transaction->setOperation($this);
         }
 
         return $this;
     }
 
-    public function removeIdTransaction(Transaction $idTransaction): self
+    public function removeTransaction(Transaction $Transaction): self
     {
-        if ($this->id_transaction->removeElement($idTransaction)) {
+        if ($this->transaction->removeElement($Transaction)) {
             // set the owning side to null (unless already changed)
-            if ($idTransaction->getIdOperation() === $this) {
-                $idTransaction->setIdOperation(null);
+            if ($Transaction->getOperation() === $this) {
+                $Transaction->setOperation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

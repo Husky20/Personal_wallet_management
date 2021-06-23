@@ -11,7 +11,10 @@
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
-
+        <div class="btn btn-light">
+            <a href="{{ url('transaction_create') }}" title="{{ 'action_create'|trans }}">
+                {{ 'action_create'|trans }}</a>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -21,10 +24,10 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label_amount'|trans, 'transaction.amount') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_cteatedAt'|trans, 'transaction.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_updatedAt'|trans, 'transaction.updatedAt') }}</th>
-                <th>{{ 'label_id_category'|trans }}</th>
-                <th>{{ 'label_id_wallet'|trans }}</th>
-                <th>{{ 'label_id_payment'|trans }}</th>
-                <th>{{ 'label_id_operation'|trans }}</th>
+                <th>{{ 'label_category'|trans }}</th>
+                <th>{{ 'label_wallet'|trans }}</th>
+                <th>{{ 'label_payment'|trans }}</th>
+                <th>{{ 'label_operation'|trans }}</th>
                 <th>{{ 'label_actions'|trans }}</th>
             </tr>
             </thead>
@@ -37,14 +40,28 @@
                     <td>{{ transaction.amount }}</td>
                     <td>{{ transaction.createdAt|format_date('long') }}</td>
                     <td>{{ transaction.updatedAt|format_date('long') }}</td>
-                    <td>{{ transaction.getIdCategory().name }}</td><!--wywołanie metody publicznej zamiast zmiennej prywatnej czemu wyżej to działa nie wiem-->
-                    <td>{{ transaction.getIdWallet().name }}</td>
-                    <td>{{ transaction.getIdPayment().getPaymentMethod() }}</td>
-                    <td>{{ transaction.getIdOperation().getNameOperation() }}</td>
+                    <td>{{ transaction.category.name }}</td>
+                    <td>{{ transaction.wallet.name }}</td>
+                    <td>{{ transaction.payment.name}}</td>
+                    <td>{{ transaction.operation.name }}</td>
+
+
                     <td>
-                        <a href="{{ url('transaction_show', {id: transaction.id}) }}" title="{{ 'action_view'|trans }}">
-                            {{ 'action_view'|trans }}
-                        </a>
+                        {% if is_granted('VIEW', transaction) %}
+                            <a href="{{ url('transaction_show', {id: transaction.id}) }}" title="{{ 'action_view'|trans }}">
+                                {{ 'action_view'|trans }}
+                            </a>
+                        {% endif %}
+                        {% if is_granted('EDIT', transaction) %}
+                            <a href="{{ url('transaction_edit', {id: transaction.id}) }}" title="{{ 'action_edit'|trans }}">
+                                {{ 'action_edit'|trans }}
+                            </a>
+                        {% endif %}
+                        {% if is_granted('DELETE', transaction) %}
+                            <a href="{{ url('transaction_delete', {id: transaction.id}) }}" title="{{ 'action_delete'|trans }}">
+                                {{ 'action_delete'|trans }}
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

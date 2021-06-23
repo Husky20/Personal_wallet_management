@@ -82,7 +82,7 @@ class Category
     private $name;
 
     /**
-     * Tasks.
+     * Transactions.
      *
      * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Transaction[] $transaction Transaction
      *
@@ -91,7 +91,7 @@ class Category
      *     mappedBy="category",
      * )
      */
-    private $id_transaction;
+    private $transaction;
 
     /**
      * Code.
@@ -115,7 +115,7 @@ class Category
 
     public function __construct()
     {
-        $this->id_transaction = new ArrayCollection();
+        $this->transaction = new ArrayCollection();
     }
 
     /**
@@ -175,27 +175,27 @@ class Category
     /**
      * @return Collection|Transaction[]
      */
-    public function getIdTransaction(): Collection
+    public function getTransaction(): Collection
     {
-        return $this->id_transaction;
+        return $this->transaction;
     }
 
-    public function addIdTransaction(Transaction $idTransaction): self
+    public function addTransaction(Transaction $Transaction): self
     {
-        if (!$this->id_transaction->contains($idTransaction)) {
-            $this->id_transaction[] = $idTransaction;
-            $idTransaction->setIdCategory($this);
+        if (!$this->transaction->contains($Transaction)) {
+            $this->transaction[] = $Transaction;
+            $Transaction->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeIdTransaction(Transaction $idTransaction): self
+    public function removeTransaction(Transaction $Transaction): self
     {
-        if ($this->id_transaction->removeElement($idTransaction)) {
+        if ($this->transaction->removeElement($Transaction)) {
             // set the owning side to null (unless already changed)
-            if ($idTransaction->getIdCategory() === $this) {
-                $idTransaction->setIdCategory(null);
+            if ($Transaction->getCategory() === $this) {
+                $Transaction->setCategory(null);
             }
         }
 
@@ -216,6 +216,6 @@ class Category
 
     public function getCanDelete(): ?bool
     {
-        return is_null($this->id_transaction);
+        return is_null($this->transaction);
     }
 }

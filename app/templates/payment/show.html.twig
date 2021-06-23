@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_payment_details'|trans({'%id%': payment.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title_payment_details'|trans({'%id%': payment.id|default('')}) }}</h1>
+    {% if payment is defined and payment|length %}
+        <dl class="dl">
+            <dt>{{ 'label_id'|trans }}</dt>
+            <dd>{{ payment.id }}</dd>
+            <dt>{{ 'label_name'|trans }}</dt>
+            <dd>{{  payment.name }}</dd>
+        </dl>
+        <p>
+            <a href="{{ url('payment_index') }}" title="{{ 'action_back_to_list'|trans }}">
+                {{ 'action_back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {% include 'default/_single_flash_message.html.twig' with {
+                type: 'warning',
+                message: 'message.empty_list'|trans
+            } %}
+        </p>
+    {% endif %}
+{% endblock %}

@@ -22,9 +22,9 @@ class OperationFixtures extends AbstractBaseFixtures
     {
         $this->createMany(20, 'operations', function ($i) {
             $operation = new Operation();
-            $operation->setNameOperation($this->faker->word);
-            //$operation->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            //$operation->setUpdatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
+            $operation->setName($this->faker->word);
+            $operation->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
+            $operation->setUpdatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
 
             return $operation;
         });

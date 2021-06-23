@@ -22,9 +22,9 @@ class PaymentFixtures extends AbstractBaseFixtures
     {
         $this->createMany(20, 'payments', function ($i) {
             $payment = new Payment();
-            $payment->setPaymentMethod($this->faker->word);
-           // $payment->setCreateAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            //$payment->setUpdateAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
+            $payment->setName($this->faker->word);
+           // $payment->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
+            //$payment->setUpdatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
 
             return $payment;
         });

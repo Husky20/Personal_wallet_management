@@ -3,11 +3,14 @@
 namespace App\Repository;
 
 use App\Entity\Transaction;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
 /**
+ * Class TransactionRepository.
+ *
  * @method Transaction|null find($id, $lockMode = null, $lockVersion = null)
  * @method Transaction|null findOneBy(array $criteria, array $orderBy = null)
  * @method Transaction[]    findAll()
@@ -37,6 +40,34 @@ class TransactionRepository extends ServiceEntityRepository
     }
 
     /**
+     * Save record.
+     *
+     * @param \App\Entity\Transaction $transaction Transaction entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Transaction $transaction): void
+    {
+        $this->_em->persist($transaction);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete record.
+     *
+     * @param \App\Entity\Transaction $transaction Transaction entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Transaction $transaction): void
+    {
+        $this->_em->remove($transaction);
+        $this->_em->flush();
+    }
+
+    /**
      * Query all records.
      *
      * @return \Doctrine\ORM\QueryBuilder Query builder
@@ -44,7 +75,7 @@ class TransactionRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('transaction.name', 'ASC');
+            ->orderBy('transaction.updatedAt', 'DESC');
     }
 
     /**
@@ -57,6 +88,23 @@ class TransactionRepository extends ServiceEntityRepository
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('transaction');
+    }
+
+    /**
+     * Query transactions by author.
+     *
+     * @param \App\Entity\User $user User entity
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    public function queryByAuthor(User $user): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll();
+
+        $queryBuilder->andWhere('transaction.author = :author')
+            ->setParameter('author', $user);
+
+        return $queryBuilder;
     }
 
     // /**

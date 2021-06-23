@@ -95,7 +95,7 @@ class CategoryRepository extends ServiceEntityRepository
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('c')
+        return $this->createdQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
             ->orderBy('c.id', 'ASC')
@@ -109,7 +109,7 @@ class CategoryRepository extends ServiceEntityRepository
     /*
     public function findOneBySomeField($value): ?Category
     {
-        return $this->createQueryBuilder('c')
+        return $this->createdQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
