@@ -7,8 +7,8 @@ namespace App\Controller;
 
 use App\Entity\Payment;
 use App\Form\PaymentType;
-use App\Repository\PaymentRepository;
-use Knp\Component\Pager\PaginatorInterface;
+use App\Service\PaymentService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,15 +19,32 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class PaymentController.
  *
  * @Route("/payment")
+ *
+ * @IsGranted("ROLE_ADMIN")
  */
 class PaymentController extends AbstractController
 {
     /**
+     * Payment service.
+     *
+     * @var \App\Service\PaymentService
+     */
+    private $paymentService;
+
+    /**
+     * PaymentController constructor.
+     *
+     * @param \App\Service\PaymentService $paymentService Payment service
+     */
+    public function __construct(PaymentService $paymentService)
+    {
+        $this->paymentService = $paymentService;
+    }
+
+    /**
      * Index action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Repository\PaymentRepository $paymentRepository Payment repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -37,19 +54,17 @@ class PaymentController extends AbstractController
      *     name="payment_index",
      * )
      */
-    public function index(Request $request, PaymentRepository $paymentRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
-        $pagination = $paginator->paginate(
-            $paymentRepository->queryAll(),
-            $request->query->getInt('page', 1),
-            PaymentRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
+        $page = $request->query->getInt('page', 1);
+        $pagination = $this->paymentService->createPaginatedList($page);
 
         return $this->render(
             'payment/index.html.twig',
             ['pagination' => $pagination]
         );
     }
+
     /**
      * Show action.
      *
@@ -75,8 +90,7 @@ class PaymentController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Repository\PaymentRepository        $paymentRepository Payment repository
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -89,14 +103,15 @@ class PaymentController extends AbstractController
      *     name="payment_create",
      * )
      */
-    public function create(Request $request, PaymentRepository $paymentRepository): Response
+    public function create(Request $request): Response
     {
         $payment = new Payment();
         $form = $this->createForm(PaymentType::class, $payment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $paymentRepository->save($payment);
+            $this->paymentService->save($payment);
+            $this->addFlash('success', 'message_created_successfully');
 
             return $this->redirectToRoute('payment_index');
         }
@@ -106,12 +121,12 @@ class PaymentController extends AbstractController
             ['form' => $form->createView()]
         );
     }
+
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Payment                      $payment           Payment entity
-     * @param \App\Repository\PaymentRepository        $paymentRepository Payment repository
+     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param \App\Entity\Payment                      $payment Payment entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -125,15 +140,13 @@ class PaymentController extends AbstractController
      *     name="payment_edit",
      * )
      */
-    public function edit(Request $request, Payment $payment, PaymentRepository $paymentRepository): Response
+    public function edit(Request $request, Payment $payment): Response
     {
         $form = $this->createForm(PaymentType::class, $payment, ['method' => 'PUT']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $payment->setUpdatedAt(new \DateTime());
-            $paymentRepository->save($payment);
-
+            $this->paymentService->save($payment);
             $this->addFlash('success', 'message_updated_successfully');
 
             return $this->redirectToRoute('payment_index');
@@ -147,12 +160,12 @@ class PaymentController extends AbstractController
             ]
         );
     }
+
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Payment                      $payment           Payment entity
-     * @param \App\Repository\PaymentRepository        $paymentRepository Payment repository
+     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param \App\Entity\Payment                      $payment Payment entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -166,9 +179,9 @@ class PaymentController extends AbstractController
      *     name="payment_delete",
      * )
      */
-    public function delete(Request $request, Payment $payment, PaymentRepository $repository): Response
+    public function delete(Request $request, Payment $payment): Response
     {
-        if ($payment->getTransaction()->count()) {
+        if ($payment->getTransactions()->count()) {
             $this->addFlash('warning', 'message_payment_contains_transactions');
 
             return $this->redirectToRoute('payment_index');
@@ -182,7 +195,7 @@ class PaymentController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $repository->delete($payment);
+            $this->paymentService->delete($payment);
             $this->addFlash('success', 'message_deleted_successfully');
 
             return $this->redirectToRoute('payment_index');

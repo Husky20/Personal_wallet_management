@@ -1,22 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title_wallet_details'|trans({'%id%': wallet.id|default('')}) }}
+    {{ 'title_tag_details'|trans({'%id%': tag.id|default('')}) }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title_wallet_details'|trans({'%id%': wallet.id|default('')}) }}</h1>
-    {% if wallet is defined and wallet|length %}
+    <h1>{{ 'title_tag_details'|trans({'%id%': tag.id|default('')}) }}</h1>
+    {% if tag is defined and tag|length %}
         <dl class="dl">
             <dt>{{ 'label_id'|trans }}</dt>
-            <dd>{{ wallet.id }}</dd>
+            <dd>{{ tag.id }}</dd>
             <dt>{{ 'label_name'|trans }}</dt>
-            <dd>{{  wallet.name }}</dd>
-            <dt>{{ 'label_balance'|trans }}</dt>
-            <dd>{{  wallet.balance }}</dd>
+            <dd>{{  tag.name }}</dd>
         </dl>
         <p>
-            <a href="{{ url('wallet_index') }}" title="{{ 'action_back_to_list'|trans }}">
+            <a href="{{ url('tag_index') }}" title="{{ 'action_back_to_list'|trans }}">
                 {{ 'action_back_to_list'|trans }}
             </a>
         </p>

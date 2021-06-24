@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -43,7 +44,7 @@ class TagRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('tag.name', 'ASC');
+            ->orderBy('tags.name', 'ASC');
     }
 
     /**

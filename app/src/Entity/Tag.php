@@ -13,6 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * Class Tag.
  *
@@ -38,11 +39,6 @@ class Tag
      * Name.
      *
      * @var string
-     *
-     * @ORM\Column(
-     *     type="string",
-     *     length=64,
-     * )
      *
      * @Assert\Type(type="string")
      * @Assert\NotBlank

@@ -1,8 +1,8 @@
 <?php
 /**
  * Transaction entity.
- *
  */
+
 namespace App\Entity;
 
 use DateTimeInterface;
@@ -82,7 +82,7 @@ class Transaction
     /**
      * Category.
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="transactions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="transactions",fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -90,7 +90,7 @@ class Transaction
     /**
      * Wallet.
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Wallet", inversedBy="transactions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Wallet", inversedBy="transactions", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(nullable=false)
      */
     private $wallet;
@@ -98,7 +98,7 @@ class Transaction
     /**
      * Payment.
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Payment", inversedBy="transactions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Payment", inversedBy="transactions", fetch="EXTRA_LAZY",)
      * @ORM\JoinColumn(nullable=false)
      */
     private $payment;
@@ -106,7 +106,7 @@ class Transaction
     /**
      * Operation.
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Operation", inversedBy="transactions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Operation", inversedBy="transactions", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(nullable=false)
      */
     private $operation;
@@ -119,6 +119,9 @@ class Transaction
      * @ORM\ManyToMany(
      *     targetEntity="App\Entity\Tag",
      *     inversedBy="transactions",
+     *     fetch="EXTRA_LAZY",
+     *     mappedBy="tags",
+     *
      * )
      * @ORM\JoinTable(name="transactions_tags")
      */
@@ -133,6 +136,11 @@ class Transaction
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $comment;
 
     /**
      * Transaction constructor.
@@ -179,7 +187,7 @@ class Transaction
      *
      * @return datetime|null Name
      */
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?DateTimeInterface
     {
         return $this->date;
     }
@@ -189,7 +197,7 @@ class Transaction
      *
      * @param datetime $date Date
      */
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(DateTimeInterface $date): self
     {
         $this->date = $date;
 
@@ -223,7 +231,7 @@ class Transaction
      *
      * @return \DateTimeInterface|null Created at
      */
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -233,20 +241,19 @@ class Transaction
      *
      * @param \DateTimeInterface $createdAt Created at
      */
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-
     /**
      * Getter for Updated at.
      *
      * @return \DateTimeInterface|null Updated at
      */
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -256,7 +263,7 @@ class Transaction
      *
      * @param \DateTimeInterface $updatedAt Updated at
      */
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -393,6 +400,18 @@ class Transaction
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }
