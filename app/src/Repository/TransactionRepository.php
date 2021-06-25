@@ -112,17 +112,17 @@ class TransactionRepository extends ServiceEntityRepository
     /**
      * Query transactions by author.
      *
-     * @param \App\Entity\User $user User entity
+     * @param null $user
      *
      * @return \Doctrine\ORM\QueryBuilder Query builder
      */
-    public function queryByAuthor(User $user): QueryBuilder
+    public function queryByAuthor($author = null): QueryBuilder
     {
         $queryBuilder = $this->queryAll();
-
-        $queryBuilder->andWhere('transaction.author = :author')
-            ->setParameter('author', $user);
-
+        if (!is_null($author)) {
+            $queryBuilder->andWhere('transaction.author = :author')
+                ->setParameter('author', $author);
+        }
         return $queryBuilder;
     }
 

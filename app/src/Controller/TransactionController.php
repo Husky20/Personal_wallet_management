@@ -7,8 +7,7 @@ namespace App\Controller;
 
 use App\Entity\Transaction;
 use App\Form\TransactionType;
-use App\Repository\TransactionRepository;
-use Knp\Component\Pager\PaginatorInterface;
+use App\Service\TransactionService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,11 +26,25 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class TransactionController extends AbstractController
 {
     /**
+     * Transaction service.
+     *
+     * @var \App\Service\TransactionService
+     */
+    private $transactionService;
+
+    /**
+     * TransactionController constructor.
+     *
+     * @param \App\Service\TransactionService $transactionService Transaction service
+     */
+    public function __construct(TransactionService $transactionService)
+    {
+        $this->transactionService = $transactionService;
+    }
+    /**
      * Index action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Repository\TransactionRepository $transactionRepository Transaction repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -41,12 +54,15 @@ class TransactionController extends AbstractController
      *     name="transaction_index",
      * )
      */
-    public function index(Request $request, TransactionRepository $transactionRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
-        $pagination = $paginator->paginate(
-            $transactionRepository->queryByAuthor($this->getUser()),
+        $filters = [];
+        $filters['category_id'] = $request->query->getInt('filters_category_id');
+        $filters['tag_id'] = $request->query->getInt('filters_tag_id');
+
+        $pagination = $this->transactionService->createPaginatedList(
             $request->query->getInt('page', 1),
-            TransactionRepository::PAGINATOR_ITEMS_PER_PAGE
+            $filters
         );
 
         return $this->render(
@@ -83,7 +99,6 @@ class TransactionController extends AbstractController
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
-     * @param \App\Repository\TransactionRepository            $transactionRepository Transaction repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -96,7 +111,7 @@ class TransactionController extends AbstractController
      *     name="transaction_create",
      * )
      */
-    public function create(Request $request, TransactionRepository $transactionRepository): Response
+    public function create(Request $request): Response
     {
         $transaction = new Transaction();
         $form = $this->createForm(TransactionType::class, $transaction);
@@ -104,7 +119,7 @@ class TransactionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $transaction->setAuthor($this->getUser());
-            $transactionRepository->save($transaction);
+            $this->transactionService->save($transaction);
             $this->addFlash('success', 'message_created_successfully');
 
             return $this->redirectToRoute('transaction_index');
@@ -121,7 +136,6 @@ class TransactionController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
      * @param \App\Entity\Transaction                          $transaction           Transaction entity
-     * @param \App\Repository\TransactionRepository            $transactionRepository Transaction repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -135,7 +149,7 @@ class TransactionController extends AbstractController
      *     name="transaction_edit",
      * )
      */
-    public function edit(Request $request, Transaction $transaction, TransactionRepository $transactionRepository): Response
+    public function edit(Request $request, Transaction $transaction): Response
     {
         if ($transaction->getAuthor() !== $this->getUser()) {
             $this->addFlash('warning', 'message.item_not_found');
@@ -147,7 +161,7 @@ class TransactionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $transactionRepository->save($transaction);
+            $this->transactionService->save($transaction);
             $this->addFlash('success', 'message_updated_successfully');
 
             return $this->redirectToRoute('transaction_index');
@@ -167,7 +181,6 @@ class TransactionController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
      * @param \App\Entity\Transaction                          $transaction           Transaction entity
-     * @param \App\Repository\TransactionRepository            $transactionRepository Transaction repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -181,7 +194,7 @@ class TransactionController extends AbstractController
      *     name="transaction_delete",
      * )
      */
-    public function delete(Request $request, Transaction $transaction, TransactionRepository $transactionRepository): Response
+    public function delete(Request $request, Transaction $transaction): Response
     {
         if ($transaction->getAuthor() !== $this->getUser()) {
             $this->addFlash('warning', 'message.item_not_found');
@@ -197,7 +210,7 @@ class TransactionController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $transactionRepository->delete($transaction);
+            $this->transactionService->delete($transaction);
             $this->addFlash('success', 'message_deleted_successfully');
 
             return $this->redirectToRoute('transaction_index');
