@@ -181,6 +181,34 @@
                     <source>title_operation_details</source>
                     <target>Operations details</target>
             </trans-unit>
+            <trans-unit id="title_login">
+                    <source>title_login</source>
+                    <target>Login</target>
+            </trans-unit>
+            <trans-unit id="massage_log">
+                    <source>massage_log</source>
+                    <target>You are log in as</target>
+            </trans-unit>
+            <trans-unit id="massage_sign_in">
+                    <source>massage_sign_in</source>
+                    <target>Please sign in</target>
+            </trans-unit>
+            <trans-unit id="label_mail">
+                    <source>label_mail</source>
+                    <target>Email</target>
+            </trans-unit>
+            <trans-unit id="label_password">
+                    <source>label_password</source>
+                    <target>Password</target>
+            </trans-unit>
+            <trans-unit id="action_sign_in">
+                    <source>action_sign_in</source>
+                    <target>Sign in</target>
+            </trans-unit>
+            <trans-unit id="action_login">
+                    <source>action_login</source>
+                    <target>Log in</target>
+            </trans-unit>
 
         </body>
     </file>

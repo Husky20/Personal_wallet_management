@@ -119,7 +119,7 @@ class CategoryServiceTest extends KernelTestCase
     public function testCreatePaginatedListEmptyList(): void
     {
         // given
-        $page = 1;
+        $page = 0;
         $dataSetSize = 3;
         $expectedResultSize = 0;
 
@@ -151,7 +151,7 @@ class CategoryServiceTest extends KernelTestCase
         // given
         $page = 1;
         $dataSetSize = 3;
-        $expectedResultSize = 3;
+        $expectedResultSize = 10;
 
         $counter = 0;
         while ($counter < $dataSetSize) {

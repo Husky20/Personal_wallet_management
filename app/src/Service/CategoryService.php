@@ -20,14 +20,14 @@ class CategoryService
      *
      * @var \App\Repository\CategoryRepository
      */
-    private $categoryRepository;
+    private CategoryRepository $categoryRepository;
 
     /**
      * Paginator.
      *
      * @var \Knp\Component\Pager\PaginatorInterface
      */
-    private $paginator;
+    private PaginatorInterface $paginator;
 
     /**
      * CategoryService constructor.

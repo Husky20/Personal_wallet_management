@@ -6,11 +6,11 @@
 namespace App\Tests\Controller;
 
 use App\Entity\Category;
-use App\Entity\Transaction;
+
 use App\Entity\User;
-use App\Repository\CategoryRepository;
-use App\Repository\TransactionRepository;
+use App\Entity\UsersProfile;
 use App\Repository\UserRepository;
+use App\Repository\UsersProfileRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
@@ -23,10 +23,8 @@ class CategoryControllerTest extends WebTestCase
 {
     /**
      * Test client.
-     *
-     * @var KernelBrowser
      */
-    private $httpClient;
+    private KernelBrowser $httpClient;
 
     /**
      * Set up tests.
@@ -37,12 +35,29 @@ class CategoryControllerTest extends WebTestCase
     }
 
     /**
-     * Test index route.
+     * Test index route for anonymous user.
      */
-    public function testIndexRoute(): void
+    public function testIndexRouteAnonymousUser(): void
     {
         // given
+        $expectedStatusCode = 302;
+
+        // when
+        $this->httpClient->request('GET', '/category');
+        $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
+
+        // then
+        $this->assertEquals($expectedStatusCode, $resultStatusCode);
+    }
+
+    /**
+     * Test index route for admin user.
+     */
+    public function testIndexRouteAdminUser(): void
+    {
         $expectedStatusCode = 200;
+        $adminUser = $this->createUser([User::ROLE_USER, User::ROLE_ADMIN]);
+        $this->logIn($adminUser);
 
         // when
         $this->httpClient->request('GET', '/category/');
@@ -51,86 +66,17 @@ class CategoryControllerTest extends WebTestCase
         // then
         $this->assertEquals($expectedStatusCode, $resultStatusCode);
     }
-
     /**
-     * Test show category.
-     */
-    public function testShowCategory(): void
-    {
-        // given
-        $expectedStatusCode = 200;
-
-        $expectedCategory = new Category();
-        $expectedCategory->setName('Test Category');
-        $categoryRepository = self::$container->get(CategoryRepository::class);
-        $categoryRepository->save($expectedCategory);
-
-        // when
-        $this->httpClient->request('GET', '/category/'.$expectedCategory->getId());
-        $result = $this->httpClient->getResponse();
-
-        // then
-        $this->assertEquals($expectedStatusCode, $result->getStatusCode());
-    }
-
-    /**
-     * Test create category for non authorized user.
-     */
-    public function testCreateCategoryNonAuthorizedUser(): void
-    {
-        // given
-        $expectedStatusCode = 302;
-        $user = $this->createUser([User::ROLE_USER]);
-        $this->logIn($user);
-
-        // when
-        $this->httpClient->request('GET', '/category/create');
-        $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
-
-        // then
-        $this->assertEquals($expectedStatusCode, $resultStatusCode);
-    }
-
-    /**
-     * Test create category for admin user.
+     * Test create film for admin user.
      */
     public function testCreateCategoryAdminUser(): void
     {
         // given
-        $expectedStatusCode = 200;
-        $adminUser = $this->createUser([User::ROLE_USER, User::ROLE_ADMIN]);
-        $this->logIn($adminUser);
-
+        $expectedStatusCode = 301;
+        $admin = $this->createUser(['ROLE_ADMIN', 'ROLE_USER']);
+        $this->logIn($admin);
         // when
-        $crawler = $this->httpClient->request('GET', '/category/create');
-        $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
-        $form = $crawler->selectButton('Stwórz')->form();
-        $form['category[name]']->setValue('Test Category');
-        $this->httpClient->submit($form);
-        $this->httpClient->followRedirect();
-
-        // then
-        $this->assertEquals($expectedStatusCode, $resultStatusCode);
-        $this->assertStringContainsString('Stworzono pomyślnie.', $this->httpClient->getResponse()->getContent());
-    }
-
-    /**
-     * Test edit category for non authorized user.
-     */
-    public function testEditCategoryNonAuthorizedUser(): void
-    {
-        // given
-        $expectedStatusCode = 302;
-        $user = $this->createUser([User::ROLE_USER]);
-        $this->logIn($user);
-
-        $expectedCategory = new Category();
-        $expectedCategory->setName('Test Category');
-        $categoryRepository = self::$container->get(CategoryRepository::class);
-        $categoryRepository->save($expectedCategory);
-
-        // when
-        $this->httpClient->request('GET', '/category/'.$expectedCategory->getId().'/edit');
+        $this->httpClient->request('GET', '/category/new/');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
         // then
@@ -138,112 +84,41 @@ class CategoryControllerTest extends WebTestCase
     }
 
     /**
-     * Test edit category for admin user.
+     * Create user.
+     *
+     * @param array $roles User roles
+     *
+     * @return User User entity
      */
-    public function testEditCategoryAdminUser(): void
+    private function createUser(array $roles): User
     {
-        // given
-        $expectedStatusCode = 200;
-        $adminUser = $this->createUser([User::ROLE_USER, User::ROLE_ADMIN]);
-        $this->logIn($adminUser);
+        $passwordEncoder = self::$container->get('security.password_encoder');
+        $user = new User();
+        $user->setEmail('user@example.com');
+        $user->setRoles($roles);
+        $user->setPassword(
+            $passwordEncoder->encodePassword(
+                $user,
+                'p@55w0rd'
+            )
+        );
+        $user->setUsersprofile($this->createUserProfile());
+        $userRepository = self::$container->get(UserRepository::class);
+        $userRepository->save($user);
 
-        $expectedCategory = new Category();
-        $expectedCategory->setName('Test Category');
-        $categoryRepository = self::$container->get(CategoryRepository::class);
-        $categoryRepository->save($expectedCategory);
-
-        // when
-        $crawler = $this->httpClient->request('GET', '/category/'.$expectedCategory->getId().'/edit');
-        $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
-        $form = $crawler->selectButton('Zapisz')->form();
-        $this->httpClient->submit($form);
-        $this->httpClient->followRedirect();
-
-        // then
-        $this->assertEquals($expectedStatusCode, $resultStatusCode);
-        $this->assertStringContainsString('Zaktualizowano pomyślnie.', $this->httpClient->getResponse()->getContent());
+        return $user;
     }
 
-    /**
-     * Test delete category for non authorized user.
-     */
-    public function testDeleteCategoryNonAuthorizedUser(): void
+    private function createUserProfile()
     {
-        // given
-        $expectedStatusCode = 302;
-        $user = $this->createUser([User::ROLE_USER]);
-        $this->logIn($user);
+        $profile = new UsersProfile();
+        $profile->setName('Testowy');
+        $profile->setSurname('Testowenazwisko');
+        $profile->setLogin('jestem_testem');
+        $profileRepository = self::$container->get(UsersProfileRepository::class);
+        $profileRepository->save($profile);
 
-        $expectedCategory = new Category();
-        $expectedCategory->setName('Test Category');
-        $categoryRepository = self::$container->get(CategoryRepository::class);
-        $categoryRepository->save($expectedCategory);
-
-        // when
-        $this->httpClient->request('GET', '/category/'.$expectedCategory->getId().'/delete');
-        $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
-
-        // then
-        $this->assertEquals($expectedStatusCode, $resultStatusCode);
-    }
-
-    /**
-     * Test delete category for admin user.
-     */
-    public function testDeleteCategoryAdminUser(): void
-    {
-        // given
-        $expectedStatusCode = 200;
-        $adminUser = $this->createUser([User::ROLE_USER, User::ROLE_ADMIN]);
-        $this->logIn($adminUser);
-
-        $expectedCategory = new Category();
-        $expectedCategory->setName('Test Category');
-        $categoryRepository = self::$container->get(CategoryRepository::class);
-        $categoryRepository->save($expectedCategory);
-
-        // when
-        $crawler = $this->httpClient->request('GET', '/category/'.$expectedCategory->getId().'/delete');
-        $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
-        $form = $crawler->selectButton('Usuń')->form();
-        $this->httpClient->submit($form);
-        $this->httpClient->followRedirect();
-
-        // then
-        $this->assertEquals($expectedStatusCode, $resultStatusCode);
-        $this->assertStringContainsString('Usunięto pomyślnie.', $this->httpClient->getResponse()->getContent());
-    }
-
-    /**
-     * Test delete category with transactions.
-     */
-    public function testDeleteCategoryWithTransactions(): void
-    {
-        // given
-        $adminUser = $this->createUser([User::ROLE_USER, User::ROLE_ADMIN]);
-        $this->logIn($adminUser);
-
-        $expectedCategory = new Category();
-        $expectedCategory->setName('Test Category');
-        $categoryRepository = self::$container->get(CategoryRepository::class);
-        $categoryRepository->save($expectedCategory);
-
-        $transaction = new Transaction();
-        $transaction->setName('Test Transaction');
-        $transaction->setContent('Test Transaction Content');
-        $transaction->setCategory($expectedCategory);
-        $transaction->setAuthor($adminUser);
-        $transactionRepository = self::$container->get(TransactionRepository::class);
-        $transactionRepository->save($transaction);
-
-        // when
-        $crawler = $this->httpClient->request('GET', '/category/'.$expectedCategory->getId().'/delete');
-        $form = $crawler->selectButton('Usuń')->form();
-        $this->httpClient->submit($form);
-        $this->httpClient->followRedirect();
-
-        // then
-        $this->assertStringContainsString('Kategoria zawiera transactiony.', $this->httpClient->getResponse()->getContent());
+        return $profile;
     }
 
     /**
@@ -267,28 +142,20 @@ class CategoryControllerTest extends WebTestCase
     }
 
     /**
-     * Create user.
-     *
-     * @param array $roles User roles
-     *
-     * @return User User entity
+     * Test index route for non authorized user FOR NEW CATEGORY.
      */
-    private function createUser(array $roles): User
+    public function testIndexRouteNonAuthorizedUser(): void
     {
-        $passwordEncoder = self::$container->get('security.password_encoder');
-        $user = new User();
-        $user->setEmail('user@example.com');
-        $user->setRoles($roles);
-        $user->setPassword(
-            $passwordEncoder->encodePassword(
-                $user,
-                'p@55w0rd'
-            )
-        );
+        // given
+        $expectedStatusCode = 403;
+        $user = $this->createUser([User::ROLE_USER]);
+        $this->logIn($user);
 
-        $userRepository = self::$container->get(UserRepository::class);
-        $userRepository->save($user);
+        // when
+        $this->httpClient->request('GET', '/category/new/');
+        $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
-        return $user;
+        // then
+        $this->assertEquals($expectedStatusCode, $resultStatusCode);
     }
 }
