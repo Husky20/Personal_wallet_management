@@ -71,4 +71,77 @@ class WalletServiceTest extends KernelTestCase
         // then
         $this->assertEquals($expectedWallet, $resultWallet);
     }
+
+    /**
+     * Test delete.
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function testDelete(): void
+    {
+        // given
+        $expectedWallet = new Wallet();
+        $expectedWallet->setName('Test Wallet');
+        $expectedWallet->setBalance('100');
+        $this->walletRepository->save($expectedWallet);
+        $expectedId = $expectedWallet->getId();
+
+        // when
+        $this->walletService->delete($expectedWallet);
+        $result = $this->walletRepository->findOneById($expectedId);
+
+        // then
+        $this->assertNull($result);
+    }
+
+    /**
+     * Test find by id.
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function testFindById(): void
+    {
+        // given
+        $expectedWallet = new Wallet();
+        $expectedWallet->setName('Test Wallet');
+        $expectedWallet->setBalance('100');
+        $this->walletRepository->save($expectedWallet);
+
+        // when
+        $result = $this->walletService->findOneById($expectedWallet->getId());
+
+        // then
+        $this->assertEquals($expectedWallet->getId(), $result->getId());
+    }
+
+    /**
+     * Test pagination empty list.
+     */
+    public function testCreatePaginatedListEmptyList(): void
+    {
+        // given
+        $page = 1;
+        $dataSetSize = 3;
+        $expectedResultSize = 0;
+
+        $counter = 0;
+        while ($counter < $dataSetSize) {
+            $wallet = new Wallet();
+            $wallet->setName('Test Wallet #'.$counter);
+            $wallet->setBalance('100 #'.$counter);
+            $this->walletRepository->save($wallet);
+
+            ++$counter;
+        }
+
+        // when
+        $result = $this->walletService->createPaginatedList($page);
+
+        // then
+        $this->assertEquals($expectedResultSize, $result->count());
+    }
+
+    // other tests for paginated list
 }

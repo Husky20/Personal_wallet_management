@@ -20,14 +20,14 @@ class WalletService
      *
      * @var \App\Repository\WalletRepository
      */
-    private WalletRepository $walletRepository;
+    private $walletRepository;
 
     /**
      * Paginator.
      *
      * @var \Knp\Component\Pager\PaginatorInterface
      */
-    private PaginatorInterface $paginator;
+    private $paginator;
 
     /**
      * WalletService constructor.
