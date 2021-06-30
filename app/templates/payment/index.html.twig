@@ -19,8 +19,8 @@
             <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'payment.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label_create_at'|trans, 'payment.createAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label_update_at'|trans, 'payment.updateAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_created_at'|trans, 'payment.createAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_updated_at'|trans, 'payment.updateAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_name'|trans, 'payment.name') }}</th>
                 <th>{{ 'label_actions'|trans }}</th>
 
@@ -41,7 +41,7 @@
                         <a href="{{ url('payment_edit', {id: payment.id}) }}" title="{{ 'action_edit'|trans }}">
                             {{ 'action_edit'|trans }}
                         </a>
-                        {% if not payment.transaction|length %}
+                        {% if not payment.transactions|length %}
                             <a href="{{ url('payment_delete', {id: payment.id}) }}" title="{{ 'action_delete'|trans }}">
                                 {{ 'action_delete'|trans }}
                             </a>

@@ -32,8 +32,155 @@
             </trans-unit>
             <trans-unit id="action_back_to_list">
                  <source>action_back_to_list</source>
-                 <target>Powtrót do kategorii</target>
+                 <target>Powrót do listy</target>
             </trans-unit>
+            <trans-unit id="title_transaction_list">
+                      <source>title_transaction_list</source>
+                      <target>Transakcje</target>
+                </trans-unit>
+                <trans-unit id="action_logout">
+                      <source>action_logout</source>
+                      <target>Wyloguj</target>
+                </trans-unit>
+                <trans-unit id="action_create">
+                       <source>action_create</source>
+                       <target>Dodaj rekord</target>
+                </trans-unit>
+                <trans-unit id="label_date">
+                        <source>label_date</source>
+                        <target>Data</target>
+                </trans-unit>
+                <trans-unit id="label_amount">
+                        <source>label_amount</source>
+                        <target>Kwota</target>
+                </trans-unit>
+                <trans-unit id="label_createdAt">
+                        <source>label_createdAt</source>
+                        <target>Data utworzenia</target>
+                </trans-unit>
+                <trans-unit id="label_updatedAt">
+                        <source>label_updatedAt</source>
+                        <target>Data aktualizacji</target>
+                </trans-unit>
+                <trans-unit id="label_createAt">
+                        <source>label_createAt</source>
+                        <target>Data utworzenia</target>
+                </trans-unit>
+                <trans-unit id="label_updateAt">
+                        <source>label_updateAt</source>
+                        <target>Data aktualizacji</target>
+                </trans-unit>
+                <trans-unit id="label_category">
+                        <source>label_category</source>
+                        <target>Kategorie</target>
+                </trans-unit><trans-unit id="label_wallet">
+                        <source>label_wallet</source>
+                        <target>Portfele</target>
+                </trans-unit>
+                <trans-unit id="label_payment">
+                        <source>label_payment</source>
+                        <target>Metody płatności</target>
+                </trans-unit>
+                <trans-unit id="label_operation">
+                        <source>label_operation</source>
+                        <target>Operacje</target>
+                </trans-unit>
+                <trans-unit id="action_edit">
+                        <source>action_edit</source>
+                        <target>Edytuj</target>
+                </trans-unit><trans-unit id="action_delete">
+                        <source>action_delete</source>
+                        <target>Usuń</target>
+                </trans-unit>
+                <trans-unit id="title_wallet_edit">
+                        <source>title_wallet_edit</source>
+                        <target>Edytuj portfel</target>
+                </trans-unit>
+                <trans-unit id="label_balance">
+                         <source>label_balance</source>
+                         <target>Saldo</target>
+                </trans-unit>
+                <trans-unit id="action_save">
+                         <source>action_save</source>
+                         <target>Zapisz</target>
+                </trans-unit>
+                <trans-unit id="label_created_at">
+                         <source>label_created_at</source>
+                         <target>Data utworzenia</target>
+                </trans-unit>
+                <trans-unit id="label_updated_at">
+                         <source>label_updated_at</source>
+                         <target>Data aktualizacji</target>
+                </trans-unit>
+                <trans-unit id="title_wallet_list">
+                        <source>title_wallet_list</source>
+                        <target>Portfele</target>
+                </trans-unit>
+                <trans-unit id="title_wallet_delete">
+                        <source>title_wallet_delete</source>
+                        <target>Portfel szczegóły</target>
+                </trans-unit>
+                <trans-unit id="title_wallet_create">
+                        <source>title_wallet_create</source>
+                        <target>Dodaj portfel</target>
+                </trans-unit>
+                <trans-unit id="title_operation_create">
+                        <source>title_operation_create</source>
+                        <target>Dodaj operacje</target>
+                </trans-unit>
+                <trans-unit id="title_payment_create">
+                        <source>title_payment_create</source>
+                        <target>Dodaj płatność</target>
+                </trans-unit>
+                <trans-unit id="title_category_create">
+                        <source>title_category_create</source>
+                        <target>Dodaj kategorię</target>
+                </trans-unit>
+                <trans-unit id="title_category_edit">
+                        <source>title_category_edit</source>
+                        <target>Edytuj kategorię</target>
+                </trans-unit>
+                <trans-unit id="title_transaction_create">
+                        <source>title_transaction_create</source>
+                        <target>Dodaj tranzakcje</target>
+                </trans-unit>
+                <trans-unit id="title_transaction_details">
+                        <source>title_transaction_details</source>
+                        <target>Szczegóły tranzakcji</target>
+                </trans-unit>
+                <trans-unit id="title_wallet_details">
+                        <source>title_wallet_details</source>
+                        <target>Szczegóły portfela</target>
+                </trans-unit>
+                <trans-unit id="title_payment_list">
+                        <source>title_payment_list</source>
+                        <target>Metoda płatności</target>
+                </trans-unit>
+                <trans-unit id="title_tag_list">
+                        <source>title_tag_list</source>
+                        <target>Tagi</target>
+                </trans-unit>
+                <trans-unit id="title_tag_details">
+                        <source>title_tag_details</source>
+                        <target>Szczegóły tagu</target>
+                </trans-unit>
+                <trans-unit id="title_payment_details">
+                        <source>title_payment_details</source>
+                        <target>Szczegóły metody płatności</target>
+                </trans-unit>
+                <trans-unit id="label_tags">
+                        <source>label_tags</source>
+                        <target>Tag</target>
+                </trans-unit>
+                <trans-unit id="title_operation_list">
+                        <source>title_operation_list</source>
+                        <target>Operacje</target>
+                </trans-unit>
+                <trans-unit id="title_operation_details">
+                        <source>title_operation_details</source>
+                        <target>Szczegóły operacji</target>
+                </trans-unit>
+
         </body>
     </file>
 </xliff>

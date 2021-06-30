@@ -91,7 +91,7 @@ class Category
      *     mappedBy="category",
      * )
      */
-    private $transaction;
+    private $transactions;
 
     /**
      * Code.
@@ -115,7 +115,7 @@ class Category
 
     public function __construct()
     {
-        $this->transaction = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
     }
 
     /**
@@ -148,11 +148,22 @@ class Category
         $this->name = $name;
     }
 
+    /**
+     * Getter for Create At.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getCreateAt(): ?\DateTimeInterface
     {
         return $this->createAt;
     }
 
+    /**
+     * Setter for Create At.
+     *
+     * @param DateTimeInterface $createAt
+     * @return $this
+     */
     public function setCreateAt(\DateTimeInterface $createAt): self
     {
         $this->createAt = $createAt;
@@ -160,11 +171,22 @@ class Category
         return $this;
     }
 
+    /**
+     * Getter for Update At.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getUpdateAt(): ?\DateTimeInterface
     {
         return $this->updateAt;
     }
 
+    /**
+     * Setter for Update At.
+     *
+     * @param DateTimeInterface $updateAt
+     * @return $this
+     */
     public function setUpdateAt(\DateTimeInterface $updateAt): self
     {
         $this->updateAt = $updateAt;
@@ -173,40 +195,65 @@ class Category
     }
 
     /**
+     * Getter for Transactions.
+     *
      * @return Collection|Transaction[]
      */
-    public function getTransaction(): Collection
+    public function getTransactions(): Collection
     {
-        return $this->transaction;
+        return $this->transactions;
     }
 
-    public function addTransaction(Transaction $Transaction): self
+    /**
+     * Add for Transactions.
+     *
+     * @param Transactions $transaction Transaction Entity
+     *
+     * @return $this
+     */
+    public function addTransaction(Transaction $transaction): self
     {
-        if (!$this->transaction->contains($Transaction)) {
-            $this->transaction[] = $Transaction;
-            $Transaction->setCategory($this);
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
+            $transaction->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeTransaction(Transaction $Transaction): self
+    /**
+     * Remove for Transactions.
+     *
+     * @param Transaction $Transaction
+     * @return $this
+     */
+    public function removeTransaction(Transaction $transaction): self
     {
-        if ($this->transaction->removeElement($Transaction)) {
-            // set the owning side to null (unless already changed)
-            if ($Transaction->getCategory() === $this) {
-                $Transaction->setCategory(null);
+        if ($this->transactions->removeElement($transaction)) {
+            if ($transaction->getCategory() === $this) {
+                $transaction->setCategory(null);
             }
         }
 
         return $this;
     }
 
+    /**
+     * Getter for Code.
+     *
+     * @return string|null
+     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
+    /**
+     * Setter for Code
+     *
+     * @param string $code Code
+     * @return $this
+     */
     public function setCode(string $code): self
     {
         $this->code = $code;
@@ -214,8 +261,13 @@ class Category
         return $this;
     }
 
+    /**
+     * getteer Can Delete.
+     *
+     * @return bool|null
+     */
     public function getCanDelete(): ?bool
     {
-        return is_null($this->transaction);
+        return is_null($this->transactions);
     }
 }

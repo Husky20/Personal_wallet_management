@@ -9,7 +9,9 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Transaction.
@@ -120,10 +122,11 @@ class Transaction
      *     targetEntity="App\Entity\Tag",
      *     inversedBy="transactions",
      *     fetch="EXTRA_LAZY",
-     *     mappedBy="tags",
      *
      * )
      * @ORM\JoinTable(name="transactions_tags")
+     *
+     *  @Assert\Type(type="Doctrine\Common\Collections\Collection")
      */
     private $tags;
 
@@ -327,7 +330,7 @@ class Transaction
     /**
      * Setter for payment.
      *
-     * @param \App\Entity\Payment|null $payment Payment
+     * @param \App\Entity\Payment|null   $payment Payment
      */
     public function setPayment(?Payment $payment): self
     {
@@ -347,7 +350,7 @@ class Transaction
     }
 
     /**
-     * Setter for opeeration.
+     * Setter for operation.
      *
      * @param \App\Entity\Operation|null $operation Operation
      */
@@ -361,7 +364,7 @@ class Transaction
     /**
      * Getter for tags.
      *
-     * @return \Doctrine\Common\Collections\Collection|\App\Entity\Tag[] Tags collection
+     * @return \Doctrine\Common\Collections\Collection|\App\Entity\Tag[] Tag collection
      */
     public function getTags(): Collection
     {

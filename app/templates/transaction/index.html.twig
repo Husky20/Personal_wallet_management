@@ -15,6 +15,23 @@
             <a href="{{ url('transaction_create') }}" title="{{ 'action_create'|trans }}">
                 {{ 'action_create'|trans }}</a>
         </div>
+        <div class="btn btn-light">
+            <a href="{{ url('operation_index') }}" title="{{ 'label_operation'|trans }}">
+                {{ 'label_operation'|trans }}</a>
+        </div>
+        <div class="btn btn-light">
+            <a href="{{ url('wallet_index') }}" title="{{ 'label_wallet'|trans }}">
+                {{ 'label_wallet'|trans }}</a>
+        </div>
+        <div class="btn btn-light">
+            <a href="{{ url('category_index') }}" title="{{ 'label_category'|trans }}">
+                {{ 'label_category'|trans }}</a>
+        </div>
+        <div class="btn btn-light">
+            <a href="{{ url('payment_index') }}" title="{{ 'label_payment'|trans }}">
+                {{ 'label_payment'|trans }}</a>
+        </div>
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -22,7 +39,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label_name'|trans, 'transaction.name') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_date'|trans, 'transaction.date') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_amount'|trans, 'transaction.amount') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label_cteatedAt'|trans, 'transaction.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_createdAt'|trans, 'transaction.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_updatedAt'|trans, 'transaction.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_category'|trans, 'category.name') }}</th>
                 <th>{{ 'label_wallet'|trans }}</th>
@@ -64,6 +81,15 @@
                         {% endif %}
                     </td>
                 </tr>
+                    {% if is_granted('ROLE_AUTHOR', transaction) %}
+                        <div class="btn btn-light">
+                            <a href="{{ url('category_index') }}" title="{{ 'label_category'|trans }}">
+                                {{ 'label_category'|trans }}</a>   </div>
+                        <div class="btn btn-light">
+                            <a href="{{ url('payment_index') }}" title="{{ 'payment_category'|trans }}">
+                                {{ 'payment_category'|trans }}</a>
+                        </div>
+                    {% endif %}
             {% endfor %}
             </tbody>
         </table>

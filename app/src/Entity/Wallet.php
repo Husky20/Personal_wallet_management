@@ -81,23 +81,40 @@ class Wallet
     /**
      * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="wallet")
      */
-    private $transaction;
+    private $transactions;
 
+    /**
+     * Wallet constructor.
+     */
     public function __construct()
     {
         $this->transaction = new ArrayCollection();
     }
 
+    /**
+     * Getter for Id.
+     *
+     * @return int|null Result
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for Name.
+     *
+     * @return string|null Name
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
-
+    /**
+     * Setter for Name.
+     *
+     * @param string $name Name
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -105,11 +122,22 @@ class Wallet
         return $this;
     }
 
+    /**
+     * Getter for Balance.
+     *
+     * @return int|null
+     */
     public function getBalance(): ?int
     {
         return $this->balance;
     }
 
+    /**
+     * Setter for Balance.
+     *
+     * @param int $balance Balance
+     * @return $this
+     */
     public function setBalance(int $balance): self
     {
         $this->balance = $balance;
@@ -117,11 +145,22 @@ class Wallet
         return $this;
     }
 
+    /**
+     * Getter for Created At.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
+    /**
+     * Setter for Created At.
+     *
+     * @param DateTimeInterface $createdAt Created At
+     * @return $this
+     */
     public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
@@ -129,11 +168,22 @@ class Wallet
         return $this;
     }
 
+    /**
+     * Getter for Updated At.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
+    /**
+     * setter for Updated At.
+     *
+     * @param DateTimeInterface $updatedAt Updated At
+     * @return $this
+     */
     public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
@@ -142,29 +192,43 @@ class Wallet
     }
 
     /**
+     * Getter for Transactions.
+     *
      * @return Collection|Transaction[]
      */
-    public function getTransaction(): Collection
+    public function getTransactions(): Collection
     {
-        return $this->transaction;
+        return $this->transactions;
     }
 
-    public function addTransaction(Transaction $Transaction): self
+    /**
+     * Add for Transactions.
+     *
+     * @param Transactions $transaction Transaction Entity
+     *
+     * @return $this
+     */
+    public function addTransaction(Transaction $transaction): self
     {
-        if (!$this->transaction->contains($Transaction)) {
-            $this->transaction[] = $Transaction;
-            $Transaction->setWallet($this);
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
+            $transaction->setWallet($this);
         }
 
         return $this;
     }
 
-    public function removeTransaction(Transaction $Transaction): self
+    /**
+     * Remove for Transactions.
+     *
+     * @param Transaction $Transaction
+     * @return $this
+     */
+    public function removeTransaction(Transaction $transaction): self
     {
-        if ($this->transaction->removeElement($Transaction)) {
-            // set the owning side to null (unless already changed)
-            if ($Transaction->getWallet() === $this) {
-                $Transaction->setWallet(null);
+        if ($this->transactions->removeElement($transaction)) {
+            if ($transaction->getWallet() === $this) {
+                $transaction->setWallet(null);
             }
         }
 

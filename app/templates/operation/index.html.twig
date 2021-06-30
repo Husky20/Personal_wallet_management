@@ -37,11 +37,10 @@
                         <a href="{{ url('operation_show', {id: operation.id}) }}" title="{{ 'action_view'|trans }}">
                             {{ 'action_view'|trans }}
                         </a>
-
                         <a href="{{ url('operation_edit', {id: operation.id}) }}" title="{{ 'action_edit'|trans }}">
                             {{ 'action_edit'|trans }}
                         </a>
-                        {% if not operation.transaction|length %}
+                        {% if not operation.transactions|length %}
                             <a href="{{ url('operation_delete', {id: operation.id}) }}" title="{{ 'action_delete'|trans }}">
                                 {{ 'action_delete'|trans }}
                             </a>

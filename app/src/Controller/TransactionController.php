@@ -56,13 +56,13 @@ class TransactionController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $filters = [];
-        $filters['category_id'] = $request->query->getInt('filters_category_id');
-        $filters['tag_id'] = $request->query->getInt('filters_tag_id');
+
+        $page = $request->query->getInt('page', 1);
+        $user = $this->getUser()->getId();
 
         $pagination = $this->transactionService->createPaginatedList(
-            $request->query->getInt('page', 1),
-            $filters
+            $page,
+            $user
         );
 
         return $this->render(
@@ -98,7 +98,7 @@ class TransactionController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request   $request     HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -134,8 +134,8 @@ class TransactionController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
-     * @param \App\Entity\Transaction                          $transaction           Transaction entity
+     * @param \Symfony\Component\HttpFoundation\Request $request     HTTP request
+     * @param \App\Entity\Transaction                   $transaction Transaction entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *

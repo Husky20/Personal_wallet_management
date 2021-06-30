@@ -43,7 +43,7 @@
                         <a href="{{ url('wallet_edit', {id: wallet.id}) }}" title="{{ 'action_edit'|trans }}">
                             {{ 'action_edit'|trans }}
                         </a>
-                        {% if not wallet.transaction|length %}
+                        {% if not wallet.transactions|length %}
                             <a href="{{ url('wallet_delete', {id: wallet.id}) }}" title="{{ 'action_delete'|trans }}">
                                 {{ 'action_delete'|trans }}
                             </a>

@@ -92,8 +92,8 @@ class TagController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Repository\TagRepository        $tagRepository Tag repository
+     * @param \Symfony\Component\HttpFoundation\Request $request       HTTP request
+     * @param \App\Repository\TagRepository             $tagRepository Tag repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -126,9 +126,9 @@ class TagController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Tag                      $tag           Tag entity
-     * @param \App\Repository\TagRepository        $tagRepository Tag repository
+     * @param \Symfony\Component\HttpFoundation\Request $request       HTTP request
+     * @param \App\Entity\Tag                           $tag           Tag entity
+     * @param \App\Repository\TagRepository             $tagRepository Tag repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -169,7 +169,7 @@ class TagController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
      * @param \App\Entity\Tag                      $tag           Tag entity
-     * @param \App\Repository\tagRepository        $tagRepository Tag repository
+     * @param \App\Repository\tagRepository        $repository Tag repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *

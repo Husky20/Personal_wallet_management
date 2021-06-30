@@ -46,7 +46,7 @@ class Payment
      *
      * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="payment")
      */
-    private $transaction;
+    private $transactions;
 
     /**
      * Create at.
@@ -74,21 +74,39 @@ class Payment
      */
     private $updatedAt;
 
+    /**
+     * Payment constructor.
+     */
     public function __construct()
     {
         $this->transaction = new ArrayCollection();
     }
 
+    /**
+     * Getter for Id.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for Name.
+     *
+     * @return string|null Name
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Setter for Name.
+     *
+     * @param string $name Name
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -97,40 +115,65 @@ class Payment
     }
 
     /**
+     * Getter for Transactions.
+     *
      * @return Collection|Transaction[]
      */
-    public function getTransaction(): Collection
+    public function getTransactions(): Collection
     {
-        return $this->transaction;
+        return $this->transactions;
     }
 
-    public function addTransaction(Transaction $Transaction): self
+    /**
+     * Add for Transactions.
+     *
+     * @param Transactions $transaction Transaction Entity
+     *
+     * @return $this
+     */
+    public function addTransaction(Transaction $transaction): self
     {
-        if (!$this->transaction->contains($Transaction)) {
-            $this->transaction[] = $Transaction;
-            $Transaction->setPayment($this);
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
+            $transaction->setPayment($this);
         }
 
         return $this;
     }
 
-    public function removeTransaction(Transaction $Transaction): self
+    /**
+     * Remove for Transactions.
+     *
+     * @param Transaction $Transaction
+     * @return $this
+     */
+    public function removeTransaction(Transaction $transaction): self
     {
-        if ($this->transaction->removeElement($Transaction)) {
-            // set the owning side to null (unless already changed)
-            if ($Transaction->getPayment() === $this) {
-                $Transaction->setPayment(null);
+        if ($this->transactions->removeElement($transaction)) {
+            if ($transaction->getPayment() === $this) {
+                $transaction->setPayment(null);
             }
         }
 
         return $this;
     }
 
+    /**
+     * Getter for Create At.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
+    /**
+     * Setter for Create At.
+     *
+     * @param DateTimeInterface $createAt
+     * @return $this
+     */
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
@@ -138,11 +181,22 @@ class Payment
         return $this;
     }
 
+    /**
+     * Getter for Update At.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
+    /**
+     * Setter for Update At.
+     *
+     * @param DateTimeInterface $updateAt
+     * @return $this
+     */
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;

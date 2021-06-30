@@ -140,4 +140,32 @@ class CategoryServiceTest extends KernelTestCase
     }
 
     // other tests for paginated list
+    /**
+     * Test pagination list.
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function testCreatePaginatedList(): void
+    {
+        // given
+        $page = 1;
+        $dataSetSize = 3;
+        $expectedResultSize = 3;
+
+        $counter = 0;
+        while ($counter < $dataSetSize) {
+            $category = new Category();
+            $category->setName('Test Category #'.$counter);
+            $this->categoryRepository->save($category);
+
+            ++$counter;
+        }
+
+        // when
+        $result = $this->categoryService->createPaginatedList($page);
+
+        // then
+        $this->assertEquals($expectedResultSize, $result->count());
+    }
 }

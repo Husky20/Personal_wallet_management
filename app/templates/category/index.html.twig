@@ -19,8 +19,8 @@
             <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'category.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label_create_at'|trans, 'category.createAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label_update_at'|trans, 'category.updateAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_createAt'|trans, 'category.createAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_updateAt'|trans, 'category.updateAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_name'|trans, 'category.name') }}</th>
                 <th>{{ 'label_actions'|trans }}</th>
 
@@ -41,7 +41,7 @@
                         <a href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action_edit'|trans }}">
                             {{ 'action_edit'|trans }}
                         </a>
-                        {% if not category.transaction|length %}
+                        {% if not category.transactions|length %}
                             <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action_delete'|trans }}">
                                 {{ 'action_delete'|trans }}
                             </a>

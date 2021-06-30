@@ -48,9 +48,10 @@ class Operation
 
     /**
      * Transaction.
+     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Transaction[] $transaction Transaction
      * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="operation")
      */
-    private $transaction;
+    private $transactions;
 
     /**
      * Create at.
@@ -80,7 +81,7 @@ class Operation
 
     public function __construct()
     {
-        $this->transaction = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -103,27 +104,31 @@ class Operation
     /**
      * @return Collection|Transaction[]
      */
-    public function getTransaction(): Collection
+    public function getTransactions(): Collection
     {
-        return $this->transaction;
+        return $this->transactions;
     }
 
-    public function addTransaction(Transaction $Transaction): self
+    /**
+     * @param Transactions $transaction Transaction Entity
+     *
+     * @return $this
+     */
+    public function addTransaction(Transaction $transaction): self
     {
-        if (!$this->transaction->contains($Transaction)) {
-            $this->transaction[] = $Transaction;
-            $Transaction->setOperation($this);
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
+            $transaction->setOperation($this);
         }
 
         return $this;
     }
 
-    public function removeTransaction(Transaction $Transaction): self
+    public function removeTransaction(Transaction $transaction): self
     {
-        if ($this->transaction->removeElement($Transaction)) {
-            // set the owning side to null (unless already changed)
-            if ($Transaction->getOperation() === $this) {
-                $Transaction->setOperation(null);
+        if ($this->transactions->removeElement($transaction)) {
+            if ($transaction->getOperation() === $this) {
+                $transaction->setOperation(null);
             }
         }
 

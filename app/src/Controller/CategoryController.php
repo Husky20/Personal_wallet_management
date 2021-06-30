@@ -178,6 +178,7 @@ class CategoryController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="category_delete",
      * )
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Category $category): Response
     {

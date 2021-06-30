@@ -32,8 +32,8 @@ class TagService
     /**
      * TagService constructor.
      *
-     * @param \App\Repository\TagRepository      $tagRepository Tag repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
+     * @param \App\Repository\TagRepository           $tagRepository Tag repository
+     * @param \Knp\Component\Pager\PaginatorInterface $paginator     Paginator
      */
     public function __construct(TagRepository $tagRepository, PaginatorInterface $paginator)
     {
@@ -92,5 +92,16 @@ class TagService
     public function findOneByName(string $name): ?Tag
     {
         return $this->tagRepository->findOneByName($name);
+    }
+    /**
+     * Find tag by Id.
+     *
+     * @param int $id Tag Id
+     *
+     * @return \App\Entity\Tag|null Tag entity
+     */
+    public function findOneById(int $id): ?Tag
+    {
+        return $this->tagRepository->findOneById($id);
     }
 }

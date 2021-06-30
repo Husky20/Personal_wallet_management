@@ -32,8 +32,8 @@ class TransactionService
     /**
      * TransactionService constructor.
      *
-     * @param \App\Repository\TransactionRepository      $transactionRepository Transaction repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
+     * @param \App\Repository\TransactionRepository   $transactionRepository Transaction repository
+     * @param \Knp\Component\Pager\PaginatorInterface $paginator             Paginator
      */
     public function __construct(TransactionRepository $transactionRepository, PaginatorInterface $paginator)
     {

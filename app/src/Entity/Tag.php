@@ -78,7 +78,7 @@ class Tag
     /**
      * Transactions.
      *
-     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Transaction[] Transaction
+     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Transaction[] Transactions
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Transaction", mappedBy="tags")
      */
