@@ -1,13 +1,12 @@
 <?php
 /**
- * Tag Controller test.
+ * Wallet Controller test.
  */
 
 namespace App\Tests\Controller;
 
-use App\Entity\Tag;
+use App\Entity\Wallet;
 use App\Entity\User;
-use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -15,9 +14,9 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
- * Class TagControllerTest.
+ * Class WalletControllerTest.
  */
-class TagControllerTest extends WebTestCase
+class WalletControllerTest extends WebTestCase
 {
     /**
      * Test client.
@@ -41,7 +40,7 @@ class TagControllerTest extends WebTestCase
         $expectedStatusCode = 302;
 
         // when
-        $this->httpClient->request('GET', '/tag');
+        $this->httpClient->request('GET', '/wallet');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
         // then
@@ -58,33 +57,29 @@ class TagControllerTest extends WebTestCase
         $this->logIn($adminUser);
 
         // when
-        $this->httpClient->request('GET', '/tag/');
+        $this->httpClient->request('GET', '/wallet/');
+        $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
+
+        // then
+        $this->assertEquals($expectedStatusCode, $resultStatusCode);
+    }
+    /**
+     * Test create film for admin user.
+     */
+    public function testCreateWalletAdminUser(): void
+    {
+        // given
+        $expectedStatusCode = 301;
+        $admin = $this->createUser(['ROLE_ADMIN', 'ROLE_USER']);
+        $this->logIn($admin);
+        // when
+        $this->httpClient->request('GET', '/wallet/new/');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
         // then
         $this->assertEquals($expectedStatusCode, $resultStatusCode);
     }
 
-    /**
-     * Test Tag.
-     */
-    public function testTag(): void
-    {
-        // given
-        $expectedStatusCode = 200;
-        $admin = $this->createUser(['ROLE_ADMIN', 'ROLE_USER']);
-        $this->logIn($admin);
-        $expectedTag = new Tag();
-        $expectedTag->setName('TName');
-        $tagRepository = self::$container->get(TagRepository::class);
-        $tagRepository->save($expectedTag);
-        // when
-        $this->httpClient->request('GET', '/tag/');
-        $result = $this->httpClient->getResponse()->getStatusCode();
-
-        // then
-        $this->assertEquals($expectedStatusCode, $result);
-    }
     /**
      * Create user.
      *
@@ -96,7 +91,7 @@ class TagControllerTest extends WebTestCase
     {
         $passwordEncoder = self::$container->get('security.password_encoder');
         $user = new User();
-        $user->setEmail('user@example.com');
+        $user->setEmail('user1@example.com');
         $user->setRoles($roles);
         $user->setPassword(
             $passwordEncoder->encodePassword(
@@ -129,5 +124,21 @@ class TagControllerTest extends WebTestCase
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->httpClient->getCookieJar()->set($cookie);
     }
+    /**
+     * Test index route for non authorized user FOR NEW Wallet.
+     */
+    public function testIndexRouteNonAuthorizedUser(): void
+    {
+        // given
+        $expectedStatusCode = 403;
+        $user = $this->createUser([User::ROLE_USER]);
+        $this->logIn($user);
 
+        // when
+        $this->httpClient->request('GET', '/wallet/new/');
+        $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
+
+        // then
+        $this->assertEquals($expectedStatusCode, $resultStatusCode);
+    }
 }

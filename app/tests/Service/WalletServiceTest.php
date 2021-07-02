@@ -51,7 +51,6 @@ class WalletServiceTest extends KernelTestCase
 
     /**
      * Test save.
-     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

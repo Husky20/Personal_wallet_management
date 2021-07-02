@@ -1,13 +1,13 @@
 <?php
 /**
- * Tag Controller test.
+ * Operation Controller test.
  */
 
 namespace App\Tests\Controller;
 
-use App\Entity\Tag;
+use App\Entity\Operation;
 use App\Entity\User;
-use App\Repository\TagRepository;
+use App\Repository\OperationRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -15,9 +15,9 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
- * Class TagControllerTest.
+ * Class OperationControllerTest.
  */
-class TagControllerTest extends WebTestCase
+class OperationControllerTest extends WebTestCase
 {
     /**
      * Test client.
@@ -41,7 +41,7 @@ class TagControllerTest extends WebTestCase
         $expectedStatusCode = 302;
 
         // when
-        $this->httpClient->request('GET', '/tag');
+        $this->httpClient->request('GET', '/operation');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
         // then
@@ -58,7 +58,7 @@ class TagControllerTest extends WebTestCase
         $this->logIn($adminUser);
 
         // when
-        $this->httpClient->request('GET', '/tag/');
+        $this->httpClient->request('GET', '/operation/');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
         // then
@@ -66,20 +66,20 @@ class TagControllerTest extends WebTestCase
     }
 
     /**
-     * Test Tag.
+     * Test Operation.
      */
-    public function testTag(): void
+    public function testOperation(): void
     {
         // given
         $expectedStatusCode = 200;
         $admin = $this->createUser(['ROLE_ADMIN', 'ROLE_USER']);
         $this->logIn($admin);
-        $expectedTag = new Tag();
-        $expectedTag->setName('TName');
-        $tagRepository = self::$container->get(TagRepository::class);
-        $tagRepository->save($expectedTag);
+        $expectedOperation = new Operation();
+        $expectedOperation->setName('TName');
+        $operationRepository = self::$container->get(OperationRepository::class);
+        $operationRepository->save($expectedOperation);
         // when
-        $this->httpClient->request('GET', '/tag/');
+        $this->httpClient->request('GET', '/operation/');
         $result = $this->httpClient->getResponse()->getStatusCode();
 
         // then

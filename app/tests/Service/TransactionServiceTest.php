@@ -21,6 +21,8 @@ use App\Repository\TagRepository;
 use App\Repository\TransactionRepository;
 use App\Service\TransactionService;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+
 
 /**
  * Class TransactionServiceTest.
@@ -77,6 +79,13 @@ class TransactionServiceTest extends KernelTestCase
     private ?TagRepository $tagRepository;
 
     /**
+     * User repository.
+     *
+     * @var UserRepository|object|null
+     */
+    private ?UserRepository $userRepository;
+
+    /**
      * Set up test.
      */
     protected function setUp(): void
@@ -95,7 +104,7 @@ class TransactionServiceTest extends KernelTestCase
 
     /**
      * Test save.
-     *
+     * @covers TransactionService::save
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -104,15 +113,14 @@ class TransactionServiceTest extends KernelTestCase
         // given
         $expectedTransaction = new Transaction();
         $expectedTransaction->setName('Test Transaction');
-        $expectedTransaction->setDate('2021-07-07');
+        $expectedTransaction->setDate(\DateTime::createFromFormat('Y-m-d', "2021-05-09"));
         $expectedTransaction->setPayment($this->createPayment());
         $expectedTransaction->setCategory($this->createCategory());
         $expectedTransaction->setOperation($this->createOperation());
         $expectedTransaction->addTag($this->createTag());
         $expectedTransaction->setWallet($this->createWallet());
+        $expectedTransaction->setAuthor($this->createUser());
         $expectedTransaction->setAmount('1000');
-        $expectedTransaction->setAuthor($this->createUser('user@example.com'));
-
 
         // when
         $this->transactionService->save($expectedTransaction);
@@ -124,6 +132,19 @@ class TransactionServiceTest extends KernelTestCase
         $this->assertEquals($expectedTransaction, $resultTransaction);
     }
 
+    /**
+     * Create user.
+     */
+    private function createUser(){
+        $user = new User();
+        $user->setEmail('usert@gmail.com');
+        $user->setPassword('passwordd');
+        $userRepository = self::$container->get(UserRepository::class);
+        $userRepository->save($user);
+
+
+        return $user;
+    }
     /**
      * Create Category.
      * @return Category
@@ -193,7 +214,7 @@ class TransactionServiceTest extends KernelTestCase
 
     /**
      * Test delete.
-     *
+     * @covers \App\Entity\Transaction::delete
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -202,15 +223,14 @@ class TransactionServiceTest extends KernelTestCase
         // given
         $expectedTransaction = new Transaction();
         $expectedTransaction->setName('Test Transaction');
-        $expectedTransaction->setName('Test Transaction');
-        $expectedTransaction->setDate('2021-07-07');
+        $expectedTransaction->setDate((\DateTime::createFromFormat('Y-m-d', "2021-05-09")));
         $expectedTransaction->setPayment($this->createPayment());
         $expectedTransaction->setCategory($this->createCategory());
         $expectedTransaction->setOperation($this->createOperation());
         $expectedTransaction->addTag($this->createTag());
         $expectedTransaction->setWallet($this->createWallet());
+        $expectedTransaction->setAuthor($this->createUser());
         $expectedTransaction->setAmount('1000');
-        $expectedTransaction->setAuthor($this->createUser('user@example.com'));
         $expectedId = $expectedTransaction->getId();
 
         // when
@@ -223,7 +243,7 @@ class TransactionServiceTest extends KernelTestCase
 
     /**
      * Test find by id.
-     *
+     * @covers Transaction::FindById
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -232,15 +252,14 @@ class TransactionServiceTest extends KernelTestCase
         // given
         $expectedTransaction = new Transaction();
         $expectedTransaction->setName('Test Transaction');
-        $expectedTransaction->setName('Test Transaction');
-        $expectedTransaction->setDate('2021-07-07');
+        $expectedTransaction->setDate(\DateTime::createFromFormat('Y-m-d', "2021-05-09"));
         $expectedTransaction->setPayment($this->createPayment());
         $expectedTransaction->setCategory($this->createCategory());
         $expectedTransaction->setOperation($this->createOperation());
         $expectedTransaction->addTag($this->createTag());
         $expectedTransaction->setWallet($this->createWallet());
+        $expectedTransaction->setAuthor($this->createUser());
         $expectedTransaction->setAmount('1000');
-        $expectedTransaction->setAuthor($this->createUser('user@example.com'));
         $this->transactionRepository->save($expectedTransaction);
 
         // when
@@ -264,14 +283,14 @@ class TransactionServiceTest extends KernelTestCase
         while ($counter < $dataSetSize) {
             $transaction = new Transaction();
             $transaction->setName('Test Transaction #'.$counter);
-            $transaction->setDate('2021-07-07');
+            $transaction->setDate(\DateTime::createFromFormat('Y-m-d', "2021-05-09"));
             $transaction->setPayment($this->createPayment());
             $transaction->setCategory($this->createCategory());
             $transaction->setOperation($this->createOperation());
             $transaction->addTag($this->createTag());
             $transaction->setWallet($this->createWallet());
+            $transaction->setAuthor($this->createUser());
             $transaction->setAmount('1000');
-            $transaction->setAuthor($this->createUser('user@example.com'));
             $this->transactionRepository->save($transaction);
 
             ++$counter;

@@ -51,7 +51,7 @@ class CategoryServiceTest extends KernelTestCase
 
     /**
      * Test save.
-     *
+     * @covers \App\Service\CategoryService::save
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

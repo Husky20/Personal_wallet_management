@@ -10,6 +10,7 @@ use App\Repository\TagRepository;
 use App\Repository\TransactionRepository;
 use App\Service\TagService;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use DateTimeInterface;
 
 /**
  * Class TagServiceTest.
@@ -139,23 +140,6 @@ class TagServiceTest extends KernelTestCase
         $this->assertEquals($expectedResultSize, $result->count());
     }
 
-    /**
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function testFindOneByName(): void
-    {
-        // given
-        $expectedTag = new Tag();
-        $expectedTag->setName('Test Tag');
-        $this->tagRepository->save($expectedTag);
-
-        // when
-        $result = $this->tagService->findOneByName($expectedTag->getName());
-
-        // then
-        $this->assertEquals($expectedTag->getName(), $result->getName());
-    }
 
     // other tests for paginated list
 }

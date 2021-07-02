@@ -6,11 +6,8 @@
 namespace App\Tests\Controller;
 
 use App\Entity\Category;
-
 use App\Entity\User;
-use App\Entity\UsersProfile;
 use App\Repository\UserRepository;
-use App\Repository\UsersProfileRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
@@ -94,7 +91,7 @@ class CategoryControllerTest extends WebTestCase
     {
         $passwordEncoder = self::$container->get('security.password_encoder');
         $user = new User();
-        $user->setEmail('user@example.com');
+        $user->setEmail('user1@example.com');
         $user->setRoles($roles);
         $user->setPassword(
             $passwordEncoder->encodePassword(
@@ -102,23 +99,10 @@ class CategoryControllerTest extends WebTestCase
                 'p@55w0rd'
             )
         );
-        $user->setUsersprofile($this->createUserProfile());
         $userRepository = self::$container->get(UserRepository::class);
         $userRepository->save($user);
 
         return $user;
-    }
-
-    private function createUserProfile()
-    {
-        $profile = new UsersProfile();
-        $profile->setName('Testowy');
-        $profile->setSurname('Testowenazwisko');
-        $profile->setLogin('jestem_testem');
-        $profileRepository = self::$container->get(UsersProfileRepository::class);
-        $profileRepository->save($profile);
-
-        return $profile;
     }
 
     /**
@@ -140,7 +124,6 @@ class CategoryControllerTest extends WebTestCase
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->httpClient->getCookieJar()->set($cookie);
     }
-
     /**
      * Test index route for non authorized user FOR NEW CATEGORY.
      */
