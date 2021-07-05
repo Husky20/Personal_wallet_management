@@ -6,11 +6,19 @@
 namespace App\Tests\Controller;
 
 use App\Entity\Category;
+use App\Entity\Operation;
+use App\Entity\Payment;
+use App\Entity\Tag;
 use App\Entity\Transaction;
 use App\Entity\User;
+use App\Entity\Wallet;
 use App\Repository\CategoryRepository;
+use App\Repository\OperationRepository;
+use App\Repository\PaymentRepository;
+use App\Repository\TagRepository;
 use App\Repository\TransactionRepository;
 use App\Repository\UserRepository;
+use App\Repository\WalletRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
@@ -93,7 +101,59 @@ class TransactionControllerTest extends WebTestCase
 
         return $category;
     }
+    /**
+     * Create Payment.
+     * @return Payment
+     */
+    private function createPayment()
+    {
+        $payment = new Payment();
+        $payment->setName('TPayment');
+        $paymentRepository = self::$container->get(PaymentRepository::class);
+        $paymentRepository->save($payment);
 
+        return $payment;
+    }
+    /**
+     * Create Operation.
+     * @return Operation
+     */
+    private function createOperation()
+    {
+        $operation = new Operation();
+        $operation->setName('TOperation');
+        $operationRepository = self::$container->get(OperationRepository::class);
+        $operationRepository->save($operation);
+
+        return $operation;
+    }
+    /**
+     * Create Tag.
+     * @return Tag
+     */
+    private function createTag()
+    {
+        $tag = new Tag();
+        $tag->setName('TTag');
+        $tagRepository = self::$container->get(TagRepository::class);
+        $tagRepository->save($tag);
+
+        return $tag;
+    }
+    /**
+     * Create Wallet.
+     * @return Wallet
+     */
+    private function createWallet()
+    {
+        $wallet = new Wallet();
+        $wallet->setName('TWallet');
+        $wallet->setBalance('1000');
+        $walletRepository = self::$container->get(WalletRepository::class);
+        $walletRepository->save($wallet);
+
+        return $wallet;
+    }
     /**
      * Test index route for anonymous user.
      */
@@ -140,9 +200,13 @@ class TransactionControllerTest extends WebTestCase
     {
         $transaction = new Transaction();
         $transaction->setName('TName');
-        $transaction->setDate('2021-07-07');
+        $transaction->setDate(\DateTime::createFromFormat('Y-m-d', "2021-05-09"));
         $transaction->setAmount('11');
         $transaction->setCategory($this->createCategory());
+        $transaction->setWallet($this->createWallet());
+        $transaction->setOperation($this->createOperation());
+        $transaction->setPayment($this->createPayment());
+        $transaction->addTag($this->createTag());
 
         $transactionRepository = self::$container->get(TransactionRepository::class);
         $transactionRepository->save($transaction);
@@ -200,7 +264,7 @@ class TransactionControllerTest extends WebTestCase
         $user->setPassword(
             $passwordEncoder->encodePassword(
                 $user,
-                'p@5687de5w0rd'
+                'p@w0rd'
             )
         );
         $userRepository = self::$container->get(UserRepository::class);

@@ -94,26 +94,6 @@ class OperationServiceTest extends KernelTestCase
     }
 
     /**
-     * Test find by id.
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function testFindById(): void
-    {
-        // given
-        $expectedOperation = new Operation();
-        $expectedOperation->setName('Test Operation');
-        $this->operationRepository->save($expectedOperation);
-
-        // when
-        $result = $this->operationService->findOneById($expectedOperation->getId());
-
-        // then
-        $this->assertEquals($expectedOperation->getId(), $result->getId());
-    }
-
-    /**
      * Test pagination empty list.
      */
     public function testCreatePaginatedListEmptyList(): void

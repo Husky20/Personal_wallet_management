@@ -94,26 +94,6 @@ class CategoryServiceTest extends KernelTestCase
     }
 
     /**
-     * Test find by id.
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function testFindById(): void
-    {
-        // given
-        $expectedCategory = new Category();
-        $expectedCategory->setName('Test Category');
-        $this->categoryRepository->save($expectedCategory);
-
-        // when
-        $result = $this->categoryService->findOneById($expectedCategory->getId());
-
-        // then
-        $this->assertEquals($expectedCategory->getId(), $result->getId());
-    }
-
-    /**
      * Test pagination empty list.
      */
     public function testCreatePaginatedListEmptyList(): void

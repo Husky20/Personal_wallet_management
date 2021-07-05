@@ -93,25 +93,6 @@ class PaymentServiceTest extends KernelTestCase
         $this->assertNull($result);
     }
 
-    /**
-     * Test find by id.
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function testFindById(): void
-    {
-        // given
-        $expectedPayment = new Payment();
-        $expectedPayment->setName('Test Payment');
-        $this->paymentRepository->save($expectedPayment);
-
-        // when
-        $result = $this->paymentService->findOneById($expectedPayment->getId());
-
-        // then
-        $this->assertEquals($expectedPayment->getId(), $result->getId());
-    }
 
     /**
      * Test pagination empty list.

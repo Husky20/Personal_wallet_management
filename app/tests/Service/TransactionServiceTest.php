@@ -119,7 +119,6 @@ class TransactionServiceTest extends KernelTestCase
         $expectedTransaction->setOperation($this->createOperation());
         $expectedTransaction->addTag($this->createTag());
         $expectedTransaction->setWallet($this->createWallet());
-        $expectedTransaction->setAuthor($this->createUser());
         $expectedTransaction->setAmount('1000');
 
         // when
@@ -141,7 +140,6 @@ class TransactionServiceTest extends KernelTestCase
         $user->setPassword('passwordd');
         $userRepository = self::$container->get(UserRepository::class);
         $userRepository->save($user);
-
 
         return $user;
     }
@@ -214,7 +212,7 @@ class TransactionServiceTest extends KernelTestCase
 
     /**
      * Test delete.
-     * @covers \App\Entity\Transaction::delete
+     * @covers \App\Service\Transaction::delete
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -224,13 +222,15 @@ class TransactionServiceTest extends KernelTestCase
         $expectedTransaction = new Transaction();
         $expectedTransaction->setName('Test Transaction');
         $expectedTransaction->setDate((\DateTime::createFromFormat('Y-m-d', "2021-05-09")));
-        $expectedTransaction->setPayment($this->createPayment());
-        $expectedTransaction->setCategory($this->createCategory());
-        $expectedTransaction->setOperation($this->createOperation());
-        $expectedTransaction->addTag($this->createTag());
-        $expectedTransaction->setWallet($this->createWallet());
-        $expectedTransaction->setAuthor($this->createUser());
         $expectedTransaction->setAmount('1000');
+
+        $expectedTransaction->setCategory($this->createCategory());
+        $expectedTransaction->setWallet($this->createWallet());
+        $expectedTransaction->setOperation($this->createOperation());
+        $expectedTransaction->setPayment($this->createPayment());
+        $expectedTransaction->addTag($this->createTag());
+
+
         $expectedId = $expectedTransaction->getId();
 
         // when
@@ -239,34 +239,6 @@ class TransactionServiceTest extends KernelTestCase
 
         // then
         $this->assertNull($result);
-    }
-
-    /**
-     * Test find by id.
-     * @covers Transaction::FindById
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function testFindById(): void
-    {
-        // given
-        $expectedTransaction = new Transaction();
-        $expectedTransaction->setName('Test Transaction');
-        $expectedTransaction->setDate(\DateTime::createFromFormat('Y-m-d', "2021-05-09"));
-        $expectedTransaction->setPayment($this->createPayment());
-        $expectedTransaction->setCategory($this->createCategory());
-        $expectedTransaction->setOperation($this->createOperation());
-        $expectedTransaction->addTag($this->createTag());
-        $expectedTransaction->setWallet($this->createWallet());
-        $expectedTransaction->setAuthor($this->createUser());
-        $expectedTransaction->setAmount('1000');
-        $this->transactionRepository->save($expectedTransaction);
-
-        // when
-        $result = $this->transactionService->findOneById($expectedTransaction->getId());
-
-        // then
-        $this->assertEquals($expectedTransaction->getId(), $result->getId());
     }
 
     /**
@@ -284,12 +256,13 @@ class TransactionServiceTest extends KernelTestCase
             $transaction = new Transaction();
             $transaction->setName('Test Transaction #'.$counter);
             $transaction->setDate(\DateTime::createFromFormat('Y-m-d', "2021-05-09"));
-            $transaction->setPayment($this->createPayment());
+
             $transaction->setCategory($this->createCategory());
-            $transaction->setOperation($this->createOperation());
-            $transaction->addTag($this->createTag());
             $transaction->setWallet($this->createWallet());
-            $transaction->setAuthor($this->createUser());
+            $transaction->setOperation($this->createOperation());
+            $transaction->setPayment($this->createPayment());
+            $transaction->addTag($this->createTag());
+
             $transaction->setAmount('1000');
             $this->transactionRepository->save($transaction);
 

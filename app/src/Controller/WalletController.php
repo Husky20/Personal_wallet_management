@@ -7,8 +7,8 @@ namespace App\Controller;
 
 use App\Entity\Wallet;
 use App\Form\WalletType;
-use App\Repository\WalletRepository;
-use Knp\Component\Pager\PaginatorInterface;
+use App\Service\WalletService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,17 +19,33 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class WalletController.
  *
  * @Route("/wallet")
+ *
  */
 class WalletController extends AbstractController
 {
     /**
+     * Wallet service.
+     *
+     * @var \App\Service\WalletService
+     */
+    private $walletService;
+
+    /**
+     * WalletController constructor.
+     *
+     * @param \App\Service\WalletService $walletService Wallet service
+     */
+    public function __construct(WalletService $walletService)
+    {
+        $this->walletService = $walletService;
+    }
+
+    /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Repository\WalletRepository $walletRepository Wallet repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator Paginator
+     * @param Request $request HTTP request
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
      * @Route(
      *     "/",
@@ -37,25 +53,23 @@ class WalletController extends AbstractController
      *     name="wallet_index",
      * )
      */
-    public function index(Request $request, WalletRepository $walletRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
-        $pagination = $paginator->paginate(
-            $walletRepository->queryAll(),
-            $request->query->getInt('page', 1),
-            WalletRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
+        $page = $request->query->getInt('page', 1);
+        $pagination = $this->walletService->createPaginatedList($page);
 
         return $this->render(
             'wallet/index.html.twig',
             ['pagination' => $pagination]
         );
     }
+
     /**
      * Show action.
      *
-     * @param \App\Entity\Wallet $wallet Wallet entity
+     * @param Wallet $wallet Wallet entity
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
      * @Route(
      *     "/{id}",
@@ -75,10 +89,9 @@ class WalletController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Repository\WalletRepository        $walletRepository Wallet repository
+     * @param Request $request HTTP request
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -89,14 +102,15 @@ class WalletController extends AbstractController
      *     name="wallet_create",
      * )
      */
-    public function create(Request $request, WalletRepository $walletRepository): Response
+    public function create(Request $request): Response
     {
         $wallet = new Wallet();
         $form = $this->createForm(WalletType::class, $wallet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $walletRepository->save($wallet);
+            $this->walletService->save($wallet);
+            $this->addFlash('success', 'message_created_successfully');
 
             return $this->redirectToRoute('wallet_index');
         }
@@ -106,14 +120,14 @@ class WalletController extends AbstractController
             ['form' => $form->createView()]
         );
     }
+
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Wallet                      $wallet           Wallet entity
-     * @param \App\Repository\WalletRepository        $walletRepository Wallet repository
+     * @param Request $request HTTP request
+     * @param Wallet  $wallet  Wallet entity
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -125,15 +139,13 @@ class WalletController extends AbstractController
      *     name="wallet_edit",
      * )
      */
-    public function edit(Request $request, Wallet $wallet, WalletRepository $walletRepository): Response
+    public function edit(Request $request, Wallet $wallet): Response
     {
         $form = $this->createForm(WalletType::class, $wallet, ['method' => 'PUT']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $wallet->setUpdatedAt(new \DateTime());
-            $walletRepository->save($wallet);
-
+            $this->walletService->save($wallet);
             $this->addFlash('success', 'message_updated_successfully');
 
             return $this->redirectToRoute('wallet_index');
@@ -147,14 +159,14 @@ class WalletController extends AbstractController
             ]
         );
     }
+
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Wallet                      $wallet           Wallet entity
-     * @param \App\Repository\WalletRepository        $walletRepository Wallet repository
+     * @param Request $request  HTTP request
+     * @param Wallet $wallet Wallet entity
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -165,10 +177,11 @@ class WalletController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="wallet_delete",
      * )
+     * @IsGranted("ROLE_ADMIN")
      */
-    public function delete(Request $request, Wallet $wallet, WalletRepository $repository): Response
+    public function delete(Request $request, Wallet $wallet): Response
     {
-        if ($wallet->getTransaction()->count()) {
+        if ($wallet->getTransactions()->count()) {
             $this->addFlash('warning', 'message_wallet_contains_transactions');
 
             return $this->redirectToRoute('wallet_index');
@@ -182,7 +195,7 @@ class WalletController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $repository->delete($wallet);
+            $this->walletService->delete($wallet);
             $this->addFlash('success', 'message_deleted_successfully');
 
             return $this->redirectToRoute('wallet_index');

@@ -74,7 +74,7 @@ class TagServiceTest extends KernelTestCase
 
     /**
      * Test delete.
-     *
+     * @covers \App\Service\TagService
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

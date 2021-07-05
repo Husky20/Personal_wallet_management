@@ -20,19 +20,19 @@ class WalletService
      *
      * @var \App\Repository\WalletRepository
      */
-    private $walletRepository;
+    private WalletRepository $walletRepository;
 
     /**
      * Paginator.
      *
      * @var \Knp\Component\Pager\PaginatorInterface
      */
-    private $paginator;
+    private PaginatorInterface $paginator;
 
     /**
      * WalletService constructor.
      *
-     * @param \App\Repository\WalletRepository        $walletRepository   Wallet repository
+     * @param \App\Repository\WalletRepository        $walletRepository Wallet repository
      * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
      */
     public function __construct(WalletRepository $walletRepository, PaginatorInterface $paginator)

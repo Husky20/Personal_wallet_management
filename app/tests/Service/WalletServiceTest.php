@@ -95,27 +95,6 @@ class WalletServiceTest extends KernelTestCase
     }
 
     /**
-     * Test find by id.
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function testFindById(): void
-    {
-        // given
-        $expectedWallet = new Wallet();
-        $expectedWallet->setName('Test Wallet');
-        $expectedWallet->setBalance('100');
-        $this->walletRepository->save($expectedWallet);
-
-        // when
-        $result = $this->walletService->findOneById($expectedWallet->getId());
-
-        // then
-        $this->assertEquals($expectedWallet->getId(), $result->getId());
-    }
-
-    /**
      * Test pagination empty list.
      */
     public function testCreatePaginatedListEmptyList(): void
@@ -129,7 +108,7 @@ class WalletServiceTest extends KernelTestCase
         while ($counter < $dataSetSize) {
             $wallet = new Wallet();
             $wallet->setName('Test Wallet #'.$counter);
-            $wallet->setBalance('100 #'.$counter);
+            $wallet->setBalance('100');
             $this->walletRepository->save($wallet);
 
             ++$counter;
