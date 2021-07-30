@@ -5,3 +5,4 @@
 .php_cs.cache
 .phpunit.result.cache
 app/bin/phpdoc/vendor/phpdocumentor/phpdocumentor/bin
+.docker
