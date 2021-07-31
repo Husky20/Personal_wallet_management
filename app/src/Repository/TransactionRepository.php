@@ -2,19 +2,14 @@
 
 namespace App\Repository;
 
-use App\Entity\Transaction;
-use App\Entity\User;
 use App\Entity\Category;
-use App\Entity\Wallet;
-use App\Entity\Tag;
 use App\Entity\Operation;
 use App\Entity\Payment;
+use App\Entity\Transaction;
+use App\Entity\Wallet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\PersistentCollection;
-use Doctrine\Common\Collections\Expr\Value;
-
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Class TransactionRepository.
@@ -84,17 +79,17 @@ class TransactionRepository extends ServiceEntityRepository
     {
         return $this->getOrCreateQueryBuilder()
             ->orderBy('transaction.updatedAt', 'ASC');
-            /*->select(
-                'partial transaction.{id, date, amount, createdAt, updatedAt}',
-                'partial category.{id, name}',
-                'partial wallet.{id, name}',
-                'partial payment.{id, name}',
-                'partial operation.{id, name}')
-            ->join('transaction.category', 'category')
-            ->leftJoin('transaction.wallet', 'wallet')
-            ->leftJoin('transaction.payment', 'payment')
-            ->leftJoin('transaction.operation', 'operation')
-            ->orderBy('transaction.updatedAt', 'DESC');*/
+        /*->select(
+            'partial transaction.{id, date, amount, createdAt, updatedAt}',
+            'partial category.{id, name}',
+            'partial wallet.{id, name}',
+            'partial payment.{id, name}',
+            'partial operation.{id, name}')
+        ->join('transaction.category', 'category')
+        ->leftJoin('transaction.wallet', 'wallet')
+        ->leftJoin('transaction.payment', 'payment')
+        ->leftJoin('transaction.operation', 'operation')
+        ->orderBy('transaction.updatedAt', 'DESC');*/
     }
 
     /**
@@ -112,7 +107,7 @@ class TransactionRepository extends ServiceEntityRepository
     /**
      * Query transactions by author.
      *
-     * @param null $user
+     * @param null $author
      *
      * @return \Doctrine\ORM\QueryBuilder Query builder
      */
@@ -123,6 +118,7 @@ class TransactionRepository extends ServiceEntityRepository
             $queryBuilder->andWhere('transaction.author = :author')
                 ->setParameter('author', $author);
         }
+
         return $queryBuilder;
     }
 

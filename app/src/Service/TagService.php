@@ -82,6 +82,7 @@ class TagService
     {
         $this->tagRepository->delete($tag);
     }
+
     /**
      * Find by name.
      *
@@ -93,6 +94,7 @@ class TagService
     {
         return $this->tagRepository->findOneByName($name);
     }
+
     /**
      * Find tag by Id.
      *

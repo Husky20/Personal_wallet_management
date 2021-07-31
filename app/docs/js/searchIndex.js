@@ -176,11 +176,6 @@ Search.appendIndex(
             "summary": "Tag\u0020service.",
             "url": "classes/App-Controller-TagController.html#property_tagService"
         },                {
-            "fqsen": "\\App\\Controller\\Test",
-            "name": "Test",
-            "summary": "",
-            "url": "classes/App-Controller-Test.html"
-        },                {
             "fqsen": "\\App\\Controller\\TransactionController",
             "name": "TransactionController",
             "summary": "Class\u0020TransactionController.",
@@ -226,6 +221,11 @@ Search.appendIndex(
             "summary": "Class\u0020WalletController.",
             "url": "classes/App-Controller-WalletController.html"
         },                {
+            "fqsen": "\\App\\Controller\\WalletController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "WalletController\u0020constructor.",
+            "url": "classes/App-Controller-WalletController.html#method___construct"
+        },                {
             "fqsen": "\\App\\Controller\\WalletController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
             "summary": "Index\u0020action.",
@@ -250,6 +250,11 @@ Search.appendIndex(
             "name": "delete",
             "summary": "Delete\u0020action.",
             "url": "classes/App-Controller-WalletController.html#method_delete"
+        },                {
+            "fqsen": "\\App\\Controller\\WalletController\u003A\u003A\u0024walletService",
+            "name": "walletService",
+            "summary": "Wallet\u0020service.",
+            "url": "classes/App-Controller-WalletController.html#property_walletService"
         },                {
             "fqsen": "\\App\\DataFixtures\\AbstractBaseFixtures",
             "name": "AbstractBaseFixtures",
@@ -458,7 +463,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003AsetCode\u0028\u0029",
             "name": "setCode",
-            "summary": "Setter\u0020for\u0020Code",
+            "summary": "Setter\u0020for\u0020Code.",
             "url": "classes/App-Entity-Category.html#method_setCode"
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003AgetCanDelete\u0028\u0029",
@@ -963,17 +968,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Id.",
             "url": "classes/App-Entity-User.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetEmail\u0028\u0029",
             "name": "getEmail",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Email.",
             "url": "classes/App-Entity-User.html#method_getEmail"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AsetEmail\u0028\u0029",
             "name": "setEmail",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020Email.",
             "url": "classes/App-Entity-User.html#method_setEmail"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetUsername\u0028\u0029",
@@ -1531,6 +1536,26 @@ Search.appendIndex(
             "summary": "Used\u0020to\u0020upgrade\u0020\u0028rehash\u0029\u0020the\u0020user\u0027s\u0020password\u0020automatically\u0020over\u0020time.",
             "url": "classes/App-Repository-UserRepository.html#method_upgradePassword"
         },                {
+            "fqsen": "\\App\\Repository\\UserRepository\u003A\u003AqueryAll\u0028\u0029",
+            "name": "queryAll",
+            "summary": "Query\u0020all\u0020records.",
+            "url": "classes/App-Repository-UserRepository.html#method_queryAll"
+        },                {
+            "fqsen": "\\App\\Repository\\UserRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
+            "name": "getOrCreateQueryBuilder",
+            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
+            "url": "classes/App-Repository-UserRepository.html#method_getOrCreateQueryBuilder"
+        },                {
+            "fqsen": "\\App\\Repository\\UserRepository\u003A\u003Asave\u0028\u0029",
+            "name": "save",
+            "summary": "Save\u0020record.",
+            "url": "classes/App-Repository-UserRepository.html#method_save"
+        },                {
+            "fqsen": "\\App\\Repository\\UserRepository\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "Delete\u0020record.",
+            "url": "classes/App-Repository-UserRepository.html#method_delete"
+        },                {
             "fqsen": "\\App\\Repository\\WalletRepository",
             "name": "WalletRepository",
             "summary": "Class\u0020WalletRepository.",
@@ -1755,6 +1780,11 @@ Search.appendIndex(
             "name": "findOneByName",
             "summary": "Find\u0020by\u0020name.",
             "url": "classes/App-Service-TagService.html#method_findOneByName"
+        },                {
+            "fqsen": "\\App\\Service\\TagService\u003A\u003AfindOneById\u0028\u0029",
+            "name": "findOneById",
+            "summary": "Find\u0020tag\u0020by\u0020Id.",
+            "url": "classes/App-Service-TagService.html#method_findOneById"
         },                {
             "fqsen": "\\App\\Service\\TagService\u003A\u003A\u0024tagRepository",
             "name": "tagRepository",

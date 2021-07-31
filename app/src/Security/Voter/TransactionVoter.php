@@ -2,6 +2,7 @@
 /**
  * Transaction security voter.
  */
+
 namespace App\Security\Voter;
 
 use App\Entity\Transaction;

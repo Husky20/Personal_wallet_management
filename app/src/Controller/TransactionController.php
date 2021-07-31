@@ -8,15 +8,12 @@ namespace App\Controller;
 use App\Entity\Transaction;
 use App\Form\TransactionType;
 use App\Service\TransactionService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
-
 
 /**
  * Class TransactionController.
@@ -41,6 +38,7 @@ class TransactionController extends AbstractController
     {
         $this->transactionService = $transactionService;
     }
+
     /**
      * Index action.
      *
@@ -56,7 +54,6 @@ class TransactionController extends AbstractController
      */
     public function index(Request $request): Response
     {
-
         $page = $request->query->getInt('page', 1);
         $user = $this->getUser()->getId();
 
@@ -70,6 +67,7 @@ class TransactionController extends AbstractController
             ['pagination' => $pagination]
         );
     }
+
     /**
      * Show action.
      *
@@ -95,10 +93,11 @@ class TransactionController extends AbstractController
             ['transaction' => $transaction]
         );
     }
+
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request   $request     HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -179,8 +178,8 @@ class TransactionController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
-     * @param \App\Entity\Transaction                          $transaction           Transaction entity
+     * @param \Symfony\Component\HttpFoundation\Request $request     HTTP request
+     * @param \App\Entity\Transaction                   $transaction Transaction entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *

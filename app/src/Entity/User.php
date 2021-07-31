@@ -60,8 +60,6 @@ class User implements UserInterface
 
     /**
      * Getter for Id.
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -70,8 +68,6 @@ class User implements UserInterface
 
     /**
      * Getter for Email.
-     *
-     * @return string|null
      */
     public function getEmail(): ?string
     {
@@ -81,7 +77,6 @@ class User implements UserInterface
     /**
      * Setter for Email.
      *
-     * @param string $email
      * @return $this
      */
     public function setEmail(string $email): self

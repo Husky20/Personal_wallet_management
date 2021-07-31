@@ -17,15 +17,11 @@ class WalletService
 {
     /**
      * Wallet repository.
-     *
-     * @var \App\Repository\WalletRepository
      */
     private WalletRepository $walletRepository;
 
     /**
      * Paginator.
-     *
-     * @var \Knp\Component\Pager\PaginatorInterface
      */
     private PaginatorInterface $paginator;
 
@@ -33,7 +29,7 @@ class WalletService
      * WalletService constructor.
      *
      * @param \App\Repository\WalletRepository        $walletRepository Wallet repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
+     * @param \Knp\Component\Pager\PaginatorInterface $paginator        Paginator
      */
     public function __construct(WalletRepository $walletRepository, PaginatorInterface $paginator)
     {

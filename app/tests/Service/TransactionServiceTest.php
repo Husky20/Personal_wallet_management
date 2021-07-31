@@ -104,7 +104,6 @@ class TransactionServiceTest extends KernelTestCase
 
     /**
      * Test save.
-     * @covers TransactionService::save
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -120,6 +119,8 @@ class TransactionServiceTest extends KernelTestCase
         $expectedTransaction->addTag($this->createTag());
         $expectedTransaction->setWallet($this->createWallet());
         $expectedTransaction->setAmount('1000');
+        $expectedTransaction->setAuthor( $user = $this->createUser());
+
 
         // when
         $this->transactionService->save($expectedTransaction);
@@ -133,16 +134,28 @@ class TransactionServiceTest extends KernelTestCase
 
     /**
      * Create user.
+     *
+     * @return User User entity
      */
-    private function createUser(){
+    private function createUser(): User
+    {
+        $passwordEncoder = self::$container->get('security.password_encoder');
         $user = new User();
-        $user->setEmail('usert@gmail.com');
-        $user->setPassword('passwordd');
+        $user->setEmail('user@example.com');
+        $user->setRoles([User::ROLE_USER]);
+        $user->setPassword(
+            $passwordEncoder->encodePassword(
+                $user,
+                'p@55w0rd'
+            )
+        );
         $userRepository = self::$container->get(UserRepository::class);
         $userRepository->save($user);
 
         return $user;
     }
+
+
     /**
      * Create Category.
      * @return Category
@@ -276,5 +289,4 @@ class TransactionServiceTest extends KernelTestCase
         $this->assertEquals($expectedResultSize, $result->count());
     }
 
-    // other tests for paginated list
 }

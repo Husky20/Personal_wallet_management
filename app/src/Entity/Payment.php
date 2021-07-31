@@ -10,8 +10,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use phpDocumentor\Reflection\Types\Boolean;
-use phpDocumentor\Reflection\Types\Nullable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -84,8 +82,6 @@ class Payment
 
     /**
      * Getter for Id.
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -106,6 +102,8 @@ class Payment
      * Setter for Name.
      *
      * @param string $name Name
+     *
+     * @return Payment
      */
     public function setName(string $name): self
     {
@@ -144,7 +142,6 @@ class Payment
     /**
      * Remove for Transactions.
      *
-     * @param Transaction $Transaction
      * @return $this
      */
     public function removeTransaction(Transaction $transaction): self
@@ -160,10 +157,8 @@ class Payment
 
     /**
      * Getter for Create At.
-     *
-     * @return DateTimeInterface|null
      */
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -171,10 +166,9 @@ class Payment
     /**
      * Setter for Create At.
      *
-     * @param DateTimeInterface $createAt
      * @return $this
      */
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -183,10 +177,8 @@ class Payment
 
     /**
      * Getter for Update At.
-     *
-     * @return DateTimeInterface|null
      */
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -194,10 +186,9 @@ class Payment
     /**
      * Setter for Update At.
      *
-     * @param DateTimeInterface $updateAt
      * @return $this
      */
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

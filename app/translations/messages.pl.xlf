@@ -208,7 +208,26 @@
                         <source>action_login</source>
                         <target>Zaloguj</target>
                 </trans-unit>
-
+                <trans-unit id="message_item_not_found">
+                        <source>message_item_not_found</source>
+                        <target>Nie znaleziono elementu</target>
+                </trans-unit>
+                <trans-unit id="message_form_error">
+                        <source>message_form_error</source>
+                        <target>Błąd formularza</target>
+                </trans-unit>
+                <trans-unit id="title_tag_create">
+                        <source>title_tag_create</source>
+                        <target>Stwórz tag</target>
+                </trans-unit>
+                <trans-unit id="message_updated_successfully">
+                        <source>message_updated_successfully</source>
+                        <target>Rekord został zaktualizowany pomyślnie</target>
+                </trans-unit>
+                <trans-unit id="title_operation_edit">
+                        <source>title_operation_edit</source>
+                        <target>Edytuj operację</target>
+                </trans-unit>
 
         </body>
     </file>

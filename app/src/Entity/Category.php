@@ -10,8 +10,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use phpDocumentor\Reflection\Types\Boolean;
-use phpDocumentor\Reflection\Types\Nullable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -84,7 +82,7 @@ class Category
     /**
      * Transactions.
      *
-     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Transaction[] $transaction Transaction
+     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Transaction[] Transaction
      *
      * @ORM\OneToMany(
      *     targetEntity="App\Entity\Transaction",
@@ -113,6 +111,9 @@ class Category
      */
     private $code;
 
+    /**
+     * Category constructor.
+     */
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
@@ -150,10 +151,8 @@ class Category
 
     /**
      * Getter for Create At.
-     *
-     * @return DateTimeInterface|null
      */
-    public function getCreateAt(): ?\DateTimeInterface
+    public function getCreateAt(): ?DateTimeInterface
     {
         return $this->createAt;
     }
@@ -161,10 +160,9 @@ class Category
     /**
      * Setter for Create At.
      *
-     * @param DateTimeInterface $createAt
      * @return $this
      */
-    public function setCreateAt(\DateTimeInterface $createAt): self
+    public function setCreateAt(DateTimeInterface $createAt): self
     {
         $this->createAt = $createAt;
 
@@ -173,10 +171,8 @@ class Category
 
     /**
      * Getter for Update At.
-     *
-     * @return DateTimeInterface|null
      */
-    public function getUpdateAt(): ?\DateTimeInterface
+    public function getUpdateAt(): ?DateTimeInterface
     {
         return $this->updateAt;
     }
@@ -184,10 +180,9 @@ class Category
     /**
      * Setter for Update At.
      *
-     * @param DateTimeInterface $updateAt
      * @return $this
      */
-    public function setUpdateAt(\DateTimeInterface $updateAt): self
+    public function setUpdateAt(DateTimeInterface $updateAt): self
     {
         $this->updateAt = $updateAt;
 
@@ -224,7 +219,6 @@ class Category
     /**
      * Remove for Transactions.
      *
-     * @param Transaction $Transaction
      * @return $this
      */
     public function removeTransaction(Transaction $transaction): self
@@ -240,8 +234,6 @@ class Category
 
     /**
      * Getter for Code.
-     *
-     * @return string|null
      */
     public function getCode(): ?string
     {
@@ -249,9 +241,10 @@ class Category
     }
 
     /**
-     * Setter for Code
+     * Setter for Code.
      *
      * @param string $code Code
+     *
      * @return $this
      */
     public function setCode(string $code): self
@@ -263,8 +256,6 @@ class Category
 
     /**
      * getteer Can Delete.
-     *
-     * @return bool|null
      */
     public function getCanDelete(): ?bool
     {

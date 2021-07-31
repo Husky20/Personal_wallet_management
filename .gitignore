@@ -6,3 +6,6 @@
 .phpunit.result.cache
 app/bin/phpdoc/vendor/phpdocumentor/phpdocumentor/bin
 .docker
+app/.phpdoc
+app/docs
+app/config

@@ -9,7 +9,6 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -177,6 +176,8 @@ class Transaction
      * Setter for Name.
      *
      * @param string $name Name
+     *
+     * @return Transaction
      */
     public function setName(string $name): self
     {
@@ -199,6 +200,8 @@ class Transaction
      * Setter for Date.
      *
      * @param datetime $date Date
+     *
+     * @return Transaction
      */
     public function setDate(DateTimeInterface $date): self
     {
@@ -221,6 +224,8 @@ class Transaction
      * Setter for Amount.
      *
      * @param int $amount Amount
+     *
+     * @return Transaction
      */
     public function setAmount(int $amount): self
     {
@@ -243,6 +248,8 @@ class Transaction
      * Setter for Created at.
      *
      * @param \DateTimeInterface $createdAt Created at
+     *
+     * @return Transaction
      */
     public function setCreatedAt(DateTimeInterface $createdAt): self
     {
@@ -265,6 +272,8 @@ class Transaction
      * Setter for Updated at.
      *
      * @param \DateTimeInterface $updatedAt Updated at
+     *
+     * @return Transaction
      */
     public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
@@ -287,6 +296,8 @@ class Transaction
      * Setter for category.
      *
      * @param \App\Entity\Category|null $category Category
+     *
+     * @return Transaction
      */
     public function setCategory(?Category $category): self
     {
@@ -309,6 +320,8 @@ class Transaction
      * Setter for wallet.
      *
      * @param \App\Entity\Wallet|null $wallet Wallet
+     *
+     * @return Transaction
      */
     public function setWallet(?Wallet $wallet): self
     {
@@ -330,7 +343,9 @@ class Transaction
     /**
      * Setter for payment.
      *
-     * @param \App\Entity\Payment|null   $payment Payment
+     * @param \App\Entity\Payment|null $payment Payment
+     *
+     * @return Transaction
      */
     public function setPayment(?Payment $payment): self
     {
@@ -353,6 +368,8 @@ class Transaction
      * Setter for operation.
      *
      * @param \App\Entity\Operation|null $operation Operation
+     *
+     * @return Transaction
      */
     public function setOperation(?Operation $operation): self
     {
@@ -400,6 +417,9 @@ class Transaction
         return $this->author;
     }
 
+    /**
+     * @return $this
+     */
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
@@ -412,6 +432,9 @@ class Transaction
         return $this->comment;
     }
 
+    /**
+     * @return $this
+     */
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;

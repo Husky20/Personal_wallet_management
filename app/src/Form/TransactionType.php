@@ -6,21 +6,18 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Operation;
+use App\Entity\Payment;
 use App\Entity\Transaction;
 use App\Entity\Wallet;
-use App\Entity\Payment;
-use App\Entity\Operation;
-use App\Entity\Tag;
 use App\Form\DataTransformer\TagsDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use phpDocumentor\Reflection\Types\Integer;
-use Symfony\Component\Form\FormTypeInterface;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 /**
  * Class TransactionType.
@@ -43,6 +40,7 @@ class TransactionType extends AbstractType
     {
         $this->tagsDataTransformer = $tagsDataTransformer;
     }
+
     /**
      * Builds the form.
      *
@@ -65,10 +63,10 @@ class TransactionType extends AbstractType
                 'attr' => ['max_length' => 64],
             ]
         );
-       $builder->add(
+        $builder->add(
             'date',
-           DateType::class,
-           [
+            DateType::class,
+            [
                 'label' => 'label_date',
                 'required' => true,
             ]

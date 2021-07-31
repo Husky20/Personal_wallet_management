@@ -13,7 +13,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * Class Tag.
  *
@@ -116,6 +115,8 @@ class Tag
      * Setter for Name.
      *
      * @param string $name Name
+     *
+     * @return Tag
      */
     public function setName(string $name): self
     {
@@ -129,7 +130,7 @@ class Tag
      *
      * @return \DateTimeInterface|null Created at
      */
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -138,8 +139,10 @@ class Tag
      * Setter for Created at.
      *
      * @param \DateTimeInterface $createdAt Created at
+     *
+     * @return Tag
      */
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -151,7 +154,7 @@ class Tag
      *
      * @return \DateTimeInterface|null Updated at
      */
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -160,8 +163,10 @@ class Tag
      * Setter for Updated at.
      *
      * @param \DateTimeInterface $updatedAt Updated at
+     *
+     * @return Tag
      */
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -182,6 +187,8 @@ class Tag
      * Add transaction to collection.
      *
      * @param \App\Entity\Transaction $transaction Transaction entity
+     *
+     * @return Tag
      */
     public function addTransaction(Transaction $transaction): self
     {
@@ -197,6 +204,8 @@ class Tag
      * Remove transaction from collection.
      *
      * @param \App\Entity\Transaction $transaction Transaction entity
+     *
+     * @return Tag
      */
     public function removeTransaction(Transaction $transaction): self
     {

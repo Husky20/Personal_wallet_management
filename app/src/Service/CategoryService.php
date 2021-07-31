@@ -17,15 +17,11 @@ class CategoryService
 {
     /**
      * Category repository.
-     *
-     * @var \App\Repository\CategoryRepository
      */
     private CategoryRepository $categoryRepository;
 
     /**
      * Paginator.
-     *
-     * @var \Knp\Component\Pager\PaginatorInterface
      */
     private PaginatorInterface $paginator;
 
