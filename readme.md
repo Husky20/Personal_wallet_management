@@ -1,3 +1,20 @@
+# Docker Symfony Starter Kit
+
+Starter kit is based on [The perfect kit starter for a Symfony 4 project with Docker and PHP 7.2](https://medium.com/@romaricp/the-perfect-kit-starter-for-a-symfony-4-project-with-docker-and-php-7-2-fda447b6bca1).
+
+## What is inside?
+
+* Apache 2.4.25 (Debian)
+* PHP 7.4 FPM
+* MySQL 8.0.x (5.7)
+* NodeJS 13.x
+* Composer
+* Symfony CLI 
+* xdebug
+* djfarrelly/maildev
+
+## Requirements
+
 * Install [Docker](https://www.docker.com/products/docker-desktop) and [Docker Compose](https://docs.docker.com/compose/install) on your machine 
 
 ## Installation
