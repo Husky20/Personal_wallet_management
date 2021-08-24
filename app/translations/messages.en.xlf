@@ -229,7 +229,18 @@
                     <source>title_operation_edit</source>
                     <target>Operation edit</target>
             </trans-unit>
-
+            <trans-unit id="action_change_password">
+                    <source>action_change_password</source>
+                    <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="massage_change_password">
+                    <source>massage_change_password</source>
+                    <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="label_password_again">
+                    <source>label_password_again</source>
+                    <target>Repeat the password again</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

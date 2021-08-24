@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * User Repository.
+ */
 namespace App\Repository;
 
 use App\Entity\User;
@@ -10,6 +12,8 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * Class UserRepository
+ *
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User[]    findAll()
@@ -30,7 +34,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * Used to upgrade (rehash) the user's password automatically over time.
      *
      * @param UserInterface $user
-     * @param string $newEncodedPassword
+     * @param string        $newEncodedPassword
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -54,18 +59,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         return $this->getOrCreateQueryBuilder()
             ->orderBy('user.name', 'ASC');
-    }
-
-    /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('user');
     }
 
     /**
@@ -96,6 +89,31 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    /**
+     * Getter for Email.
+     *
+     * @param $email
+     *
+     * @return User
+     */
+    public function getByEmail($email): User
+    {
+        $qb = $this->getOrCreateQueryBuilder();
+
+        return $qb->select('u')->from('user', 'u')->where('u.email = '.$email);
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('user');
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

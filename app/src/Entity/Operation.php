@@ -48,6 +48,8 @@ class Operation
      * Transaction.
      *
      * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Transaction[] Transaction
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="operation")
      */
     private $transactions;
@@ -86,17 +88,31 @@ class Operation
         $this->transactions = new ArrayCollection();
     }
 
+    /**
+     * Getter for Id.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for Name.
+     *
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
+     * Setter for Name.
+     *
+     * @param string $name
+     *
      * @return $this
      */
     public function setName(string $name): self
@@ -107,6 +123,8 @@ class Operation
     }
 
     /**
+     * Getter for Transactions.
+     *
      * @return Collection|Transaction[]
      */
     public function getTransactions(): Collection
@@ -115,6 +133,8 @@ class Operation
     }
 
     /**
+     * Add for Transactions.
+     *
      * @param Transactions $transaction Transaction Entity
      *
      * @return $this
@@ -130,7 +150,10 @@ class Operation
     }
 
     /**
+     * Remove for Transactions.
+     *
      * @param Transaction $transaction
+     *
      * @return $this
      */
     public function removeTransaction(Transaction $transaction): self
@@ -144,13 +167,21 @@ class Operation
         return $this;
     }
 
+    /**
+     * Getter for Create At.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
     /**
+     * Setter for Create At.
+     *
      * @param DateTimeInterface $createdAt
+     *
      * @return $this
      */
     public function setCreatedAt(DateTimeInterface $createdAt): self
@@ -160,13 +191,21 @@ class Operation
         return $this;
     }
 
+    /**
+     * Getter for Update At.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
     /**
+     * Setter for Update At.
+     *
      * @param DateTimeInterface $updatedAt
+     *
      * @return $this
      */
     public function setUpdatedAt(DateTimeInterface $updatedAt): self

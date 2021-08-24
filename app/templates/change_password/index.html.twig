@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChangePasswordController!{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {% if error is defined %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    {% if success is defined %}
+        <div class="success alert-success">{{ success }}</div>
+    {% endif %}
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

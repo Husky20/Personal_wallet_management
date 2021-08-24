@@ -1,12 +1,12 @@
 <?php
+/**
+ * Transaction Repository.
+ */
 
 namespace App\Repository;
 
 use App\Entity\Category;
-use App\Entity\Operation;
-use App\Entity\Payment;
 use App\Entity\Transaction;
-use App\Entity\Wallet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -77,31 +77,21 @@ class TransactionRepository extends ServiceEntityRepository
      */
     public function queryAll(): QueryBuilder
     {
-        return $this->getOrCreateQueryBuilder()
-            ->orderBy('transaction.updatedAt', 'ASC');
-        /*->select(
-            'partial transaction.{id, date, amount, createdAt, updatedAt}',
+        /*return $this->getOrCreateQueryBuilder()
+            ->join('transaction.category', 'category')
+            ->orderBy('transaction.updatedAt', 'DESC');*/
+        return $this->getOrCreateQueryBuilder()->select(
+            'partial transaction.{id, name, date, amount, createdAt, updatedAt}',
             'partial category.{id, name}',
             'partial wallet.{id, name}',
             'partial payment.{id, name}',
-            'partial operation.{id, name}')
-        ->join('transaction.category', 'category')
-        ->leftJoin('transaction.wallet', 'wallet')
-        ->leftJoin('transaction.payment', 'payment')
-        ->leftJoin('transaction.operation', 'operation')
-        ->orderBy('transaction.updatedAt', 'DESC');*/
-    }
-
-    /**
-     * Get or create new query builder.
-     *
-     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?: $this->createQueryBuilder('transaction');
+            'partial operation.{id, name}'
+        )
+            ->join('transaction.category', 'category')
+            ->leftJoin('transaction.wallet', 'wallet')
+            ->leftJoin('transaction.payment', 'payment')
+            ->leftJoin('transaction.operation', 'operation')
+            ->orderBy('transaction.updatedAt', 'DESC');
     }
 
     /**
@@ -120,6 +110,18 @@ class TransactionRepository extends ServiceEntityRepository
         }
 
         return $queryBuilder;
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?: $this->createQueryBuilder('transaction');
     }
 
     // /**

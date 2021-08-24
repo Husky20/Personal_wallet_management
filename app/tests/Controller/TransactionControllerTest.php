@@ -48,7 +48,7 @@ class TransactionControllerTest extends WebTestCase
     public function testIndexRouteAnonymousUser(): void
     {
         // given
-        $expectedStatusCode = 200;
+        $expectedStatusCode = 302;
 
         // when
         $this->httpClient->request('GET', '/transaction/');
@@ -78,7 +78,7 @@ class TransactionControllerTest extends WebTestCase
     public function testShowTransaction(): void
     {
         // given
-        $expectedStatusCode = 200;
+        $expectedStatusCode = 302;
         $expectedTransaction = $this->createTransaction();
         $id = $expectedTransaction->getId();
         // when
@@ -160,14 +160,11 @@ class TransactionControllerTest extends WebTestCase
     public function testIndexRouteSearch(): void
     {
         // given
-        $expectedStatusCode = 200;
+        $expectedStatusCode = 302;
 
         // when
         $aa = $this->httpClient->request('GET', '/transaction/');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
-        $form = $aa->filter('form')->form();
-        $form['search']->setValue('query');
-        $this->httpClient->submit($form);
 
         // then
         $this->assertEquals($expectedStatusCode, $resultStatusCode);
@@ -207,6 +204,7 @@ class TransactionControllerTest extends WebTestCase
         $transaction->setOperation($this->createOperation());
         $transaction->setPayment($this->createPayment());
         $transaction->addTag($this->createTag());
+        $transaction->setAuthor($this->createUser(['ROLE_ADMIN', 'ROLE_USER']));
 
         $transactionRepository = self::$container->get(TransactionRepository::class);
         $transactionRepository->save($transaction);
@@ -224,7 +222,7 @@ class TransactionControllerTest extends WebTestCase
         $admin = $this->createUser(['ROLE_ADMIN', 'ROLE_USER']);
         $this->logIn($admin);
         // when
-        $this->httpClient->request('GET', '/transaction/new/');
+        $this->httpClient->request('GET', '/transaction/create/');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
         // then
@@ -241,7 +239,7 @@ class TransactionControllerTest extends WebTestCase
         $admin = $this->createUser([User::ROLE_USER]);
         $this->logIn($admin);
         // when
-        $this->httpClient->request('GET', '/Transactions/new/');
+        $this->httpClient->request('GET', '/transaction/create/');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
         // then
@@ -272,6 +270,39 @@ class TransactionControllerTest extends WebTestCase
 
         return $user;
     }
+
+    // edit transaction
+    public function testEditTransaction(): void
+    {
+        $transaction = $this->createTransaction();
+
+        $transaction->setName('ChangedTransactionName');
+
+        $transactionRepository = self::$container->get(TransactionRepository::class);
+        $transactionRepository->save($transaction);
+
+        $expected = 'ChangedTransactionName';
+
+        $this->assertEquals($expected, $transactionRepository->findByName($expected)->getName());
+
+    }
+
+    // delete transaction
+
+    /*public function testDeleteTransaction(): void
+    {
+        $transaction = $this->createTransaction();
+        $transaction->setName('ChangedTransactionName');
+
+        $transactionRepository = self::$container->get(TransactionRepository::class);
+        $transactionRepository->save($transaction);
+
+        $expected = new Transaction();
+
+        $transactionRepository->delete($transaction);
+
+        $this->assertEquals($expected, $transactionRepository->findByName('ChangedTransactionName')->getName());
+    }*/
 
 
 }

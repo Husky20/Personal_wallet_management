@@ -8,6 +8,7 @@ namespace App\Tests\Controller;
 use App\Entity\Wallet;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Repository\WalletRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
@@ -73,7 +74,7 @@ class WalletControllerTest extends WebTestCase
         $admin = $this->createUser(['ROLE_ADMIN', 'ROLE_USER']);
         $this->logIn($admin);
         // when
-        $this->httpClient->request('GET', '/wallet/new/');
+        $this->httpClient->request('GET', '/wallet/create/');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
         // then
@@ -130,15 +131,34 @@ class WalletControllerTest extends WebTestCase
     public function testIndexRouteNonAuthorizedUser(): void
     {
         // given
-        $expectedStatusCode = 403;
+        $expectedStatusCode = 301;
         $user = $this->createUser([User::ROLE_USER]);
         $this->logIn($user);
 
         // when
-        $this->httpClient->request('GET', '/wallet/new/');
+        $this->httpClient->request('GET', '/wallet/create/');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
         // then
         $this->assertEquals($expectedStatusCode, $resultStatusCode);
+    }
+
+    public function testEditWallet(): void
+    {
+        // create category
+        $wallet = new Wallet();
+        $wallet->setName('TestWallet123');
+        $wallet->setBalance(2000);
+        $walletRepository = self::$container->get(WalletRepository::class);
+        $walletRepository->save($wallet);
+
+        $expected = 'TestChangedWallet123.';
+        // change name
+        $wallet->setName('TestChangedWallet123.');
+        $wallet->setBalance(3000);
+        $walletRepository->save($wallet);
+
+        $this->assertEquals($expected, $walletRepository->findByName($expected)->getName());
+
     }
 }

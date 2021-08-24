@@ -101,10 +101,11 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Repository/UserRepository.php"><a href="files/src-repository-userrepository.html"><abbr title="src/Repository/UserRepository.php">UserRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 </aside>
 
-        
+            <p class="phpdocumentor-summary">Class UserRepository</p>
+
     <section class="phpdocumentor-description"></section>
 
 
@@ -136,7 +137,7 @@
     <span>
                         &nbsp;: mixed    </span>
 </dt>
-<dd></dd>
+<dd>UserRepository constructor.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/App-Repository-UserRepository.html#method_delete">delete()</a>
@@ -174,6 +175,13 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Repository-UserRepository.html#method_getByEmail">getByEmail()</a>
+    <span>
+                        &nbsp;: <a href="classes/App-Entity-User.html"><abbr title="\App\Entity\User">User</abbr></a>    </span>
+</dt>
+<dd>Getter for Email.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/App-Repository-UserRepository.html#method_queryAll">queryAll()</a>
     <span>
                         &nbsp;: <abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr>    </span>
@@ -197,7 +205,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/App-Repository-UserRepository.html#method_getOrCreateQueryBuilder">getOrCreateQueryBuilder()</a>
     <span>
-                        &nbsp;: <abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr>    </span>
+                        &nbsp;: <abbr title="\App\Repository\QueryBuilder">QueryBuilder</abbr>    </span>
 </dt>
 <dd>Get or create new query builder.</dd>
 
@@ -227,15 +235,17 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Repository/UserRepository.php"><a href="files/src-repository-userrepository.html"><abbr title="src/Repository/UserRepository.php">UserRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 </aside>
 
-    
+        <p class="phpdocumentor-summary">UserRepository constructor.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\Persistence\ManagerRegistry">ManagerRegistry</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$registry</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -243,7 +253,8 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\Persistence\ManagerRegistry">ManagerRegistry</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"></section>
+
             </dd>
             </dl>
 
@@ -269,7 +280,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Repository/UserRepository.php"><a href="files/src-repository-userrepository.html"><abbr title="src/Repository/UserRepository.php">UserRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">87</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 </aside>
 
         <p class="phpdocumentor-summary">Delete record.</p>
@@ -536,6 +547,51 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getByEmail">
+        getByEmail()
+        <a href="classes/App-Repository-UserRepository.html#method_getByEmail" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Repository/UserRepository.php"><a href="files/src-repository-userrepository.html"><abbr title="src/Repository/UserRepository.php">UserRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">99</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Getter for Email.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getByEmail</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Entity-User.html"><abbr title="\App\Entity\User">User</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$email</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href=""><abbr title=""></abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/App-Entity-User.html"><abbr title="\App\Entity\User">User</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_queryAll">
         queryAll()
         <a href="classes/App-Repository-UserRepository.html#method_queryAll" class="headerlink"><i class="fas fa-link"></i></a>
@@ -543,7 +599,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Repository/UserRepository.php"><a href="files/src-repository-userrepository.html"><abbr title="src/Repository/UserRepository.php">UserRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 </aside>
 
         <p class="phpdocumentor-summary">Query all records.</p>
@@ -578,7 +634,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Repository/UserRepository.php"><a href="files/src-repository-userrepository.html"><abbr title="src/Repository/UserRepository.php">UserRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 </aside>
 
         <p class="phpdocumentor-summary">Save record.</p>
@@ -648,7 +704,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Repository/UserRepository.php"><a href="files/src-repository-userrepository.html"><abbr title="src/Repository/UserRepository.php">UserRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 </aside>
 
         <p class="phpdocumentor-summary">Used to upgrade (rehash) the user&#039;s password automatically over time.</p>
@@ -666,14 +722,16 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Security\Core\User\UserInterface">UserInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"></section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$newEncodedPassword</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"></section>
+
             </dd>
             </dl>
 
@@ -723,14 +781,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Repository/UserRepository.php"><a href="files/src-repository-userrepository.html"><abbr title="src/Repository/UserRepository.php">UserRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">113</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get or create new query builder.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                <span class="phpdocumentor-signature__name">getOrCreateQueryBuilder</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$queryBuilder</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr></span></code>
+                <span class="phpdocumentor-signature__name">getOrCreateQueryBuilder</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\App\Repository\QueryBuilder">QueryBuilder</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$queryBuilder</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\App\Repository\QueryBuilder">QueryBuilder</abbr></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -738,7 +796,7 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$queryBuilder</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr>|null</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\App\Repository\QueryBuilder">QueryBuilder</abbr>|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>Query builder</p>
@@ -750,7 +808,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr></span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\App\Repository\QueryBuilder">QueryBuilder</abbr></span>
             &mdash;
             <section class="phpdocumentor-description"><p>Query builder</p>
 </section>

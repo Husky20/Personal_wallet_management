@@ -412,12 +412,21 @@ class Transaction
         }
     }
 
+    /**
+     * Getter for Author.
+     *
+     * @return User|null
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
     /**
+     * Setter foe Author.
+     *
+     * @param  User|null $author
+     *
      * @return $this
      */
     public function setAuthor(?User $author): self
@@ -427,12 +436,21 @@ class Transaction
         return $this;
     }
 
+    /**
+     * Getter for Comment.
+     *
+     * @return string|null
+     */
     public function getComment(): ?string
     {
         return $this->comment;
     }
 
     /**
+     * Setter for Comment.
+     *
+     * @param string|null $comment
+     *
      * @return $this
      */
     public function setComment(?string $comment): self

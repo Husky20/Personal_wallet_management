@@ -151,6 +151,8 @@ class Category
 
     /**
      * Getter for Create At.
+     *
+     * @return DateTimeInterface|null
      */
     public function getCreateAt(): ?DateTimeInterface
     {
@@ -159,6 +161,8 @@ class Category
 
     /**
      * Setter for Create At.
+     *
+     * @param DateTimeInterface $createAt
      *
      * @return $this
      */
@@ -171,6 +175,8 @@ class Category
 
     /**
      * Getter for Update At.
+     *
+     * @return DateTimeInterface|null
      */
     public function getUpdateAt(): ?DateTimeInterface
     {
@@ -179,6 +185,8 @@ class Category
 
     /**
      * Setter for Update At.
+     *
+     * @param DateTimeInterface $updateAt
      *
      * @return $this
      */
@@ -190,7 +198,7 @@ class Category
     }
 
     /**
-     * Getter for Transactions.
+     * Getter for Transaction.
      *
      * @return Collection|Transaction[]
      */
@@ -200,9 +208,9 @@ class Category
     }
 
     /**
-     * Add for Transactions.
+     * Add for Transaction.
      *
-     * @param Transactions $transaction Transaction Entity
+     * @param Transaction $transaction Transaction Entity
      *
      * @return $this
      */
@@ -219,6 +227,8 @@ class Category
     /**
      * Remove for Transactions.
      *
+     * @param Transaction $transaction
+     *
      * @return $this
      */
     public function removeTransaction(Transaction $transaction): self
@@ -234,6 +244,8 @@ class Category
 
     /**
      * Getter for Code.
+     *
+     * @return string|null
      */
     public function getCode(): ?string
     {
@@ -255,7 +267,9 @@ class Category
     }
 
     /**
-     * getteer Can Delete.
+     * Getter Can Delete.
+     *
+     * @return bool|null
      */
     public function getCanDelete(): ?bool
     {

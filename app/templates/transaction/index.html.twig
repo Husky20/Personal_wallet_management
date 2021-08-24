@@ -23,15 +23,18 @@
             <a href="{{ url('wallet_index') }}" title="{{ 'label_wallet'|trans }}">
                 {{ 'label_wallet'|trans }}</a>
         </div>
-        <div class="btn btn-light">
-            <a href="{{ url('category_index') }}" title="{{ 'label_category'|trans }}">
-                {{ 'label_category'|trans }}</a>
-        </div>
-        <div class="btn btn-light">
-            <a href="{{ url('payment_index') }}" title="{{ 'label_payment'|trans }}">
-                {{ 'label_payment'|trans }}</a>
-        </div>
-
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="btn btn-light">
+                <a href="{{ url('category_index') }}" title="{{ 'label_category'|trans }}">
+                    {{ 'label_category'|trans }}</a>
+            </div>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="btn btn-light">
+                <a href="{{ url('payment_index') }}" title="{{ 'label_payment'|trans }}">
+                    {{ 'label_payment'|trans }}</a>
+            </div>
+        {% endif %}
         <table class="table table-striped">
             <thead>
             <tr>
@@ -42,10 +45,11 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label_createdAt'|trans, 'transaction.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_updatedAt'|trans, 'transaction.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_category'|trans, 'category.name') }}</th>
-                <th>{{ 'label_wallet'|trans }}</th>
-                <th>{{ 'label_payment'|trans }}</th>
-                <th>{{ 'label_operation'|trans }}</th>
-                <th>{{ 'label_actions'|trans }}</th>
+
+                <th>{{ knp_pagination_sortable(pagination, 'label_wallet'|trans, 'wallet.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_payment'|trans, 'payment.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_operation'|trans, 'operation.name') }}</th>
+
             </tr>
             </thead>
             <tbody>
@@ -81,15 +85,15 @@
                         {% endif %}
                     </td>
                 </tr>
-                    {% if is_granted('ROLE_AUTHOR', transaction) %}
-                        <div class="btn btn-light">
-                            <a href="{{ url('category_index') }}" title="{{ 'label_category'|trans }}">
-                                {{ 'label_category'|trans }}</a>   </div>
-                        <div class="btn btn-light">
-                            <a href="{{ url('payment_index') }}" title="{{ 'label_payment'|trans }}">
-                                {{ 'label_payment'|trans }}</a>
-                        </div>
-                    {% endif %}
+                {% if is_granted('ROLE_AUTHOR', transaction) %}
+                    <div class="btn btn-light">
+                        <a href="{{ url('category_index') }}" title="{{ 'label_category'|trans }}">
+                            {{ 'label_category'|trans }}</a>   </div>
+                    <div class="btn btn-light">
+                        <a href="{{ url('payment_index') }}" title="{{ 'label_payment'|trans }}">
+                            {{ 'label_payment'|trans }}</a>
+                    </div>
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>

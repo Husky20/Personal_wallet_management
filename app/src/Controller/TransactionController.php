@@ -7,7 +7,9 @@ namespace App\Controller;
 
 use App\Entity\Transaction;
 use App\Form\TransactionType;
+use App\Repository\TransactionRepository;
 use App\Service\TransactionService;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -42,7 +44,9 @@ class TransactionController extends AbstractController
     /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request               HTTP request
+     * @param \App\Repository\TransactionRepository     $transactionRepository Task repository
+     * @param \Knp\Component\Pager\PaginatorInterface   $paginator             Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -52,14 +56,12 @@ class TransactionController extends AbstractController
      *     name="transaction_index",
      * )
      */
-    public function index(Request $request): Response
+    public function index(Request $request, TransactionRepository $transactionRepository, PaginatorInterface $paginator): Response
     {
-        $page = $request->query->getInt('page', 1);
-        $user = $this->getUser()->getId();
-
-        $pagination = $this->transactionService->createPaginatedList(
-            $page,
-            $user
+        $pagination = $paginator->paginate(
+            $transactionRepository->queryAll(),
+            $request->query->getInt('page', 1),
+            TransactionRepository::PAGINATOR_ITEMS_PER_PAGE
         );
 
         return $this->render(

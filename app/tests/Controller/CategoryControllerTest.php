@@ -7,6 +7,7 @@ namespace App\Tests\Controller;
 
 use App\Entity\Category;
 use App\Entity\User;
+use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -73,7 +74,24 @@ class CategoryControllerTest extends WebTestCase
         $admin = $this->createUser(['ROLE_ADMIN', 'ROLE_USER']);
         $this->logIn($admin);
         // when
-        $this->httpClient->request('GET', '/category/new/');
+        $this->httpClient->request('GET', '/category/create/');
+        $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
+
+        // then
+        $this->assertEquals($expectedStatusCode, $resultStatusCode);
+    }
+
+    /**
+     * Test create film for common user.
+     */
+    public function testCreateCategoryCommonUser(): void
+    {
+        // given
+        $expectedStatusCode = 301;
+        $user= $this->createUser(['ROLE_USER']);
+        $this->logIn($user);
+        // when
+        $this->httpClient->request('GET', '/category/create/');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
         // then
@@ -130,15 +148,49 @@ class CategoryControllerTest extends WebTestCase
     public function testIndexRouteNonAuthorizedUser(): void
     {
         // given
-        $expectedStatusCode = 403;
+        $expectedStatusCode = 301;
         $user = $this->createUser([User::ROLE_USER]);
         $this->logIn($user);
 
         // when
-        $this->httpClient->request('GET', '/category/new/');
+        $this->httpClient->request('GET', '/category/create/');
         $resultStatusCode = $this->httpClient->getResponse()->getStatusCode();
 
         // then
         $this->assertEquals($expectedStatusCode, $resultStatusCode);
+    }
+
+    // edit category
+    public function testEditCategory(): void
+    {
+        // create category
+        $category = new Category();
+        $category->setName('TestCategory');
+        $categoryRepository = self::$container->get(CategoryRepository::class);
+        $categoryRepository->save($category);
+
+        $expected = 'TestChanged';
+        // change name
+        $category->setName('TestChanged');
+        $categoryRepository->save($category);
+
+        $this->assertEquals($expected, $categoryRepository->findByName($expected)->getName());
+
+    }
+
+    public function testDeleteCategory(): void
+    {
+        // create category
+        $category = new Category();
+        $category->setName('TestCategory2');
+        $categoryRepository = self::$container->get(CategoryRepository::class);
+        $categoryRepository->save($category);
+
+        $expected = new Category();
+
+        // delete
+        $categoryRepository->delete($category);
+
+        $this->assertEquals($expected, $categoryRepository->findByName('TestCategory2'));
     }
 }
