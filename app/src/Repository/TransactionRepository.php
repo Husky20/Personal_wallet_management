@@ -1,20 +1,15 @@
 <?php
+/**
+ * Transaction Repository.
+ */
 
 namespace App\Repository;
 
-use App\Entity\Transaction;
-use App\Entity\User;
 use App\Entity\Category;
-use App\Entity\Wallet;
-use App\Entity\Tag;
-use App\Entity\Operation;
-use App\Entity\Payment;
+use App\Entity\Transaction;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\PersistentCollection;
-use Doctrine\Common\Collections\Expr\Value;
-
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Class TransactionRepository.
@@ -82,19 +77,39 @@ class TransactionRepository extends ServiceEntityRepository
      */
     public function queryAll(): QueryBuilder
     {
-        return $this->getOrCreateQueryBuilder()
-            ->orderBy('transaction.updatedAt', 'ASC');
-            /*->select(
-                'partial transaction.{id, date, amount, createdAt, updatedAt}',
-                'partial category.{id, name}',
-                'partial wallet.{id, name}',
-                'partial payment.{id, name}',
-                'partial operation.{id, name}')
+        /*return $this->getOrCreateQueryBuilder()
+            ->join('transaction.category', 'category')
+            ->orderBy('transaction.updatedAt', 'DESC');*/
+        return $this->getOrCreateQueryBuilder()->select(
+            'partial transaction.{id, name, date, amount, createdAt, updatedAt}',
+            'partial category.{id, name}',
+            'partial wallet.{id, name}',
+            'partial payment.{id, name}',
+            'partial operation.{id, name}'
+        )
             ->join('transaction.category', 'category')
             ->leftJoin('transaction.wallet', 'wallet')
             ->leftJoin('transaction.payment', 'payment')
             ->leftJoin('transaction.operation', 'operation')
-            ->orderBy('transaction.updatedAt', 'DESC');*/
+            ->orderBy('transaction.updatedAt', 'DESC');
+    }
+
+    /**
+     * Query transactions by author.
+     *
+     * @param null $author
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    public function queryByAuthor($author = null): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll();
+        if (!is_null($author)) {
+            $queryBuilder->andWhere('transaction.author = :author')
+                ->setParameter('author', $author);
+        }
+
+        return $queryBuilder;
     }
 
     /**
@@ -107,23 +122,6 @@ class TransactionRepository extends ServiceEntityRepository
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?: $this->createQueryBuilder('transaction');
-    }
-
-    /**
-     * Query transactions by author.
-     *
-     * @param null $user
-     *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
-     */
-    public function queryByAuthor($author = null): QueryBuilder
-    {
-        $queryBuilder = $this->queryAll();
-        if (!is_null($author)) {
-            $queryBuilder->andWhere('transaction.author = :author')
-                ->setParameter('author', $author);
-        }
-        return $queryBuilder;
     }
 
     // /**

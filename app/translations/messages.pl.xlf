@@ -42,6 +42,10 @@
                       <source>action_logout</source>
                       <target>Wyloguj</target>
                 </trans-unit>
+                <trans-unit id="action_change_password">
+                      <source>action_change_password</source>
+                      <target>Zmień hasło</target>
+                </trans-unit>
                 <trans-unit id="action_create">
                        <source>action_create</source>
                        <target>Dodaj rekord</target>
@@ -192,6 +196,10 @@
                         <source>massage_sign_in</source>
                         <target>Zaloguj się</target>
                 </trans-unit>
+                <trans-unit id="massage_change_password">
+                        <source>massage_change_password</source>
+                        <target>Zmień hasło</target>
+                </trans-unit>
                 <trans-unit id="label_mail">
                         <source>label_mail</source>
                         <target>Email</target>
@@ -199,6 +207,10 @@
                 <trans-unit id="label_password">
                         <source>label_password</source>
                         <target>Hasło</target>
+                </trans-unit>
+                <trans-unit id="label_password_again">
+                        <source>label_password_again</source>
+                        <target>Powtórz hasło</target>
                 </trans-unit>
                 <trans-unit id="action_sign_in">
                         <source>action_sign_in</source>
@@ -208,7 +220,26 @@
                         <source>action_login</source>
                         <target>Zaloguj</target>
                 </trans-unit>
-
+                <trans-unit id="message_item_not_found">
+                        <source>message_item_not_found</source>
+                        <target>Nie znaleziono elementu</target>
+                </trans-unit>
+                <trans-unit id="message_form_error">
+                        <source>message_form_error</source>
+                        <target>Błąd formularza</target>
+                </trans-unit>
+                <trans-unit id="title_tag_create">
+                        <source>title_tag_create</source>
+                        <target>Stwórz tag</target>
+                </trans-unit>
+                <trans-unit id="message_updated_successfully">
+                        <source>message_updated_successfully</source>
+                        <target>Rekord został zaktualizowany pomyślnie</target>
+                </trans-unit>
+                <trans-unit id="title_operation_edit">
+                        <source>title_operation_edit</source>
+                        <target>Edytuj operację</target>
+                </trans-unit>
 
         </body>
     </file>

@@ -100,7 +100,7 @@ class OperationServiceTest extends KernelTestCase
     {
         // given
         $page = 1;
-        $dataSetSize = 3;
+        $dataSetSize = 0;
         $expectedResultSize = 0;
 
         $counter = 0;

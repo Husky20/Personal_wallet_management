@@ -10,8 +10,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use phpDocumentor\Reflection\Types\Boolean;
-use phpDocumentor\Reflection\Types\Nullable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -48,7 +46,10 @@ class Operation
 
     /**
      * Transaction.
-     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Transaction[] $transaction Transaction
+     *
+     * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Transaction[] Transaction
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="operation")
      */
     private $transactions;
@@ -79,21 +80,41 @@ class Operation
      */
     private $updatedAt;
 
+    /**
+     * Operation constructor.
+     */
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
     }
 
+    /**
+     * Getter for Id.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for Name.
+     *
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Setter for Name.
+     *
+     * @param string $name
+     *
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -102,6 +123,8 @@ class Operation
     }
 
     /**
+     * Getter for Transactions.
+     *
      * @return Collection|Transaction[]
      */
     public function getTransactions(): Collection
@@ -110,6 +133,8 @@ class Operation
     }
 
     /**
+     * Add for Transactions.
+     *
      * @param Transactions $transaction Transaction Entity
      *
      * @return $this
@@ -124,6 +149,13 @@ class Operation
         return $this;
     }
 
+    /**
+     * Remove for Transactions.
+     *
+     * @param Transaction $transaction
+     *
+     * @return $this
+     */
     public function removeTransaction(Transaction $transaction): self
     {
         if ($this->transactions->removeElement($transaction)) {
@@ -135,24 +167,48 @@ class Operation
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     * Getter for Create At.
+     *
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * Setter for Create At.
+     *
+     * @param DateTimeInterface $createdAt
+     *
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    /**
+     * Getter for Update At.
+     *
+     * @return DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    /**
+     * Setter for Update At.
+     *
+     * @param DateTimeInterface $updatedAt
+     *
+     * @return $this
+     */
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

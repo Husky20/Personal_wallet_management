@@ -104,7 +104,6 @@ class TransactionServiceTest extends KernelTestCase
 
     /**
      * Test save.
-     * @covers TransactionService::save
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -120,6 +119,8 @@ class TransactionServiceTest extends KernelTestCase
         $expectedTransaction->addTag($this->createTag());
         $expectedTransaction->setWallet($this->createWallet());
         $expectedTransaction->setAmount('1000');
+        $expectedTransaction->setAuthor( $user = $this->createUser('user999', [User::ROLE_USER, User::ROLE_ADMIN]));
+
 
         // when
         $this->transactionService->save($expectedTransaction);
@@ -133,16 +134,30 @@ class TransactionServiceTest extends KernelTestCase
 
     /**
      * Create user.
+     *
+     * @param array $roles User roles
+     *
+     * @return User User entity
      */
-    private function createUser(){
+    private function createUser($userName, array $roles): User
+    {
+        $passwordEncoder = self::$container->get('security.password_encoder');
         $user = new User();
-        $user->setEmail('usert@gmail.com');
-        $user->setPassword('passwordd');
+        $user->setEmail($userName.'@example.com');
+        $user->setRoles($roles);
+        $user->setPassword(
+            $passwordEncoder->encodePassword(
+                $user,
+                'p@55w0rd'
+            )
+        );
         $userRepository = self::$container->get(UserRepository::class);
         $userRepository->save($user);
 
         return $user;
     }
+
+
     /**
      * Create Category.
      * @return Category
@@ -241,40 +256,4 @@ class TransactionServiceTest extends KernelTestCase
         $this->assertNull($result);
     }
 
-    /**
-     * Test pagination empty list.
-     */
-    public function testCreatePaginatedListEmptyList(): void
-    {
-        // given
-        $page = 1;
-        $dataSetSize = 3;
-        $expectedResultSize = 0;
-
-        $counter = 0;
-        while ($counter < $dataSetSize) {
-            $transaction = new Transaction();
-            $transaction->setName('Test Transaction #'.$counter);
-            $transaction->setDate(\DateTime::createFromFormat('Y-m-d', "2021-05-09"));
-
-            $transaction->setCategory($this->createCategory());
-            $transaction->setWallet($this->createWallet());
-            $transaction->setOperation($this->createOperation());
-            $transaction->setPayment($this->createPayment());
-            $transaction->addTag($this->createTag());
-
-            $transaction->setAmount('1000');
-            $this->transactionRepository->save($transaction);
-
-            ++$counter;
-        }
-
-        // when
-        $result = $this->transactionService->createPaginatedList($page);
-
-        // then
-        $this->assertEquals($expectedResultSize, $result->count());
-    }
-
-    // other tests for paginated list
 }

@@ -19,7 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class WalletController.
  *
  * @Route("/wallet")
- *
  */
 class WalletController extends AbstractController
 {
@@ -163,8 +162,8 @@ class WalletController extends AbstractController
     /**
      * Delete action.
      *
-     * @param Request $request  HTTP request
-     * @param Wallet $wallet Wallet entity
+     * @param Request $request HTTP request
+     * @param Wallet  $wallet  Wallet entity
      *
      * @return Response HTTP response
      *

@@ -110,10 +110,13 @@ class Wallet
     {
         return $this->name;
     }
+
     /**
      * Setter for Name.
      *
      * @param string $name Name
+     *
+     * @return Wallet
      */
     public function setName(string $name): self
     {
@@ -136,6 +139,7 @@ class Wallet
      * Setter for Balance.
      *
      * @param int $balance Balance
+     *
      * @return $this
      */
     public function setBalance(int $balance): self
@@ -159,6 +163,7 @@ class Wallet
      * Setter for Created At.
      *
      * @param DateTimeInterface $createdAt Created At
+     *
      * @return $this
      */
     public function setCreatedAt(DateTimeInterface $createdAt): self
@@ -179,9 +184,10 @@ class Wallet
     }
 
     /**
-     * setter for Updated At.
+     * Setter for Updated At.
      *
      * @param DateTimeInterface $updatedAt Updated At
+     *
      * @return $this
      */
     public function setUpdatedAt(DateTimeInterface $updatedAt): self
@@ -204,7 +210,7 @@ class Wallet
     /**
      * Add for Transactions.
      *
-     * @param Transactions $transaction Transaction Entity
+     * @param Transaction $transaction Transaction Entity
      *
      * @return $this
      */
@@ -221,7 +227,8 @@ class Wallet
     /**
      * Remove for Transactions.
      *
-     * @param Transaction $Transaction
+     * @param Transaction $transaction
+     *
      * @return $this
      */
     public function removeTransaction(Transaction $transaction): self

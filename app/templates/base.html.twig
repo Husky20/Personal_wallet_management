@@ -13,6 +13,9 @@
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <div>{{ app.user.email }}</div>
         <div>
+            <a href="{{ url('app_change_password') }}">{{ 'action_change_password'|trans }}</a>
+        </div>
+        <div>
             <a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
         </div>
     {% else %}

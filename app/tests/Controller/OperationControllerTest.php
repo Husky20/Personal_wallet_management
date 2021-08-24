@@ -5,8 +5,10 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\Category;
 use App\Entity\Operation;
 use App\Entity\User;
+use App\Repository\CategoryRepository;
 use App\Repository\OperationRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -128,6 +130,41 @@ class OperationControllerTest extends WebTestCase
 
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->httpClient->getCookieJar()->set($cookie);
+    }
+
+    // edit
+    public function testEditOperation(): void
+    {
+        // create operation
+        $expectedOperation = new Operation();
+        $expectedOperation->setName('TNameOperation');
+        $operationRepository = self::$container->get(OperationRepository::class);
+        $operationRepository->save($expectedOperation);
+
+        $expected = 'TNameOperationChanged';
+        // change name
+        $expectedOperation->setName('TNameOperationChanged');
+        $operationRepository->save($expectedOperation);
+
+        $this->assertEquals($expected, $operationRepository->findByName($expected)->getName());
+
+    }
+
+    // delete
+    public function testDeleteCategory(): void
+    {
+        // create operation
+        $expectedOperation = new Operation();
+        $expectedOperation->setName('TNameOperation2');
+        $operationRepository = self::$container->get(OperationRepository::class);
+        $operationRepository->save($expectedOperation);
+
+        $expected = new Operation();
+
+        // delete
+        $operationRepository->delete($expectedOperation);
+
+        $this->assertEquals($expected, $operationRepository->findByName('TNameOperation2'));
     }
 
 }

@@ -2,6 +2,7 @@
 /**
  * Transaction fixtures.
  */
+
 namespace App\DataFixtures;
 
 use App\Entity\Transaction;
@@ -56,6 +57,6 @@ class TransactionFixtures extends AbstractBaseFixtures implements DependentFixtu
      */
     public function getDependencies(): array
     {
-        return [CategoryFixtures::class,OperationFixtures::class,PaymentFixtures::class,WalletFixtures::class,TagFixtures::class, UserFixtures::class];
+        return [CategoryFixtures::class, OperationFixtures::class, PaymentFixtures::class, WalletFixtures::class, TagFixtures::class, UserFixtures::class];
     }
 }

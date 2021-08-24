@@ -123,7 +123,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\SecurityController",
             "name": "SecurityController",
-            "summary": "",
+            "summary": "Class\u0020SecurityController.",
             "url": "classes/App-Controller-SecurityController.html"
         },                {
             "fqsen": "\\App\\Controller\\SecurityController\u003A\u003Alogin\u0028\u0029",
@@ -178,7 +178,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\Test",
             "name": "Test",
-            "summary": "",
+            "summary": "Class\u0020Test.",
             "url": "classes/App-Controller-Test.html"
         },                {
             "fqsen": "\\App\\Controller\\TransactionController",
@@ -226,6 +226,11 @@ Search.appendIndex(
             "summary": "Class\u0020WalletController.",
             "url": "classes/App-Controller-WalletController.html"
         },                {
+            "fqsen": "\\App\\Controller\\WalletController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "WalletController\u0020constructor.",
+            "url": "classes/App-Controller-WalletController.html#method___construct"
+        },                {
             "fqsen": "\\App\\Controller\\WalletController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
             "summary": "Index\u0020action.",
@@ -250,6 +255,11 @@ Search.appendIndex(
             "name": "delete",
             "summary": "Delete\u0020action.",
             "url": "classes/App-Controller-WalletController.html#method_delete"
+        },                {
+            "fqsen": "\\App\\Controller\\WalletController\u003A\u003A\u0024walletService",
+            "name": "walletService",
+            "summary": "Wallet\u0020service.",
+            "url": "classes/App-Controller-WalletController.html#property_walletService"
         },                {
             "fqsen": "\\App\\DataFixtures\\AbstractBaseFixtures",
             "name": "AbstractBaseFixtures",
@@ -298,12 +308,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\DataFixtures\\AppFixtures",
             "name": "AppFixtures",
-            "summary": "",
+            "summary": "Class\u0020AppFixtures",
             "url": "classes/App-DataFixtures-AppFixtures.html"
         },                {
             "fqsen": "\\App\\DataFixtures\\AppFixtures\u003A\u003Aload\u0028\u0029",
             "name": "load",
-            "summary": "",
+            "summary": "Load\u0020data.",
             "url": "classes/App-DataFixtures-AppFixtures.html#method_load"
         },                {
             "fqsen": "\\App\\DataFixtures\\CategoryFixtures",
@@ -398,7 +408,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Category\u0020constructor.",
             "url": "classes/App-Entity-Category.html#method___construct"
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003AgetId\u0028\u0029",
@@ -438,12 +448,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003AgetTransactions\u0028\u0029",
             "name": "getTransactions",
-            "summary": "Getter\u0020for\u0020Transactions.",
+            "summary": "Getter\u0020for\u0020Transaction.",
             "url": "classes/App-Entity-Category.html#method_getTransactions"
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003AaddTransaction\u0028\u0029",
             "name": "addTransaction",
-            "summary": "Add\u0020for\u0020Transactions.",
+            "summary": "Add\u0020for\u0020Transaction.",
             "url": "classes/App-Entity-Category.html#method_addTransaction"
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003AremoveTransaction\u0028\u0029",
@@ -458,12 +468,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003AsetCode\u0028\u0029",
             "name": "setCode",
-            "summary": "Setter\u0020for\u0020Code",
+            "summary": "Setter\u0020for\u0020Code.",
             "url": "classes/App-Entity-Category.html#method_setCode"
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003AgetCanDelete\u0028\u0029",
             "name": "getCanDelete",
-            "summary": "getteer\u0020Can\u0020Delete.",
+            "summary": "Getter\u0020Can\u0020Delete.",
             "url": "classes/App-Entity-Category.html#method_getCanDelete"
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003A\u0024id",
@@ -503,57 +513,57 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Operation\u0020constructor.",
             "url": "classes/App-Entity-Operation.html#method___construct"
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Id.",
             "url": "classes/App-Entity-Operation.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Name.",
             "url": "classes/App-Entity-Operation.html#method_getName"
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003AsetName\u0028\u0029",
             "name": "setName",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020Name.",
             "url": "classes/App-Entity-Operation.html#method_setName"
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003AgetTransactions\u0028\u0029",
             "name": "getTransactions",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Transactions.",
             "url": "classes/App-Entity-Operation.html#method_getTransactions"
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003AaddTransaction\u0028\u0029",
             "name": "addTransaction",
-            "summary": "",
+            "summary": "Add\u0020for\u0020Transactions.",
             "url": "classes/App-Entity-Operation.html#method_addTransaction"
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003AremoveTransaction\u0028\u0029",
             "name": "removeTransaction",
-            "summary": "",
+            "summary": "Remove\u0020for\u0020Transactions.",
             "url": "classes/App-Entity-Operation.html#method_removeTransaction"
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003AgetCreatedAt\u0028\u0029",
             "name": "getCreatedAt",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Create\u0020At.",
             "url": "classes/App-Entity-Operation.html#method_getCreatedAt"
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003AsetCreatedAt\u0028\u0029",
             "name": "setCreatedAt",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020Create\u0020At.",
             "url": "classes/App-Entity-Operation.html#method_setCreatedAt"
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003AgetUpdatedAt\u0028\u0029",
             "name": "getUpdatedAt",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Update\u0020At.",
             "url": "classes/App-Entity-Operation.html#method_getUpdatedAt"
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003AsetUpdatedAt\u0028\u0029",
             "name": "setUpdatedAt",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020Update\u0020At.",
             "url": "classes/App-Entity-Operation.html#method_setUpdatedAt"
         },                {
             "fqsen": "\\App\\Entity\\Operation\u003A\u003A\u0024id",
@@ -873,22 +883,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Transaction\u003A\u003AgetAuthor\u0028\u0029",
             "name": "getAuthor",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Author.",
             "url": "classes/App-Entity-Transaction.html#method_getAuthor"
         },                {
             "fqsen": "\\App\\Entity\\Transaction\u003A\u003AsetAuthor\u0028\u0029",
             "name": "setAuthor",
-            "summary": "",
+            "summary": "Setter\u0020foe\u0020Author.",
             "url": "classes/App-Entity-Transaction.html#method_setAuthor"
         },                {
             "fqsen": "\\App\\Entity\\Transaction\u003A\u003AgetComment\u0028\u0029",
             "name": "getComment",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Comment.",
             "url": "classes/App-Entity-Transaction.html#method_getComment"
         },                {
             "fqsen": "\\App\\Entity\\Transaction\u003A\u003AsetComment\u0028\u0029",
             "name": "setComment",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020Comment.",
             "url": "classes/App-Entity-Transaction.html#method_setComment"
         },                {
             "fqsen": "\\App\\Entity\\Transaction\u003A\u003A\u0024id",
@@ -958,22 +968,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\User",
             "name": "User",
-            "summary": "",
+            "summary": "Class\u0020User.",
             "url": "classes/App-Entity-User.html"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Id.",
             "url": "classes/App-Entity-User.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetEmail\u0028\u0029",
             "name": "getEmail",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Email.",
             "url": "classes/App-Entity-User.html#method_getEmail"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AsetEmail\u0028\u0029",
             "name": "setEmail",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020Email.",
             "url": "classes/App-Entity-User.html#method_setEmail"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetUsername\u0028\u0029",
@@ -983,27 +993,27 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetRoles\u0028\u0029",
             "name": "getRoles",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020roles.",
             "url": "classes/App-Entity-User.html#method_getRoles"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AsetRoles\u0028\u0029",
             "name": "setRoles",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020Roles.",
             "url": "classes/App-Entity-User.html#method_setRoles"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetPassword\u0028\u0029",
             "name": "getPassword",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Password.",
             "url": "classes/App-Entity-User.html#method_getPassword"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AsetPassword\u0028\u0029",
             "name": "setPassword",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020Password.",
             "url": "classes/App-Entity-User.html#method_setPassword"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetSalt\u0028\u0029",
             "name": "getSalt",
-            "summary": "Returning\u0020a\u0020salt\u0020is\u0020only\u0020needed,\u0020if\u0020you\u0020are\u0020not\u0020using\u0020a\u0020modern\nhashing\u0020algorithm\u0020\u0028e.g.\u0020bcrypt\u0020or\u0020sodium\u0029\u0020in\u0020your\u0020security.yaml.",
+            "summary": "Getting\u0020for\u0020Salt.",
             "url": "classes/App-Entity-User.html#method_getSalt"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AeraseCredentials\u0028\u0029",
@@ -1103,7 +1113,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Wallet\u003A\u003AsetUpdatedAt\u0028\u0029",
             "name": "setUpdatedAt",
-            "summary": "setter\u0020for\u0020Updated\u0020At.",
+            "summary": "Setter\u0020for\u0020Updated\u0020At.",
             "url": "classes/App-Entity-Wallet.html#method_setUpdatedAt"
         },                {
             "fqsen": "\\App\\Entity\\Wallet\u003A\u003AgetTransactions\u0028\u0029",
@@ -1308,27 +1318,27 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Kernel",
             "name": "Kernel",
-            "summary": "",
+            "summary": "Class\u0020Kernel.",
             "url": "classes/App-Kernel.html"
         },                {
             "fqsen": "\\App\\Kernel\u003A\u003AregisterBundles\u0028\u0029",
             "name": "registerBundles",
-            "summary": "",
+            "summary": "Register\u0020Bundles.",
             "url": "classes/App-Kernel.html#method_registerBundles"
         },                {
             "fqsen": "\\App\\Kernel\u003A\u003AgetProjectDir\u0028\u0029",
             "name": "getProjectDir",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Project\u0020Dir.",
             "url": "classes/App-Kernel.html#method_getProjectDir"
         },                {
             "fqsen": "\\App\\Kernel\u003A\u003AconfigureContainer\u0028\u0029",
             "name": "configureContainer",
-            "summary": "",
+            "summary": "Configure\u0020Container.",
             "url": "classes/App-Kernel.html#method_configureContainer"
         },                {
             "fqsen": "\\App\\Kernel\u003A\u003AconfigureRoutes\u0028\u0029",
             "name": "configureRoutes",
-            "summary": "",
+            "summary": "Configure\u0020Routes.",
             "url": "classes/App-Kernel.html#method_configureRoutes"
         },                {
             "fqsen": "\\App\\Kernel\u003A\u003ACONFIG_EXTS",
@@ -1351,11 +1361,6 @@ Search.appendIndex(
             "summary": "Query\u0020all\u0020records.",
             "url": "classes/App-Repository-CategoryRepository.html#method_queryAll"
         },                {
-            "fqsen": "\\App\\Repository\\CategoryRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
-            "name": "getOrCreateQueryBuilder",
-            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
-            "url": "classes/App-Repository-CategoryRepository.html#method_getOrCreateQueryBuilder"
-        },                {
             "fqsen": "\\App\\Repository\\CategoryRepository\u003A\u003Asave\u0028\u0029",
             "name": "save",
             "summary": "Save\u0020record.",
@@ -1365,6 +1370,11 @@ Search.appendIndex(
             "name": "delete",
             "summary": "Delete\u0020record.",
             "url": "classes/App-Repository-CategoryRepository.html#method_delete"
+        },                {
+            "fqsen": "\\App\\Repository\\CategoryRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
+            "name": "getOrCreateQueryBuilder",
+            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
+            "url": "classes/App-Repository-CategoryRepository.html#method_getOrCreateQueryBuilder"
         },                {
             "fqsen": "\\App\\Repository\\CategoryRepository\u003A\u003APAGINATOR_ITEMS_PER_PAGE",
             "name": "PAGINATOR_ITEMS_PER_PAGE",
@@ -1386,11 +1396,6 @@ Search.appendIndex(
             "summary": "Query\u0020all\u0020records.",
             "url": "classes/App-Repository-OperationRepository.html#method_queryAll"
         },                {
-            "fqsen": "\\App\\Repository\\OperationRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
-            "name": "getOrCreateQueryBuilder",
-            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
-            "url": "classes/App-Repository-OperationRepository.html#method_getOrCreateQueryBuilder"
-        },                {
             "fqsen": "\\App\\Repository\\OperationRepository\u003A\u003Asave\u0028\u0029",
             "name": "save",
             "summary": "Save\u0020record.",
@@ -1400,6 +1405,11 @@ Search.appendIndex(
             "name": "delete",
             "summary": "Delete\u0020record.",
             "url": "classes/App-Repository-OperationRepository.html#method_delete"
+        },                {
+            "fqsen": "\\App\\Repository\\OperationRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
+            "name": "getOrCreateQueryBuilder",
+            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
+            "url": "classes/App-Repository-OperationRepository.html#method_getOrCreateQueryBuilder"
         },                {
             "fqsen": "\\App\\Repository\\OperationRepository\u003A\u003APAGINATOR_ITEMS_PER_PAGE",
             "name": "PAGINATOR_ITEMS_PER_PAGE",
@@ -1421,11 +1431,6 @@ Search.appendIndex(
             "summary": "Query\u0020all\u0020records.",
             "url": "classes/App-Repository-PaymentRepository.html#method_queryAll"
         },                {
-            "fqsen": "\\App\\Repository\\PaymentRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
-            "name": "getOrCreateQueryBuilder",
-            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
-            "url": "classes/App-Repository-PaymentRepository.html#method_getOrCreateQueryBuilder"
-        },                {
             "fqsen": "\\App\\Repository\\PaymentRepository\u003A\u003Asave\u0028\u0029",
             "name": "save",
             "summary": "Save\u0020record.",
@@ -1435,6 +1440,11 @@ Search.appendIndex(
             "name": "delete",
             "summary": "Delete\u0020record.",
             "url": "classes/App-Repository-PaymentRepository.html#method_delete"
+        },                {
+            "fqsen": "\\App\\Repository\\PaymentRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
+            "name": "getOrCreateQueryBuilder",
+            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
+            "url": "classes/App-Repository-PaymentRepository.html#method_getOrCreateQueryBuilder"
         },                {
             "fqsen": "\\App\\Repository\\PaymentRepository\u003A\u003APAGINATOR_ITEMS_PER_PAGE",
             "name": "PAGINATOR_ITEMS_PER_PAGE",
@@ -1456,11 +1466,6 @@ Search.appendIndex(
             "summary": "Query\u0020all\u0020records.",
             "url": "classes/App-Repository-TagRepository.html#method_queryAll"
         },                {
-            "fqsen": "\\App\\Repository\\TagRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
-            "name": "getOrCreateQueryBuilder",
-            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
-            "url": "classes/App-Repository-TagRepository.html#method_getOrCreateQueryBuilder"
-        },                {
             "fqsen": "\\App\\Repository\\TagRepository\u003A\u003Asave\u0028\u0029",
             "name": "save",
             "summary": "Save\u0020record.",
@@ -1470,6 +1475,11 @@ Search.appendIndex(
             "name": "delete",
             "summary": "Delete\u0020record.",
             "url": "classes/App-Repository-TagRepository.html#method_delete"
+        },                {
+            "fqsen": "\\App\\Repository\\TagRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
+            "name": "getOrCreateQueryBuilder",
+            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
+            "url": "classes/App-Repository-TagRepository.html#method_getOrCreateQueryBuilder"
         },                {
             "fqsen": "\\App\\Repository\\TagRepository\u003A\u003APAGINATOR_ITEMS_PER_PAGE",
             "name": "PAGINATOR_ITEMS_PER_PAGE",
@@ -1501,15 +1511,15 @@ Search.appendIndex(
             "summary": "Query\u0020all\u0020records.",
             "url": "classes/App-Repository-TransactionRepository.html#method_queryAll"
         },                {
-            "fqsen": "\\App\\Repository\\TransactionRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
-            "name": "getOrCreateQueryBuilder",
-            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
-            "url": "classes/App-Repository-TransactionRepository.html#method_getOrCreateQueryBuilder"
-        },                {
             "fqsen": "\\App\\Repository\\TransactionRepository\u003A\u003AqueryByAuthor\u0028\u0029",
             "name": "queryByAuthor",
             "summary": "Query\u0020transactions\u0020by\u0020author.",
             "url": "classes/App-Repository-TransactionRepository.html#method_queryByAuthor"
+        },                {
+            "fqsen": "\\App\\Repository\\TransactionRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
+            "name": "getOrCreateQueryBuilder",
+            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
+            "url": "classes/App-Repository-TransactionRepository.html#method_getOrCreateQueryBuilder"
         },                {
             "fqsen": "\\App\\Repository\\TransactionRepository\u003A\u003APAGINATOR_ITEMS_PER_PAGE",
             "name": "PAGINATOR_ITEMS_PER_PAGE",
@@ -1518,18 +1528,43 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Repository\\UserRepository",
             "name": "UserRepository",
-            "summary": "",
+            "summary": "Class\u0020UserRepository",
             "url": "classes/App-Repository-UserRepository.html"
         },                {
             "fqsen": "\\App\\Repository\\UserRepository\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "UserRepository\u0020constructor.",
             "url": "classes/App-Repository-UserRepository.html#method___construct"
         },                {
             "fqsen": "\\App\\Repository\\UserRepository\u003A\u003AupgradePassword\u0028\u0029",
             "name": "upgradePassword",
             "summary": "Used\u0020to\u0020upgrade\u0020\u0028rehash\u0029\u0020the\u0020user\u0027s\u0020password\u0020automatically\u0020over\u0020time.",
             "url": "classes/App-Repository-UserRepository.html#method_upgradePassword"
+        },                {
+            "fqsen": "\\App\\Repository\\UserRepository\u003A\u003AqueryAll\u0028\u0029",
+            "name": "queryAll",
+            "summary": "Query\u0020all\u0020records.",
+            "url": "classes/App-Repository-UserRepository.html#method_queryAll"
+        },                {
+            "fqsen": "\\App\\Repository\\UserRepository\u003A\u003Asave\u0028\u0029",
+            "name": "save",
+            "summary": "Save\u0020record.",
+            "url": "classes/App-Repository-UserRepository.html#method_save"
+        },                {
+            "fqsen": "\\App\\Repository\\UserRepository\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "Delete\u0020record.",
+            "url": "classes/App-Repository-UserRepository.html#method_delete"
+        },                {
+            "fqsen": "\\App\\Repository\\UserRepository\u003A\u003AgetByEmail\u0028\u0029",
+            "name": "getByEmail",
+            "summary": "Getter\u0020for\u0020Email.",
+            "url": "classes/App-Repository-UserRepository.html#method_getByEmail"
+        },                {
+            "fqsen": "\\App\\Repository\\UserRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
+            "name": "getOrCreateQueryBuilder",
+            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
+            "url": "classes/App-Repository-UserRepository.html#method_getOrCreateQueryBuilder"
         },                {
             "fqsen": "\\App\\Repository\\WalletRepository",
             "name": "WalletRepository",
@@ -1546,11 +1581,6 @@ Search.appendIndex(
             "summary": "Query\u0020all\u0020records.",
             "url": "classes/App-Repository-WalletRepository.html#method_queryAll"
         },                {
-            "fqsen": "\\App\\Repository\\WalletRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
-            "name": "getOrCreateQueryBuilder",
-            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
-            "url": "classes/App-Repository-WalletRepository.html#method_getOrCreateQueryBuilder"
-        },                {
             "fqsen": "\\App\\Repository\\WalletRepository\u003A\u003Asave\u0028\u0029",
             "name": "save",
             "summary": "Save\u0020record.",
@@ -1560,6 +1590,11 @@ Search.appendIndex(
             "name": "delete",
             "summary": "Delete\u0020record.",
             "url": "classes/App-Repository-WalletRepository.html#method_delete"
+        },                {
+            "fqsen": "\\App\\Repository\\WalletRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
+            "name": "getOrCreateQueryBuilder",
+            "summary": "Get\u0020or\u0020create\u0020new\u0020query\u0020builder.",
+            "url": "classes/App-Repository-WalletRepository.html#method_getOrCreateQueryBuilder"
         },                {
             "fqsen": "\\App\\Repository\\WalletRepository\u003A\u003APAGINATOR_ITEMS_PER_PAGE",
             "name": "PAGINATOR_ITEMS_PER_PAGE",
@@ -1756,6 +1791,11 @@ Search.appendIndex(
             "summary": "Find\u0020by\u0020name.",
             "url": "classes/App-Service-TagService.html#method_findOneByName"
         },                {
+            "fqsen": "\\App\\Service\\TagService\u003A\u003AfindOneById\u0028\u0029",
+            "name": "findOneById",
+            "summary": "Find\u0020tag\u0020by\u0020Id.",
+            "url": "classes/App-Service-TagService.html#method_findOneById"
+        },                {
             "fqsen": "\\App\\Service\\TagService\u003A\u003A\u0024tagRepository",
             "name": "tagRepository",
             "summary": "Tag\u0020repository.",
@@ -1870,6 +1910,91 @@ Search.appendIndex(
             "name": "paginator",
             "summary": "Paginator.",
             "url": "classes/App-Service-WalletService.html#property_paginator"
+        },                {
+            "fqsen": "\\App\\Controller\\ChangePasswordController",
+            "name": "ChangePasswordController",
+            "summary": "Class\u0020ChangePasswordController.",
+            "url": "classes/App-Controller-ChangePasswordController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ChangePasswordController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/App-Controller-ChangePasswordController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Entity\\ResetPasswordRequest",
+            "name": "ResetPasswordRequest",
+            "summary": "Class\u0020Reset\u0020Password\u0020Request.",
+            "url": "classes/App-Entity-ResetPasswordRequest.html"
+        },                {
+            "fqsen": "\\App\\Entity\\ResetPasswordRequest\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "ResetPasswordRequest\u0020constructor.",
+            "url": "classes/App-Entity-ResetPasswordRequest.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Entity\\ResetPasswordRequest\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "Getter\u0020for\u0020Id.",
+            "url": "classes/App-Entity-ResetPasswordRequest.html#method_getId"
+        },                {
+            "fqsen": "\\App\\Entity\\ResetPasswordRequest\u003A\u003AgetUser\u0028\u0029",
+            "name": "getUser",
+            "summary": "Getter\u0020for\u0020User.",
+            "url": "classes/App-Entity-ResetPasswordRequest.html#method_getUser"
+        },                {
+            "fqsen": "\\App\\Entity\\ResetPasswordRequest\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "Id.",
+            "url": "classes/App-Entity-ResetPasswordRequest.html#property_id"
+        },                {
+            "fqsen": "\\App\\Entity\\ResetPasswordRequest\u003A\u003A\u0024user",
+            "name": "user",
+            "summary": "User.",
+            "url": "classes/App-Entity-ResetPasswordRequest.html#property_user"
+        },                {
+            "fqsen": "\\App\\Form\\ChangePasswordType",
+            "name": "ChangePasswordType",
+            "summary": "Class\u0020ChangePasswordType.",
+            "url": "classes/App-Form-ChangePasswordType.html"
+        },                {
+            "fqsen": "\\App\\Form\\ChangePasswordType\u003A\u003AbuildForm\u0028\u0029",
+            "name": "buildForm",
+            "summary": "Builds\u0020the\u0020form.",
+            "url": "classes/App-Form-ChangePasswordType.html#method_buildForm"
+        },                {
+            "fqsen": "\\App\\Form\\ChangePasswordType\u003A\u003AconfigureOptions\u0028\u0029",
+            "name": "configureOptions",
+            "summary": "Configures\u0020the\u0020options\u0020for\u0020this\u0020type.",
+            "url": "classes/App-Form-ChangePasswordType.html#method_configureOptions"
+        },                {
+            "fqsen": "\\App\\Form\\ResetPasswordRequestFormType",
+            "name": "ResetPasswordRequestFormType",
+            "summary": "Class\u0020ResetPasswordRequestFormType.",
+            "url": "classes/App-Form-ResetPasswordRequestFormType.html"
+        },                {
+            "fqsen": "\\App\\Form\\ResetPasswordRequestFormType\u003A\u003AbuildForm\u0028\u0029",
+            "name": "buildForm",
+            "summary": "Builds\u0020the\u0020form.",
+            "url": "classes/App-Form-ResetPasswordRequestFormType.html#method_buildForm"
+        },                {
+            "fqsen": "\\App\\Form\\ResetPasswordRequestFormType\u003A\u003AconfigureOptions\u0028\u0029",
+            "name": "configureOptions",
+            "summary": "Configures\u0020the\u0020options\u0020for\u0020this\u0020type.",
+            "url": "classes/App-Form-ResetPasswordRequestFormType.html#method_configureOptions"
+        },                {
+            "fqsen": "\\App\\Repository\\ResetPasswordRequestRepository",
+            "name": "ResetPasswordRequestRepository",
+            "summary": "Class\u0020ResetPasswordRequestRepository.",
+            "url": "classes/App-Repository-ResetPasswordRequestRepository.html"
+        },                {
+            "fqsen": "\\App\\Repository\\ResetPasswordRequestRepository\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "ResetPasswordRequestRepository\u0020constructor.",
+            "url": "classes/App-Repository-ResetPasswordRequestRepository.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Repository\\ResetPasswordRequestRepository\u003A\u003AcreateResetPasswordRequest\u0028\u0029",
+            "name": "createResetPasswordRequest",
+            "summary": "Create.",
+            "url": "classes/App-Repository-ResetPasswordRequestRepository.html#method_createResetPasswordRequest"
         },                {
             "fqsen": "\\",
             "name": "\\",

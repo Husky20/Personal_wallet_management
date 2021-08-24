@@ -19,7 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class OperationController.
  *
  * @Route("/operation")
- *
  */
 class OperationController extends AbstractController
 {
@@ -124,8 +123,8 @@ class OperationController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
-     * @param \App\Entity\Operation                      $operation Operation entity
+     * @param \Symfony\Component\HttpFoundation\Request $request   HTTP request
+     * @param \App\Entity\Operation                     $operation Operation entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -163,8 +162,8 @@ class OperationController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
-     * @param \App\Entity\Operation                      $operation Operation entity
+     * @param \Symfony\Component\HttpFoundation\Request $request   HTTP request
+     * @param \App\Entity\Operation                     $operation Operation entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *

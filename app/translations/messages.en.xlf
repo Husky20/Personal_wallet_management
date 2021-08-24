@@ -209,7 +209,38 @@
                     <source>action_login</source>
                     <target>Log in</target>
             </trans-unit>
-
+            <trans-unit id="message_item_not_found">
+                    <source>message_item_not_found</source>
+                    <target>Item not found</target>
+            </trans-unit>
+            <trans-unit id="message_form_error">
+                    <source>message_form_error</source>
+                    <target>Form error</target>
+            </trans-unit>
+            <trans-unit id="title_tag_create">
+                    <source>title_tag_create</source>
+                    <target>Tag create</target>
+            </trans-unit>
+            <trans-unit id="message_updated_successfully">
+                    <source>message_updated_successfully</source>
+                    <target>Record updated successfully</target>
+            </trans-unit>
+            <trans-unit id="title_operation_edit">
+                    <source>title_operation_edit</source>
+                    <target>Operation edit</target>
+            </trans-unit>
+            <trans-unit id="action_change_password">
+                    <source>action_change_password</source>
+                    <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="massage_change_password">
+                    <source>massage_change_password</source>
+                    <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="label_password_again">
+                    <source>label_password_again</source>
+                    <target>Repeat the password again</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

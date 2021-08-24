@@ -32,8 +32,8 @@ class PaymentService
     /**
      * PaymentService constructor.
      *
-     * @param \App\Repository\PaymentRepository      $paymentRepository Payment repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
+     * @param \App\Repository\PaymentRepository       $paymentRepository Payment repository
+     * @param \Knp\Component\Pager\PaginatorInterface $paginator         Paginator
      */
     public function __construct(PaymentRepository $paymentRepository, PaginatorInterface $paginator)
     {
