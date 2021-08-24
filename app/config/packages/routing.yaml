@@ -1,6 +1,0 @@
-framework:
-    router:
-        utf8: true
-#app:
-#    resource: '@AppBundle/Controller/'
-#    type: annotation
