@@ -240,6 +240,46 @@
                         <source>title_operation_edit</source>
                         <target>Edytuj operację</target>
                 </trans-unit>
+                <trans-unit id="title_category_delete">
+                        <source>title_category_delete</source>
+                        <target>Usuń kategorię</target>
+                </trans-unit>
+                <trans-unit id="title_operation_delete">
+                        <source>title_operation_delete</source>
+                        <target>Usuń operację</target>
+                </trans-unit>
+                <trans-unit id="title_transaction_delete">
+                        <source>title_transaction_delete</source>
+                        <target>Usuń tranzakcje</target>
+                </trans-unit>
+                <trans-unit id="title_transaction_edit">
+                        <source>title_transaction_edit</source>
+                        <target>Edytuj tranzakcje</target>
+                </trans-unit>
+                <trans-unit id="message_created_successfully">
+                        <source>title_trmessage_created_successfullyansaction_edit</source>
+                        <target>Rekord stworzony pomyślnie</target>
+                </trans-unit>
+                <trans-unit id="Password">
+                        <source>Password</source>
+                        <target>Hasło</target>
+                </trans-unit>
+                <trans-unit id="Password repeated">
+                        <source>Password repeated</source>
+                        <target>Powtórz hasło</target>
+                </trans-unit>
+                <trans-unit id="Save">
+                        <source>Save</source>
+                        <target>Zmień hasło</target>
+                </trans-unit>
+                <trans-unit id="title_change_password">
+                        <source>title_change_password</source>
+                        <target>Zmień hasło</target>
+                </trans-unit>
+                <trans-unit id="Email could not be found.">
+                        <source>Email could not be found.</source>
+                        <target>Nie można znaleźć e-maila.</target>
+                </trans-unit>
 
         </body>
     </file>
