@@ -241,6 +241,48 @@
                     <source>label_password_again</source>
                     <target>Repeat the password again</target>
             </trans-unit>
+            <trans-unit id="title_category_delete">
+                    <source>title_category_delete</source>
+                    <target>Category delete</target>
+            </trans-unit>
+            <trans-unit id="title_operation_delete">
+                    <source>title_operation_delete</source>
+                    <target>Operation delete</target>
+            </trans-unit>
+            <trans-unit id="title_transaction_delete">
+                    <source>title_transaction_delete</source>
+                    <target>Transaction delete</target>
+            </trans-unit>
+            <trans-unit id="title_transaction_edit">
+                    <source>title_transaction_edit</source>
+                    <target>Transaction edit</target>
+            </trans-unit>
+            <trans-unit id="message_created_successfully">
+                    <source>message_created_successfully</source>
+                    <target>Record created successfully</target>
+            </trans-unit>
+            <trans-unit id="Password">
+                    <source>Password</source>
+                    <target>Password</target>
+            </trans-unit>
+            <trans-unit id="Password repeated">
+                    <source>Password repeated</source>
+                    <target>Password repeated</target>
+            </trans-unit>
+            <trans-unit id="Save">
+                    <source>Save</source>
+                    <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="title_change_password">
+                    <source>title_change_password</source>
+                    <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="Email could not be found.">
+                    <source>Email could not be found.</source>
+                    <target>Email could not be found.</target>
+            </trans-unit>
+
+
         </body>
     </file>
 </xliff>
