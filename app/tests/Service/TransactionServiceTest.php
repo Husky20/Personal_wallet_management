@@ -86,23 +86,6 @@ class TransactionServiceTest extends KernelTestCase
     private ?UserRepository $userRepository;
 
     /**
-     * Set up test.
-     */
-    protected function setUp(): void
-    {
-        self::bootKernel();
-        $container = self::$container;
-        $this->transactionRepository = $container->get(TransactionRepository::class);
-        $this->transactionService = $container->get(TransactionService::class);
-        $this->categoryRepository = $container->get(CategoryRepository::class);
-        $this->paymentRepository = $container->get(PaymentRepository::class);
-        $this->walletRepository = $container->get(WalletRepository::class);
-        $this->operationRepository = $container->get(OperationRepository::class);
-        $this->tagRepository = $container->get(TagRepository::class);
-        $this->userRepository = $container->get(UserRepository::class);
-    }
-
-    /**
      * Test save.
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -254,6 +237,25 @@ class TransactionServiceTest extends KernelTestCase
 
         // then
         $this->assertNull($result);
+
+
+    }
+
+    /**
+     * Set up test.
+     */
+    protected function setUp(): void
+    {
+        self::bootKernel();
+        $container = self::$container;
+        $this->transactionRepository = $container->get(TransactionRepository::class);
+        $this->transactionService = $container->get(TransactionService::class);
+        $this->categoryRepository = $container->get(CategoryRepository::class);
+        $this->paymentRepository = $container->get(PaymentRepository::class);
+        $this->walletRepository = $container->get(WalletRepository::class);
+        $this->operationRepository = $container->get(OperationRepository::class);
+        $this->tagRepository = $container->get(TagRepository::class);
+        $this->userRepository = $container->get(UserRepository::class);
     }
 
 }

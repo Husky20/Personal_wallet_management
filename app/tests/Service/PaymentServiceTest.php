@@ -38,18 +38,6 @@ class PaymentServiceTest extends KernelTestCase
     private ?TransactionRepository $transactionRepository;
 
     /**
-     * Set up test.
-     */
-    protected function setUp(): void
-    {
-        self::bootKernel();
-        $container = self::$container;
-        $this->paymentRepository = $container->get(PaymentRepository::class);
-        $this->paymentService = $container->get(PaymentService::class);
-        $this->transactionRepository = $container->get(TransactionRepository::class);
-    }
-
-    /**
      * Test save.
      *
      * @throws \Doctrine\ORM\ORMException
@@ -120,5 +108,15 @@ class PaymentServiceTest extends KernelTestCase
         $this->assertEquals($expectedResultSize, $result->count());
     }
 
-    // other tests for paginated list
+    /**
+     * Set up test.
+     */
+    protected function setUp(): void
+    {
+        self::bootKernel();
+        $container = self::$container;
+        $this->paymentRepository = $container->get(PaymentRepository::class);
+        $this->paymentService = $container->get(PaymentService::class);
+        $this->transactionRepository = $container->get(TransactionRepository::class);
+    }
 }
