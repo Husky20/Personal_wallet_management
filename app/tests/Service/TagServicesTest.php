@@ -39,18 +39,6 @@ class TagServicesTest extends KernelTestCase
     private ?TransactionRepository $transactionRepository;
 
     /**
-     * Set up test.
-     */
-    protected function setUp(): void
-    {
-        self::bootKernel();
-        $container = self::$container;
-        $this->tagRepository = $container->get(TagRepository::class);
-        $this->tagService = $container->get(TagService::class);
-        $this->transactionRepository = $container->get(TransactionRepository::class);
-    }
-
-    /**
      * Test save.
      *
      * @throws \Doctrine\ORM\ORMException
@@ -140,6 +128,15 @@ class TagServicesTest extends KernelTestCase
         $this->assertEquals($expectedResultSize, $result->count());
     }
 
-
-    // other tests for paginated list
+    /**
+     * Set up test.
+     */
+    protected function setUp(): void
+    {
+        self::bootKernel();
+        $container = self::$container;
+        $this->tagRepository = $container->get(TagRepository::class);
+        $this->tagService = $container->get(TagService::class);
+        $this->transactionRepository = $container->get(TransactionRepository::class);
+    }
 }
