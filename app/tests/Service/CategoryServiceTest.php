@@ -37,17 +37,6 @@ class CategoryServiceTest extends KernelTestCase
      */
     private ?TransactionRepository $transactionRepository;
 
-    /**
-     * Set up test.
-     */
-    protected function setUp(): void
-    {
-        self::bootKernel();
-        $container = self::$container;
-        $this->categoryRepository = $container->get(CategoryRepository::class);
-        $this->categoryService = $container->get(CategoryService::class);
-        $this->transactionRepository = $container->get(TransactionRepository::class);
-    }
 
     /**
      * Test save.
@@ -147,5 +136,17 @@ class CategoryServiceTest extends KernelTestCase
 
         // then
         $this->assertEquals($expectedResultSize, $result->count());
+    }
+
+    /**
+     * Set up test.
+     */
+    protected function setUp(): void
+    {
+        self::bootKernel();
+        $container = self::$container;
+        $this->categoryRepository = $container->get(CategoryRepository::class);
+        $this->categoryService = $container->get(CategoryService::class);
+        $this->transactionRepository = $container->get(TransactionRepository::class);
     }
 }

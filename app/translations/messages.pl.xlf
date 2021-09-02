@@ -252,13 +252,13 @@
                         <source>title_transaction_delete</source>
                         <target>Usuń tranzakcje</target>
                 </trans-unit>
+                <trans-unit id="message_category_contains_transactions">
+                        <source>message_category_contains_transactions</source>
+                        <target>Kategoria przypisana do tranzakcji.</target>
+                </trans-unit>
                 <trans-unit id="title_transaction_edit">
                         <source>title_transaction_edit</source>
                         <target>Edytuj tranzakcje</target>
-                </trans-unit>
-                <trans-unit id="message_created_successfully">
-                        <source>title_trmessage_created_successfullyansaction_edit</source>
-                        <target>Rekord stworzony pomyślnie</target>
                 </trans-unit>
                 <trans-unit id="Password">
                         <source>Password</source>
@@ -279,6 +279,14 @@
                 <trans-unit id="Email could not be found.">
                         <source>Email could not be found.</source>
                         <target>Nie można znaleźć e-maila.</target>
+                </trans-unit>
+                <trans-unit id="message_created_successfully">
+                        <source>message_created_successfully</source>
+                        <target>Rekord dodany pomyślnie.</target>
+                </trans-unit>
+                <trans-unit id="title_payment_edit">
+                        <source>title_payment_edit</source>
+                        <target>Edytuj płatność.</target>
                 </trans-unit>
 
         </body>

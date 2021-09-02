@@ -38,18 +38,6 @@ class WalletServiceTest extends KernelTestCase
     private ?TransactionRepository $transactionRepository;
 
     /**
-     * Set up test.
-     */
-    protected function setUp(): void
-    {
-        self::bootKernel();
-        $container = self::$container;
-        $this->walletRepository = $container->get(WalletRepository::class);
-        $this->walletService = $container->get(WalletService::class);
-        $this->transactionRepository = $container->get(TransactionRepository::class);
-    }
-
-    /**
      * Test save.
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -121,5 +109,16 @@ class WalletServiceTest extends KernelTestCase
         $this->assertEquals($expectedResultSize, $result->count());
     }
 
-    // other tests for paginated list
+
+    /**
+     * Set up test.
+     */
+    protected function setUp(): void
+    {
+        self::bootKernel();
+        $container = self::$container;
+        $this->walletRepository = $container->get(WalletRepository::class);
+        $this->walletService = $container->get(WalletService::class);
+        $this->transactionRepository = $container->get(TransactionRepository::class);
+    }
 }
