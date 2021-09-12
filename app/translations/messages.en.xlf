@@ -281,8 +281,21 @@
                     <source>Email could not be found.</source>
                     <target>Email could not be found.</target>
             </trans-unit>
-
-
+            <trans-unit id="label_none">
+                    <source>label_none</source>
+                    <target>Label none</target>
+            </trans-unit>
+            <trans-unit id="Year">
+                    <source>Year</source>
+                    <target>Year</target>
+            </trans-unit>
+            <trans-unit id="Month">
+                    <source>Month</source>
+                    <target>Month</target>
+            </trans-unit><trans-unit id="Day">
+                    <source>Day</source>
+                    <target>Day</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

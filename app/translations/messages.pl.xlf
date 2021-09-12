@@ -288,7 +288,21 @@
                         <source>title_payment_edit</source>
                         <target>Edytuj płatność.</target>
                 </trans-unit>
-
+                <trans-unit id="label_none">
+                        <source>label_none</source>
+                        <target>Brak</target>
+                </trans-unit>
+                <trans-unit id="Year">
+                        <source>Year</source>
+                        <target>Rok</target>
+                </trans-unit>
+                <trans-unit id="Month">
+                        <source>Month</source>
+                        <target>Miesiąc</target>
+                </trans-unit><trans-unit id="Day">
+                        <source>Day</source>
+                        <target>Dzień</target>
+                </trans-unit>
         </body>
     </file>
 </xliff>
