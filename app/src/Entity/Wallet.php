@@ -127,8 +127,6 @@ class Wallet
 
     /**
      * Getter for Balance.
-     *
-     * @return int|null
      */
     public function getBalance(): ?int
     {
@@ -151,8 +149,6 @@ class Wallet
 
     /**
      * Getter for Created At.
-     *
-     * @return DateTimeInterface|null
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
@@ -175,8 +171,6 @@ class Wallet
 
     /**
      * Getter for Updated At.
-     *
-     * @return DateTimeInterface|null
      */
     public function getUpdatedAt(): ?DateTimeInterface
     {
@@ -226,8 +220,6 @@ class Wallet
 
     /**
      * Remove for Transactions.
-     *
-     * @param Transaction $transaction
      *
      * @return $this
      */

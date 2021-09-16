@@ -82,8 +82,6 @@ class Payment
 
     /**
      * Getter for Id.
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -144,8 +142,6 @@ class Payment
     /**
      * Remove for Transactions.
      *
-     * @param Transaction $transaction
-     *
      * @return $this
      */
     public function removeTransaction(Transaction $transaction): self
@@ -161,8 +157,6 @@ class Payment
 
     /**
      * Getter for Create At.
-     *
-     * @return DateTimeInterface|null
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
@@ -171,8 +165,6 @@ class Payment
 
     /**
      * Setter for Create At.
-     *
-     * @param DateTimeInterface $createdAt
      *
      * @return $this
      */
@@ -185,8 +177,6 @@ class Payment
 
     /**
      * Getter for Update At.
-     *
-     * @return DateTimeInterface|null
      */
     public function getUpdatedAt(): ?DateTimeInterface
     {
@@ -195,8 +185,6 @@ class Payment
 
     /**
      * Setter for Update At.
-     *
-     * @param DateTimeInterface $updatedAt
      *
      * @return $this
      */

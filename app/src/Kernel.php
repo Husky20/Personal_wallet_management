@@ -36,8 +36,6 @@ class Kernel extends BaseKernel
 
     /**
      * Getter for Project Dir.
-     *
-     * @return string
      */
     public function getProjectDir(): string
     {
@@ -46,9 +44,6 @@ class Kernel extends BaseKernel
 
     /**
      * Configure Container.
-     *
-     * @param ContainerBuilder $container
-     * @param LoaderInterface  $loader
      *
      * @throws \Exception
      */
@@ -67,8 +62,6 @@ class Kernel extends BaseKernel
 
     /**
      * Configure Routes.
-     *
-     * @param RouteCollectionBuilder $routes
      *
      * @throws \Symfony\Component\Config\Exception\LoaderLoadException
      */

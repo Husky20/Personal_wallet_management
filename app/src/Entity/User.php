@@ -68,8 +68,6 @@ class User implements UserInterface
 
     /**
      * Getter for Id.
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -78,8 +76,6 @@ class User implements UserInterface
 
     /**
      * Getter for Email.
-     *
-     * @return string|null
      */
     public function getEmail(): ?string
     {
@@ -88,8 +84,6 @@ class User implements UserInterface
 
     /**
      * Setter for Email.
-     *
-     * @param string $email
      *
      * @return $this
      */
@@ -104,8 +98,6 @@ class User implements UserInterface
      * A visual identifier that represents this user.
      *
      * @see UserInterface
-     *
-     * @return string
      */
     public function getUsername(): string
     {
@@ -116,8 +108,6 @@ class User implements UserInterface
      * Getter for roles.
      *
      * @see UserInterface
-     *
-     * @return array
      */
     public function getRoles(): array
     {
@@ -130,8 +120,6 @@ class User implements UserInterface
 
     /**
      * Setter for Roles.
-     *
-     * @param array $roles
      *
      * @return $this
      */
@@ -146,8 +134,6 @@ class User implements UserInterface
      * Getter for Password.
      *
      * @see UserInterface
-     *
-     * @return string
      */
     public function getPassword(): string
     {
@@ -156,8 +142,6 @@ class User implements UserInterface
 
     /**
      * Setter for Password.
-     *
-     * @param string $password
      *
      * @return $this
      */
@@ -175,8 +159,6 @@ class User implements UserInterface
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *
      * @see UserInterface
-     *
-     * @return string|null
      */
     public function getSalt(): ?string
     {

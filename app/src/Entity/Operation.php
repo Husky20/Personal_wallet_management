@@ -90,8 +90,6 @@ class Operation
 
     /**
      * Getter for Id.
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -100,8 +98,6 @@ class Operation
 
     /**
      * Getter for Name.
-     *
-     * @return string|null
      */
     public function getName(): ?string
     {
@@ -110,8 +106,6 @@ class Operation
 
     /**
      * Setter for Name.
-     *
-     * @param string $name
      *
      * @return $this
      */
@@ -152,8 +146,6 @@ class Operation
     /**
      * Remove for Transactions.
      *
-     * @param Transaction $transaction
-     *
      * @return $this
      */
     public function removeTransaction(Transaction $transaction): self
@@ -169,8 +161,6 @@ class Operation
 
     /**
      * Getter for Create At.
-     *
-     * @return DateTimeInterface|null
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
@@ -179,8 +169,6 @@ class Operation
 
     /**
      * Setter for Create At.
-     *
-     * @param DateTimeInterface $createdAt
      *
      * @return $this
      */
@@ -193,8 +181,6 @@ class Operation
 
     /**
      * Getter for Update At.
-     *
-     * @return DateTimeInterface|null
      */
     public function getUpdatedAt(): ?DateTimeInterface
     {
@@ -203,8 +189,6 @@ class Operation
 
     /**
      * Setter for Update At.
-     *
-     * @param DateTimeInterface $updatedAt
      *
      * @return $this
      */
