@@ -9,14 +9,12 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class AppFixtures
+ * Class AppFixtures.
  */
 class AppFixtures extends Fixture
 {
     /**
      * Load data.
-     *
-     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {

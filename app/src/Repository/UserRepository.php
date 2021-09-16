@@ -2,6 +2,7 @@
 /**
  * User Repository.
  */
+
 namespace App\Repository;
 
 use App\Entity\User;
@@ -12,7 +13,7 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class UserRepository
+ * Class UserRepository.
  *
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
@@ -23,7 +24,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 {
     /**
      * UserRepository constructor.
-     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -32,9 +32,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
-     *
-     * @param UserInterface $user
-     * @param string        $newEncodedPassword
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -93,8 +90,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * Getter for Email.
      *
      * @param $email
-     *
-     * @return User
      */
     public function getByEmail($email): User
     {
@@ -114,6 +109,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         return $queryBuilder ?? $this->createQueryBuilder('user');
     }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
