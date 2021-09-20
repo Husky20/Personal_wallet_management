@@ -24,6 +24,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 {
     /**
      * UserRepository constructor.
+     *
+     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -32,6 +34,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     *
+     * @param UserInterface $user
+     * @param string        $newEncodedPassword
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -90,6 +95,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * Getter for Email.
      *
      * @param $email
+     *
+     * @return User
      */
     public function getByEmail($email): User
     {

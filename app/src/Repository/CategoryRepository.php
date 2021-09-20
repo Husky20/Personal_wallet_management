@@ -55,6 +55,8 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * Save record.
      *
+     * @param Category $category
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

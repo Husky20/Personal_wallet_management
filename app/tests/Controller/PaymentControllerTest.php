@@ -157,7 +157,7 @@ class PaymentControllerTest extends WebTestCase
         $payment->setName('TestPaymentChanged');
         $paymentRepository->save($payment);
 
-        $this->assertEquals($expected, $paymentRepository->findByName($expected)->getName());
+        $this->assertEquals($expected, $paymentRepository->findOneByName($expected)->getName());
 
     }
 

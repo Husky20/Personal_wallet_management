@@ -283,7 +283,7 @@ class TransactionControllerTest extends WebTestCase
 
         $expected = 'ChangedTransactionName';
 
-        $this->assertEquals($expected, $transactionRepository->findByName($expected)->getName());
+        $this->assertEquals($expected, $transactionRepository->findOneByName($expected)->getName());
 
     }
 

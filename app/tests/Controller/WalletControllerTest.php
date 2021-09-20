@@ -158,7 +158,7 @@ class WalletControllerTest extends WebTestCase
         $wallet->setBalance(3000);
         $walletRepository->save($wallet);
 
-        $this->assertEquals($expected, $walletRepository->findByName($expected)->getName());
+        $this->assertEquals($expected, $walletRepository->findOneByName($expected)->getName());
 
     }
 }

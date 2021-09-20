@@ -174,7 +174,7 @@ class CategoryControllerTest extends WebTestCase
         $category->setName('TestChanged');
         $categoryRepository->save($category);
 
-        $this->assertEquals($expected, $categoryRepository->findByName($expected)->getName());
+        $this->assertEquals($expected, $categoryRepository->findOneByName($expected)->getName());
 
     }
 

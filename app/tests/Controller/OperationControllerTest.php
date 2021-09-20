@@ -146,7 +146,7 @@ class OperationControllerTest extends WebTestCase
         $expectedOperation->setName('TNameOperationChanged');
         $operationRepository->save($expectedOperation);
 
-        $this->assertEquals($expected, $operationRepository->findByName($expected)->getName());
+        $this->assertEquals($expected, $operationRepository->findOneByName($expected)->getName());
 
     }
 

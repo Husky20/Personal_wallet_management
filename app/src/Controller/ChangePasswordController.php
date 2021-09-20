@@ -18,8 +18,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class ChangePasswordController extends AbstractController
 {
+
     /**
      * @Route("/change/password", name="app_change_password")
+     *
+     * @param Request                      $request
+     * @param UserRepository               $userRepository
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     *
+     * @return Response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException

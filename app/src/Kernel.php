@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
 /**
- * Class Kernel.
+ * Class Kernel
  */
 class Kernel extends BaseKernel
 {
@@ -23,6 +23,8 @@ class Kernel extends BaseKernel
 
     /**
      * Register Bundles.
+     *
+     * @return iterable
      */
     public function registerBundles(): iterable
     {
@@ -36,6 +38,8 @@ class Kernel extends BaseKernel
 
     /**
      * Getter for Project Dir.
+     *
+     * @return string
      */
     public function getProjectDir(): string
     {
@@ -44,6 +48,9 @@ class Kernel extends BaseKernel
 
     /**
      * Configure Container.
+     *
+     * @param ContainerBuilder $container
+     * @param LoaderInterface  $loader
      *
      * @throws \Exception
      */
@@ -62,6 +69,8 @@ class Kernel extends BaseKernel
 
     /**
      * Configure Routes.
+     *
+     * @param RouteCollectionBuilder $routes
      *
      * @throws \Symfony\Component\Config\Exception\LoaderLoadException
      */

@@ -414,6 +414,8 @@ class Transaction
 
     /**
      * Getter for Author.
+     *
+     * @return User|null
      */
     public function getAuthor(): ?User
     {
@@ -422,6 +424,8 @@ class Transaction
 
     /**
      * Setter foe Author.
+     *
+     * @param User|null $author
      *
      * @return $this
      */
@@ -434,6 +438,8 @@ class Transaction
 
     /**
      * Getter for Comment.
+     *
+     * @return string|null
      */
     public function getComment(): ?string
     {
@@ -442,6 +448,8 @@ class Transaction
 
     /**
      * Setter for Comment.
+     *
+     * @param string|null $comment
      *
      * @return $this
      */
